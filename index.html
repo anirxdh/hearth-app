@@ -8,11 +8,11 @@
 :root{
   --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#6E6E73; --ink3:#86868B;
   --line:rgba(0,0,0,.07); --line2:rgba(0,0,0,.05);
-  --blue:#0071E3; --blue-soft:rgba(0,113,227,.09);
+  --blue:#C4512D; --blue-soft:rgba(196,81,45,.10);
   --green:#34C759; --green-soft:rgba(52,199,89,.12);
   --orange:#FF9500; --orange-soft:rgba(255,149,0,.13);
   --red:#FF3B30; --red-soft:rgba(255,59,48,.10);
-  --purple:#AF52DE; --pink:#FF375F; --teal:#30B0C7;
+  --purple:#8A5A36; --pink:#D9552F; --teal:#8E8E93;
   --shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.06);
   --shadow-lg:0 2px 6px rgba(0,0,0,.05),0 24px 60px rgba(0,0,0,.10);
   --r:18px;
@@ -68,7 +68,7 @@ h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .row{display:flex;align-items:center;gap:10px}
 .btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13.5px;border-radius:980px;padding:9px 18px;transition:.15s;letter-spacing:-.01em}
 .btn.primary{background:var(--blue);color:#fff}
-.btn.primary:hover{background:#0077ED;transform:scale(1.02)}
+.btn.primary:hover{background:#B2451F;transform:scale(1.02)}
 .btn.quiet{background:rgba(0,0,0,.05);color:var(--ink)}
 .btn.quiet:hover{background:rgba(0,0,0,.08)}
 .btn.tint{background:var(--blue-soft);color:var(--blue)}
@@ -79,12 +79,12 @@ h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .tag.red{background:var(--red-soft);color:#D70015}
 .tag.blue{background:var(--blue-soft);color:var(--blue)}
 .tag.gray{background:rgba(0,0,0,.05);color:var(--ink2)}
-.tag.purple{background:rgba(175,82,222,.12);color:#8944AB}
+.tag.purple{background:rgba(166,123,91,.16);color:#7A5434}
 .av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;letter-spacing:0}
-.av.g1{background:linear-gradient(135deg,#AF52DE,#FF375F)}
-.av.g2{background:linear-gradient(135deg,#0A84FF,#30B0C7)}
-.av.g3{background:linear-gradient(135deg,#FF9500,#FFCC00)}
-.av.g4{background:linear-gradient(135deg,#34C759,#30B0C7)}
+.av.g1{background:linear-gradient(135deg,#E0A075,#C97B4B)}
+.av.g2{background:linear-gradient(135deg,#B85C38,#8F3D22)}
+.av.g3{background:linear-gradient(135deg,#DDB27A,#C08A3E)}
+.av.g4{background:linear-gradient(135deg,#5A5A60,#2C2C2E)}
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
 .dot.green{background:var(--green)}.dot.orange{background:var(--orange)}.dot.red{background:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
 .hr{height:1px;background:var(--line2);margin:14px 0}
@@ -92,9 +92,9 @@ h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .kv{font-size:13px}.kv b{display:block;font-size:12px;color:var(--ink3);font-weight:600;margin-bottom:1px}
 
 /* ============ DASHBOARD ============ */
-.digest{background:linear-gradient(135deg,#FFFFFF, #F0F6FF 90%);border:1px solid rgba(0,113,227,.14)}
+.digest{background:linear-gradient(135deg,#FFFFFF, #FFF6EF 92%);border:1px solid rgba(196,81,45,.16)}
 .digest .dhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.digest .dhead .ic{width:34px;height:34px;border-radius:10px;background:var(--blue);display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,113,227,.3)}
+.digest .dhead .ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#FF9500,#FF3B30);display:grid;place-items:center;box-shadow:0 6px 16px rgba(255,90,40,.32)}
 .digest .dhead .ic svg{width:17px;height:17px}
 .digest h3{font-size:16px;letter-spacing:-.015em}
 .digest .items{display:flex;flex-direction:column;gap:9px;margin-top:4px}
@@ -189,7 +189,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 .erfoot{border-top:1px dashed var(--line);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink3);background:#FAFAFA}
 
 /* ============ HANDOFF ============ */
-.respite{background:linear-gradient(135deg,#F2ECFF,#FFF);border:1px solid rgba(175,82,222,.25)}
+.respite{background:linear-gradient(135deg,#FBF2EA,#FFF);border:1px solid rgba(166,123,91,.32)}
 .switch{width:46px;height:28px;border-radius:99px;background:var(--green);position:relative;flex:0 0 auto;cursor:pointer}
 .switch::after{content:"";position:absolute;top:2px;left:20px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:.2s}
 .hsec{margin-bottom:14px}
@@ -212,7 +212,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 .prep li:last-child{border:none}
 .prep .n{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
 .script{background:#1D1D1F;color:#F5F5F7;border-radius:14px;padding:16px 18px;font-size:13.5px;line-height:1.7}
-.script b{color:#6CB4FF}
+.script b{color:#FFB48A}
 
 /* ============ CHAT ============ */
 .chatwrap{max-width:720px}
@@ -326,7 +326,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
         <div class="duty">
           <div class="day"><div class="d">Sun</div><div class="n">5</div><span class="av g4">MA</span></div>
           <div class="day"><div class="d">Mon</div><div class="n">6</div><span class="av g4">MA</span></div>
-          <div class="day"><div class="d">Tue</div><div class="n">7</div><span class="av g2" style="background:linear-gradient(135deg,#5E5CE6,#0A84FF)">MG</span></div>
+          <div class="day"><div class="d">Tue</div><div class="n">7</div><span class="av g2" style="background:linear-gradient(135deg,#8A8A90,#55555A)">MG</span></div>
           <div class="day"><div class="d">Wed</div><div class="n">8</div><span class="av g4">MA</span></div>
           <div class="day"><div class="d">Thu</div><div class="n">9</div><span class="av g4">MA</span></div>
           <div class="day"><div class="d">Fri</div><div class="n">10</div><span class="av g1">DA</span></div>
@@ -343,8 +343,8 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
     <div class="grid quick">
       <div class="card qa" onclick="go('scan')"><div class="ic" style="background:var(--blue-soft);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg></div><b>Scan a label</b><span>Add meds from a photo</span></div>
       <div class="card qa" onclick="go('er')"><div class="ic" style="background:var(--red-soft);color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><b>ER sheet</b><span>Grab-and-go one-pager</span></div>
-      <div class="card qa" onclick="go('handoff')"><div class="ic" style="background:rgba(175,82,222,.12);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><b>Handoff Pack</b><span>For a substitute caregiver</span></div>
-      <div class="card qa" onclick="go('appts')"><div class="ic" style="background:var(--green-soft);color:#248A3D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4"/></svg></div><b>Visit prep</b><span>Dr. Chen · Thursday</span></div>
+      <div class="card qa" onclick="go('handoff')"><div class="ic" style="background:rgba(166,123,91,.15);color:#7A5434"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><b>Handoff Pack</b><span>For a substitute caregiver</span></div>
+      <div class="card qa" onclick="go('appts')"><div class="ic" style="background:rgba(0,0,0,.05);color:#4A4A4F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4"/></svg></div><b>Visit prep</b><span>Dr. Chen · Thursday</span></div>
     </div>
   </section>
 
@@ -363,16 +363,16 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 
     <div class="grid vit" style="margin-bottom:16px">
       <div class="card vcard"><div class="vh"><b>Resting heart rate</b><span class="delta up">▲ 6 bpm</span></div><div class="num">74 <small>bpm</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="ghr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF375F" stop-opacity=".25"/><stop offset="1" stop-color="#FF375F" stop-opacity="0"/></linearGradient></defs><path d="M0,26 20,25 40,27 60,24 80,25 100,22 120,21 140,19 160,17 180,15 200,13 V38 H0 Z" fill="url(#ghr)"/><path d="M0,26 20,25 40,27 60,24 80,25 100,22 120,21 140,19 160,17 180,15 200,13" fill="none" stroke="#FF375F" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="ghr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9552F" stop-opacity=".25"/><stop offset="1" stop-color="#D9552F" stop-opacity="0"/></linearGradient></defs><path d="M0,26 20,25 40,27 60,24 80,25 100,22 120,21 140,19 160,17 180,15 200,13 V38 H0 Z" fill="url(#ghr)"/><path d="M0,26 20,25 40,27 60,24 80,25 100,22 120,21 140,19 160,17 180,15 200,13" fill="none" stroke="#D9552F" stroke-width="2" stroke-linecap="round"/></svg>
         <div class="mini">14-day trend · Apple Watch</div></div>
       <div class="card vcard"><div class="vh"><b>Sleep</b><span class="delta flat">— steady</span></div><div class="num">7.2 <small>h avg</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="gsl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E5CE6" stop-opacity=".22"/><stop offset="1" stop-color="#5E5CE6" stop-opacity="0"/></linearGradient></defs><path d="M0,18 25,20 50,15 75,19 100,16 125,20 150,17 175,18 200,16 V38 H0 Z" fill="url(#gsl)"/><path d="M0,18 25,20 50,15 75,19 100,16 125,20 150,17 175,18 200,16" fill="none" stroke="#5E5CE6" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="gsl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E8E93" stop-opacity=".22"/><stop offset="1" stop-color="#8E8E93" stop-opacity="0"/></linearGradient></defs><path d="M0,18 25,20 50,15 75,19 100,16 125,20 150,17 175,18 200,16 V38 H0 Z" fill="url(#gsl)"/><path d="M0,18 25,20 50,15 75,19 100,16 125,20 150,17 175,18 200,16" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"/></svg>
         <div class="mini">14-day trend</div></div>
       <div class="card vcard"><div class="vh"><b>Steps</b><span class="delta down">▲ healthy</span></div><div class="num">3,240 <small>/day</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><g fill="#34C759" opacity=".85"><rect x="2" y="20" width="10" height="18" rx="3"/><rect x="16" y="16" width="10" height="22" rx="3"/><rect x="30" y="22" width="10" height="16" rx="3"/><rect x="44" y="12" width="10" height="26" rx="3"/><rect x="58" y="18" width="10" height="20" rx="3"/><rect x="72" y="10" width="10" height="28" rx="3"/><rect x="86" y="14" width="10" height="24" rx="3"/><rect x="100" y="8" width="10" height="30" rx="3"/><rect x="114" y="16" width="10" height="22" rx="3"/><rect x="128" y="12" width="10" height="26" rx="3"/><rect x="142" y="18" width="10" height="20" rx="3"/><rect x="156" y="9" width="10" height="29" rx="3"/><rect x="170" y="13" width="10" height="25" rx="3"/><rect x="184" y="11" width="10" height="27" rx="3"/></g></svg>
+        <svg class="spark" viewBox="0 0 200 38"><g fill="#D6A254" opacity=".9"><rect x="2" y="20" width="10" height="18" rx="3"/><rect x="16" y="16" width="10" height="22" rx="3"/><rect x="30" y="22" width="10" height="16" rx="3"/><rect x="44" y="12" width="10" height="26" rx="3"/><rect x="58" y="18" width="10" height="20" rx="3"/><rect x="72" y="10" width="10" height="28" rx="3"/><rect x="86" y="14" width="10" height="24" rx="3"/><rect x="100" y="8" width="10" height="30" rx="3"/><rect x="114" y="16" width="10" height="22" rx="3"/><rect x="128" y="12" width="10" height="26" rx="3"/><rect x="142" y="18" width="10" height="20" rx="3"/><rect x="156" y="9" width="10" height="29" rx="3"/><rect x="170" y="13" width="10" height="25" rx="3"/><rect x="184" y="11" width="10" height="27" rx="3"/></g></svg>
         <div class="mini">2-week daily steps</div></div>
       <div class="card vcard"><div class="vh"><b>Weight</b><span class="delta flat">— stable</span></div><div class="num">182 <small>lb</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><path d="M0,20 30,20.5 60,19.8 90,20.2 120,19.6 150,20 180,19.7 200,19.9" fill="none" stroke="#30B0C7" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="spark" viewBox="0 0 200 38"><path d="M0,20 30,20.5 60,19.8 90,20.2 120,19.6 150,20 180,19.7 200,19.9" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"/></svg>
         <div class="mini">Withings scale · weekly</div></div>
     </div>
 
@@ -469,7 +469,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
       </table>
     </div>
     <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:16px">
-      <div class="card pad" style="background:linear-gradient(135deg,#FFF,#F0F8FF)">
+      <div class="card pad" style="background:linear-gradient(135deg,#FFF,#FFF6EF)">
         <b style="font-size:15px">💊 Med-sync opportunity</b>
         <p class="mini" style="margin-top:6px;line-height:1.6">Robert's apixaban, lisinopril &amp; atorvastatin can align to <b>one pickup day (the 28th)</b> at CVS #2213. One trip instead of three. Hearth drafted the ask.</p>
         <button class="btn sm tint" style="margin-top:10px">View the drafted request</button>
@@ -670,12 +670,12 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
         <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="ge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9500" stop-opacity=".25"/><stop offset="1" stop-color="#FF9500" stop-opacity="0"/></linearGradient></defs><path d="M0,12 30,14 60,13 90,17 120,20 150,19 175,24 200,23 V38 H0 Z" fill="url(#ge1)"/><path d="M0,12 30,14 60,13 90,17 120,20 150,19 175,24 200,23" fill="none" stroke="#FF9500" stroke-width="2" stroke-linecap="round"/></svg>
         <div class="mini">Trending shorter · worth a call</div></div>
       <div class="card vcard"><div class="vh"><b>Evening mood (ABC log)</b><span class="delta flat">3 entries</span></div><div class="num">2 <small>hard evenings</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><g fill="#AF52DE" opacity=".8"><rect x="10" y="24" width="16" height="14" rx="4"/><rect x="36" y="28" width="16" height="10" rx="4"/><rect x="62" y="12" width="16" height="26" rx="4"/><rect x="88" y="26" width="16" height="12" rx="4"/><rect x="114" y="28" width="16" height="10" rx="4"/><rect x="140" y="8" width="16" height="30" rx="4"/><rect x="166" y="24" width="16" height="14" rx="4"/></g></svg>
+        <svg class="spark" viewBox="0 0 200 38"><g fill="#C97B4B" opacity=".85"><rect x="10" y="24" width="16" height="14" rx="4"/><rect x="36" y="28" width="16" height="10" rx="4"/><rect x="62" y="12" width="16" height="26" rx="4"/><rect x="88" y="26" width="16" height="12" rx="4"/><rect x="114" y="28" width="16" height="10" rx="4"/><rect x="140" y="8" width="16" height="30" rx="4"/><rect x="166" y="24" width="16" height="14" rx="4"/></g></svg>
         <div class="mini">Hard evenings follow short-sleep nights</div></div>
       <div class="card vcard"><div class="vh"><b>Med runway</b><span class="delta flat">2 meds</span></div><div class="num">12 <small>days · sertraline</small></div>
         <div style="margin-top:8px"><div class="runbar" style="width:100%"><i style="width:40%;background:var(--orange)"></i></div><div class="mini" style="margin-top:8px">Donepezil: 21 days · on track</div></div></div>
     </div>
-    <div class="card pad" style="background:linear-gradient(135deg,#FFF,#FBF5FF)">
+    <div class="card pad" style="background:linear-gradient(135deg,#FFF,#FDF6EF)">
       <b style="font-size:15px">Pattern the quick-logs found</b>
       <p style="font-size:13.5px;color:var(--ink2);margin-top:6px;line-height:1.65">Across 6 weeks of 20-second ABC logs: <b>hard evenings follow nights under 6.5 h of sleep</b> (5 of 6 times). Shared to Dr. Patel's prep sheet for Jul 24 — <i>a hypothesis to discuss, not a diagnosis.</i></p>
     </div>
