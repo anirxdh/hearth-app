@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth — Home</title>
+<style>
+  :root{
+    --canvas:#F2F2F7;
+    --card:#FFFFFF;
+    --ink:#1C1C1E;
+    --ink2:#6E6E73;
+    --ink3:#AEAEB2;
+    --hair:rgba(60,60,67,.10);
+    --fill:rgba(118,118,128,.12);
+    --red:#FF3B30; --red-d:#E02D24;
+    --orange:#FF9500;
+    --amber:#FF9F0A; --amber-d:#C27400;
+    --green:#34C759; --green-d:#1F9D48;
+    --mint:#00C7BE;
+    --indigo:#5856D6; --indigo-d:#4B49B8;
+    --blue:#007AFF;
+    --shadow:0 1px 1px rgba(0,0,0,.03), 0 6px 20px rgba(60,60,67,.08);
+    --shadow-lift:0 2px 3px rgba(0,0,0,.04), 0 12px 30px rgba(60,60,67,.12);
+    --g-alert:linear-gradient(135deg,#FF453A 0%,#FF9500 100%);
+    --g-amber:linear-gradient(135deg,#FFD60A 0%,#FF9F0A 100%);
+    --g-meds:linear-gradient(135deg,#34C759 0%,#00C7BE 100%);
+    --g-sleep:linear-gradient(135deg,#5E5CE6 0%,#7D7AFF 100%);
+    --g-blue:linear-gradient(135deg,#0A84FF 0%,#0066DF 100%);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    font-size:14px;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    min-height:100vh;
+  }
+  svg{display:block}
+
+  /* ============ SIDEBAR ============ */
+  .sidebar{
+    width:236px; flex:0 0 236px;
+    padding:20px 14px 18px;
+    border-right:1px solid var(--hair);
+    display:flex; flex-direction:column;
+  }
+  .brand{display:flex; align-items:center; gap:9px; padding:2px 10px 18px;}
+  .brand-name{font-size:19px; font-weight:800; letter-spacing:-.02em;}
+  .nav-item{
+    display:flex; align-items:center; gap:11px;
+    padding:8px 10px; border-radius:11px;
+    font-size:13.5px; font-weight:500; color:var(--ink);
+    cursor:pointer; transition:background .15s ease;
+    margin-bottom:2px; position:relative;
+  }
+  .nav-item svg{color:var(--ink2); flex:0 0 auto;}
+  .nav-item:hover{background:rgba(118,118,128,.08);}
+  .nav-item.active{background:var(--card); box-shadow:var(--shadow); font-weight:600;}
+  .nav-item.active svg{color:var(--blue);}
+  .dot-red{width:7px; height:7px; border-radius:50%; background:var(--red); margin-left:auto; flex:0 0 auto;}
+  .nav-label{
+    font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink3); padding:0 10px; margin:18px 0 7px;
+  }
+  .initial{
+    width:23px; height:23px; border-radius:50%; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700;
+  }
+  .init-amber{background:rgba(255,159,10,.16); color:var(--amber-d);}
+  .init-red{background:rgba(255,59,48,.14); color:var(--red-d);}
+  .init-green{background:rgba(52,199,89,.16); color:var(--green-d);}
+  .sidebar-foot{margin-top:auto; padding:12px 10px 0; font-size:11.5px; color:var(--ink3); border-top:1px solid var(--hair);}
+
+  /* ============ MAIN ============ */
+  .main{flex:1; min-width:0; display:flex; flex-direction:column;}
+  .topbar{
+    display:flex; align-items:center; gap:12px;
+    padding:14px 28px; border-bottom:1px solid var(--hair);
+  }
+  .search{
+    position:relative; width:320px;
+  }
+  .search svg{position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--ink3);}
+  .search input{
+    width:100%; height:36px; border:none; outline:none;
+    border-radius:10px; background:var(--fill);
+    padding:0 12px 0 34px; font-size:13px; color:var(--ink);
+    font-family:inherit;
+  }
+  .search input::placeholder{color:#8E8E93;}
+  .search input:focus{background:#E8E8ED; box-shadow:0 0 0 3px rgba(0,122,255,.18);}
+  .respite-pill{
+    margin-left:auto;
+    display:flex; align-items:center; gap:7px;
+    background:rgba(88,86,214,.12); color:var(--indigo-d);
+    border-radius:999px; padding:7px 13px;
+    font-size:12.5px; font-weight:600; white-space:nowrap;
+    transition:background .15s ease; cursor:default;
+  }
+  .respite-pill:hover{background:rgba(88,86,214,.18);}
+  .user-chip{display:flex; align-items:center; gap:9px; padding:4px 4px 4px 6px; border-radius:999px; cursor:pointer; transition:background .15s ease;}
+  .user-chip:hover{background:rgba(118,118,128,.08);}
+  .avatar{
+    width:30px; height:30px; border-radius:50%;
+    background:linear-gradient(135deg,#0A84FF,#5E5CE6);
+    color:#fff; font-size:11.5px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    letter-spacing:.02em;
+  }
+  .user-chip span{font-size:13px; font-weight:600;}
+
+  .content{padding:18px 28px 24px; display:flex; flex-direction:column; gap:16px; max-width:1220px;}
+
+  /* greeting */
+  .greet-row{display:flex; align-items:flex-end; gap:20px;}
+  .greet h1{margin:0 0 4px; font-size:27px; font-weight:700; letter-spacing:-.03em; line-height:1.1;}
+  .greet p{margin:0; font-size:13.5px; color:var(--ink2);}
+  .seg{
+    margin-left:auto; display:flex; background:#E3E3E8;
+    border-radius:9px; padding:2px; gap:2px;
+  }
+  .seg button{
+    border:none; background:transparent; font-family:inherit;
+    font-size:13px; font-weight:500; color:var(--ink);
+    padding:5px 18px; border-radius:7px; cursor:pointer;
+    transition:background .15s ease, box-shadow .15s ease;
+  }
+  .seg button:hover{color:#000;}
+  .seg button.active{
+    background:#fff; font-weight:600;
+    box-shadow:0 1px 2.5px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04);
+  }
+
+  /* cards */
+  .card{
+    background:var(--card); border-radius:20px;
+    box-shadow:var(--shadow); padding:18px 20px;
+  }
+  .card-head{display:flex; align-items:baseline; gap:12px; margin-bottom:8px;}
+  .card-label{
+    font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink2);
+  }
+  .card-meta{margin-left:auto; font-size:12px; color:var(--ink3); white-space:nowrap;}
+
+  /* digest */
+  .digest-item{
+    display:grid; grid-template-columns:36px 1fr auto;
+    gap:14px; align-items:center; padding:11px 0;
+  }
+  .digest-item + .digest-item{border-top:1px solid var(--hair);}
+  .digest-icon{
+    width:36px; height:36px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  .di-red{background:var(--g-alert); box-shadow:0 3px 9px rgba(255,69,58,.32);}
+  .di-amber{background:var(--g-amber); box-shadow:0 3px 9px rgba(255,159,10,.30);}
+  .di-green{background:var(--g-meds); box-shadow:0 3px 9px rgba(52,199,89,.28);}
+  .digest-text{font-size:13.5px; line-height:1.45; letter-spacing:-.006em;}
+  .digest-text strong{font-weight:650;}
+  .btn{
+    border:none; font-family:inherit; cursor:pointer;
+    border-radius:999px; padding:8px 16px;
+    font-size:12.5px; font-weight:600; white-space:nowrap;
+    transition:filter .15s ease, background .15s ease, transform .1s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-red{background:var(--g-alert); color:#fff; box-shadow:0 3px 10px rgba(255,69,58,.30);}
+  .btn-red:hover{filter:brightness(.94);}
+  .btn-amber{background:rgba(255,159,10,.15); color:var(--amber-d);}
+  .btn-amber:hover{background:rgba(255,159,10,.24);}
+  .btn-green{background:rgba(52,199,89,.14); color:var(--green-d);}
+  .btn-green:hover{background:rgba(52,199,89,.22);}
+  .btn-blue{background:var(--blue); color:#fff;}
+  .btn-blue:hover{filter:brightness(.93);}
+  .btn-gray{background:var(--fill); color:var(--ink);}
+  .btn-gray:hover{background:rgba(118,118,128,.2);}
+
+  /* person cards */
+  .people{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .person{display:flex; gap:16px; padding:16px 18px; transition:box-shadow .18s ease;}
+  .person:hover{box-shadow:var(--shadow-lift);}
+  .ring-wrap{position:relative; width:84px; height:84px; flex:0 0 auto; align-self:center;}
+  .ring-val{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:19px; font-weight:700; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;
+  }
+  .ring-val small{font-size:10px; font-weight:600; color:var(--ink2); margin-left:1px;}
+  .person-body{min-width:0; flex:1; display:flex; flex-direction:column;}
+  .person-top{display:flex; align-items:flex-start; gap:8px;}
+  .person-name{font-size:15.5px; font-weight:650; letter-spacing:-.015em; line-height:1.2;}
+  .person-rel{font-size:11.5px; color:var(--ink2); margin-top:2px;}
+  .status{
+    margin-left:auto; flex:0 0 auto;
+    display:flex; align-items:center; gap:5px;
+    font-size:10.5px; font-weight:700; letter-spacing:.02em;
+    border-radius:999px; padding:4px 9px; white-space:nowrap;
+  }
+  .status i{width:6px; height:6px; border-radius:50%; display:block;}
+  .st-red{background:rgba(255,59,48,.12); color:var(--red-d);} .st-red i{background:var(--red);}
+  .st-amber{background:rgba(255,159,10,.14); color:var(--amber-d);} .st-amber i{background:var(--amber);}
+  .st-green{background:rgba(52,199,89,.13); color:var(--green-d);} .st-green i{background:var(--green);}
+  .p-lines{margin-top:9px; display:flex; flex-direction:column; gap:5px;}
+  .p-line{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--ink); letter-spacing:-.004em;}
+  .p-line svg{flex:0 0 auto;}
+  .p-line.crit{color:var(--red-d); font-weight:600;}
+  .ic-sleep{color:var(--indigo);} .ic-meds{color:var(--mint);} .ic-hr{color:var(--orange);}
+  .ic-cal{color:var(--ink3);} .ic-fam{color:var(--ink3);}
+  .p-tag{
+    margin-top:9px; align-self:flex-start;
+    font-size:11px; font-weight:600; border-radius:7px; padding:4px 8px;
+  }
+  .tag-indigo{background:rgba(88,86,214,.11); color:var(--indigo-d);}
+  .tag-blue{background:rgba(0,122,255,.10); color:#0063CE;}
+
+  /* duty strip */
+  .duty-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-top:4px;}
+  .day{
+    border-radius:14px; padding:9px 6px 8px; text-align:center;
+    transition:background .15s ease; cursor:default;
+  }
+  .day:hover{background:rgba(118,118,128,.07);}
+  .day .dw{font-size:10.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink3);}
+  .day .dn{font-size:17px; font-weight:700; letter-spacing:-.02em; margin:2px 0 5px; font-variant-numeric:tabular-nums;}
+  .who{
+    display:inline-flex; font-size:10px; font-weight:700; letter-spacing:.04em;
+    border-radius:999px; padding:3px 8px;
+  }
+  .who-ma{background:rgba(0,122,255,.12); color:#0063CE;}
+  .who-mg{background:rgba(48,176,199,.15); color:#137A8E;}
+  .who-da{background:rgba(88,86,214,.12); color:var(--indigo-d);}
+  .day.today{background:var(--blue); box-shadow:0 4px 12px rgba(0,122,255,.35);}
+  .day.today:hover{background:#0071EE;}
+  .day.today .dw{color:rgba(255,255,255,.75);}
+  .day.today .dn{color:#fff;}
+  .day.today .who{background:rgba(255,255,255,.22); color:#fff;}
+
+  /* bottom row */
+  .bottom{display:grid; grid-template-columns:1.12fr 1fr; gap:16px;}
+  .badge-draft{
+    font-size:10.5px; font-weight:700; letter-spacing:.04em;
+    background:rgba(52,199,89,.14); color:var(--green-d);
+    border-radius:999px; padding:3px 9px;
+  }
+  .update-quote{
+    background:#F7F7FA; border-radius:13px; padding:12px 14px;
+    font-size:13.5px; line-height:1.55; color:var(--ink);
+    margin:8px 0 12px; letter-spacing:-.004em;
+  }
+  .update-actions{display:flex; gap:8px;}
+
+  .qa-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px;}
+  .qa{
+    display:flex; align-items:center; gap:12px;
+    padding:10px; border-radius:14px; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .qa:hover{background:rgba(118,118,128,.07);}
+  .qa-icon{
+    width:40px; height:40px; border-radius:11px; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; color:#fff;
+  }
+  .qa1 .qa-icon{background:var(--g-blue); box-shadow:0 3px 9px rgba(10,132,255,.30);}
+  .qa2 .qa-icon{background:var(--g-alert); box-shadow:0 3px 9px rgba(255,69,58,.30);}
+  .qa3 .qa-icon{background:var(--g-sleep); box-shadow:0 3px 9px rgba(94,92,230,.30);}
+  .qa4 .qa-icon{background:var(--g-meds); box-shadow:0 3px 9px rgba(52,199,89,.28);}
+  .qa-title{font-size:13px; font-weight:600; letter-spacing:-.01em;}
+  .qa-sub{font-size:11.5px; color:var(--ink2); margin-top:1px;}
+</style>
+</head>
+<body>
+
+<!-- shared ring gradients -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="ringAmber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD60A"/><stop offset="1" stop-color="#FF9F0A"/>
+    </linearGradient>
+    <linearGradient id="ringRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF453A"/><stop offset="1" stop-color="#FF9500"/>
+    </linearGradient>
+    <linearGradient id="ringGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34C759"/><stop offset="1" stop-color="#00C7BE"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9500"/><stop offset="1" stop-color="#FF453A"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <div class="brand">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="url(#flame)">
+      <path d="M12 2.7c.4 2.3 1.9 3.7 3.4 5.2 1.6 1.6 2.7 3.3 2.7 5.6a6.1 6.1 0 0 1-12.2 0c0-2 .9-3.6 2-4.9.3 1 .9 1.9 1.7 2.4-.2-2.9 1-6 2.4-8.3Z"/>
+    </svg>
+    <span class="brand-name">Hearth</span>
+  </div>
+
+  <div class="nav-item active">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5 12 4l7.5 6.5"/><path d="M6 9.7V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9.7"/></svg>
+    Home
+  </div>
+  <div class="nav-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.5" width="16" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="m9.2 9.2 5.6 5.6"/></svg>
+    Medications
+    <span class="dot-red"></span>
+  </div>
+  <div class="nav-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M20 16v2a2 2 0 0 1-2 2h-2"/><path d="M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+    Scan a label
+  </div>
+  <div class="nav-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10.5h16"/><path d="M8.5 3.5V7M15.5 3.5V7"/></svg>
+    Appointments
+  </div>
+  <div class="nav-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5 13.6 8.9 18 10.5l-4.4 1.6L12 16.5l-1.6-4.4L6 10.5l4.4-1.6L12 4.5Z"/><path d="m18.4 15.8.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7.7-1.6Z"/></svg>
+    Assistant
+  </div>
+
+  <div class="nav-label">Care circle</div>
+  <div class="nav-item">
+    <span class="initial init-amber">E</span>
+    Eleanor · Mom
+  </div>
+  <div class="nav-item">
+    <span class="initial init-red">R</span>
+    Robert · Dad
+    <span class="dot-red"></span>
+  </div>
+  <div class="nav-item">
+    <span class="initial init-green">R</span>
+    Aunt Rosa
+  </div>
+
+  <div class="nav-label">Tools</div>
+  <div class="nav-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.5h4v5h5v4h-5v5h-4v-5H5v-4h5v-5Z"/></svg>
+    ER Sheet
+  </div>
+  <div class="nav-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M9 8V6.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V8"/><path d="M4 13h16"/></svg>
+    Handoff Pack
+  </div>
+
+  <div class="sidebar-foot">Quiet since 7:00 AM · 0 alerts missed</div>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<div class="main">
+
+  <div class="topbar">
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.2 4.2"/></svg>
+      <input type="text" placeholder="Search people, meds, records…">
+    </div>
+    <div class="respite-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+      Respite mode: Eleanor · expires Mon 8 AM
+    </div>
+    <div class="user-chip">
+      <div class="avatar">MA</div>
+      <span>Maria</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- greeting + segmented control -->
+    <div class="greet-row">
+      <div class="greet">
+        <h1>Good afternoon, Maria</h1>
+        <p>Saturday, July 11 · Here's the one thing that needs you, and the calm around it.</p>
+      </div>
+      <div class="seg" id="seg">
+        <button class="active">Today</button>
+        <button>Week</button>
+        <button>Month</button>
+      </div>
+    </div>
+
+    <!-- TODAY'S DIGEST -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-label">Today's Digest</span>
+        <span class="card-meta">Composed 7:00 AM from 14 quiet events · 1 needs action</span>
+      </div>
+
+      <div class="digest-item">
+        <div class="digest-icon di-red">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.5" width="16" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="m9.2 9.2 5.6 5.6"/></svg>
+        </div>
+        <div class="digest-text"><strong>Robert's metformin runs out Thursday</strong> — refill not yet picked up at CVS.</div>
+        <button class="btn btn-red">Request refill</button>
+      </div>
+
+      <div class="digest-item">
+        <div class="digest-icon di-amber">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8 8 0 1 1 10.5 4 6.5 6.5 0 0 0 20 13.5Z"/></svg>
+        </div>
+        <div class="digest-text"><strong>Eleanor's sleep is trending shorter</strong> — 6.1 h avg this week, 48 min under her norm. Worth a call?</div>
+        <button class="btn btn-amber">Call Mom</button>
+      </div>
+
+      <div class="digest-item">
+        <div class="digest-icon di-green">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10.5h16"/><path d="M8.5 3.5V7M15.5 3.5V7"/><path d="m9.5 14.5 2 2 3.5-4"/></svg>
+        </div>
+        <div class="digest-text"><strong>Dr. Chen (cardiology) is Thursday 9:30</strong> — Robert's prep sheet is ready. Rosa's granddaughter visits Sunday.</div>
+        <button class="btn btn-green">Prep sheet</button>
+      </div>
+    </div>
+
+    <!-- THREE PERSON CARDS -->
+    <div class="people">
+
+      <!-- Eleanor -->
+      <div class="card person">
+        <div class="ring-wrap">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle cx="42" cy="42" r="34" fill="none" stroke="rgba(255,159,10,.16)" stroke-width="9"/>
+            <circle cx="42" cy="42" r="34" fill="none" stroke="url(#ringAmber)" stroke-width="9" stroke-linecap="round" stroke-dasharray="132.45 213.63" transform="rotate(-90 42 42)"/>
+          </svg>
+          <div class="ring-val">62<small>%</small></div>
+        </div>
+        <div class="person-body">
+          <div class="person-top">
+            <div>
+              <div class="person-name">Eleanor Alvarez</div>
+              <div class="person-rel">Mom · 78 · early-stage Alzheimer's</div>
+            </div>
+            <span class="status st-amber"><i></i>Worth a look</span>
+          </div>
+          <div class="p-lines">
+            <div class="p-line">
+              <svg class="ic-sleep" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8 8 0 1 1 10.5 4 6.5 6.5 0 0 0 20 13.5Z"/></svg>
+              Sleep 6.1 h · trending down
+            </div>
+            <div class="p-line">
+              <svg class="ic-meds" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.5" width="16" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="m9.2 9.2 5.6 5.6"/></svg>
+              Sertraline refill in 12 days
+            </div>
+          </div>
+          <span class="p-tag tag-indigo">Respite: Dana</span>
+        </div>
+      </div>
+
+      <!-- Robert -->
+      <div class="card person">
+        <div class="ring-wrap">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle cx="42" cy="42" r="34" fill="none" stroke="rgba(255,59,48,.14)" stroke-width="9"/>
+            <circle cx="42" cy="42" r="34" fill="none" stroke="url(#ringRed)" stroke-width="9" stroke-linecap="round" stroke-dasharray="59.82 213.63" transform="rotate(-90 42 42)"/>
+          </svg>
+          <div class="ring-val">28<small>%</small></div>
+        </div>
+        <div class="person-body">
+          <div class="person-top">
+            <div>
+              <div class="person-name">Robert Alvarez</div>
+              <div class="person-rel">Dad · 81 · T2 diabetes · AFib</div>
+            </div>
+            <span class="status st-red"><i></i>Act now</span>
+          </div>
+          <div class="p-lines">
+            <div class="p-line crit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.5" width="16" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="m9.2 9.2 5.6 5.6"/></svg>
+              Metformin: 4 days left
+            </div>
+            <div class="p-line">
+              <svg class="ic-hr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9Z"/></svg>
+              Resting HR 74 · up 6 bpm / 2 wks
+            </div>
+          </div>
+          <span class="p-tag tag-blue">Cardiology Thu</span>
+        </div>
+      </div>
+
+      <!-- Rosa -->
+      <div class="card person">
+        <div class="ring-wrap">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle cx="42" cy="42" r="34" fill="none" stroke="rgba(52,199,89,.15)" stroke-width="9"/>
+            <circle cx="42" cy="42" r="34" fill="none" stroke="url(#ringGreen)" stroke-width="9" stroke-linecap="round" stroke-dasharray="205.09 213.63" transform="rotate(-90 42 42)"/>
+          </svg>
+          <div class="ring-val">96<small>%</small></div>
+        </div>
+        <div class="person-body">
+          <div class="person-top">
+            <div>
+              <div class="person-name">Rosa Marquez</div>
+              <div class="person-rel">Aunt · 74 · hypothyroid</div>
+            </div>
+            <span class="status st-green"><i></i>All good</span>
+          </div>
+          <div class="p-lines">
+            <div class="p-line">
+              <svg class="ic-meds" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8.5" width="16" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="m9.2 9.2 5.6 5.6"/></svg>
+              All meds on track · 32 days runway
+            </div>
+            <div class="p-line">
+              <svg class="ic-fam" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg>
+              Granddaughter visits Sunday
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHO'S ON DUTY -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-label">Who's on duty</span>
+        <span class="card-meta">This week · shared with Dana &amp; Miguel</span>
+      </div>
+      <div class="duty-grid">
+        <div class="day"><div class="dw">Sun</div><div class="dn">5</div><span class="who who-ma">MA</span></div>
+        <div class="day"><div class="dw">Mon</div><div class="dn">6</div><span class="who who-ma">MA</span></div>
+        <div class="day"><div class="dw">Tue</div><div class="dn">7</div><span class="who who-mg">MG</span></div>
+        <div class="day"><div class="dw">Wed</div><div class="dn">8</div><span class="who who-ma">MA</span></div>
+        <div class="day"><div class="dw">Thu</div><div class="dn">9</div><span class="who who-ma">MA</span></div>
+        <div class="day"><div class="dw">Fri</div><div class="dn">10</div><span class="who who-da">DA</span></div>
+        <div class="day today"><div class="dw">Sat</div><div class="dn">11</div><span class="who who-da">DA</span></div>
+      </div>
+    </div>
+
+    <!-- FAMILY UPDATE + QUICK ACTIONS -->
+    <div class="bottom">
+
+      <div class="card">
+        <div class="card-head">
+          <span class="card-label">Family update</span>
+          <span class="badge-draft">drafted</span>
+          <span class="card-meta">Ready to edit</span>
+        </div>
+        <div class="update-quote">Hi Miguel — good week overall. Dad's refill is handled and his cardiology visit is Thursday. Mom's been sleeping a little less, so I'm calling her today…</div>
+        <div class="update-actions">
+          <button class="btn btn-blue">Edit &amp; send</button>
+          <button class="btn btn-gray">Regenerate</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <span class="card-label">Quick actions</span>
+        </div>
+        <div class="qa-grid">
+          <div class="qa qa1">
+            <div class="qa-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M20 16v2a2 2 0 0 1-2 2h-2"/><path d="M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <div class="qa-title">Scan a label</div>
+              <div class="qa-sub">Add meds from a photo</div>
+            </div>
+          </div>
+          <div class="qa qa2">
+            <div class="qa-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.5h4v5h5v4h-5v5h-4v-5H5v-4h5v-5Z"/></svg>
+            </div>
+            <div>
+              <div class="qa-title">ER sheet</div>
+              <div class="qa-sub">Grab-and-go one-pager</div>
+            </div>
+          </div>
+          <div class="qa qa3">
+            <div class="qa-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M9 8V6.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V8"/><path d="M4 13h16"/></svg>
+            </div>
+            <div>
+              <div class="qa-title">Handoff Pack</div>
+              <div class="qa-sub">For a substitute caregiver</div>
+            </div>
+          </div>
+          <div class="qa qa4">
+            <div class="qa-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="12" height="15.5" rx="2"/><rect x="9" y="3.2" width="6" height="3.4" rx="1.2"/><path d="m9.5 13.5 2 2 3.5-4.5"/></svg>
+            </div>
+            <div>
+              <div class="qa-title">Visit prep</div>
+              <div class="qa-sub">Dr. Chen · Thursday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('#seg button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#seg button').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

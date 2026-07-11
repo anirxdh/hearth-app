@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hearth — Design Lab</title>
+<style>
+:root{--bg:#F5F5F7;--ink:#1D1D1F;--ink2:#6E6E73;--line:rgba(0,0,0,.08);--accent:#C4512D}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:56px clamp(20px,5vw,72px) 100px}
+.crumb{font-size:13px;color:var(--ink2);margin-bottom:14px}
+.crumb a{color:var(--accent);text-decoration:none;font-weight:600}
+h1{font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.02}
+.lede{font-size:17px;color:var(--ink2);max-width:640px;margin:14px 0 8px}
+h2{font-size:24px;font-weight:700;letter-spacing:-.02em;margin:64px 0 6px}
+.sub2{font-size:14px;color:var(--ink2);margin-bottom:22px}
+.vgrid{display:grid;gap:26px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 14px 40px rgba(0,0,0,.07);transition:.25s}
+.vcard:hover{transform:translateY(-3px);box-shadow:0 2px 6px rgba(0,0,0,.05),0 28px 70px rgba(0,0,0,.12)}
+.vcard img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line);background:#EEE}
+.vmeta{display:flex;align-items:center;gap:16px;padding:18px 22px}
+.vnum{flex:0 0 auto;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff}
+.vmeta h3{font-size:17px;letter-spacing:-.015em}
+.vmeta p{font-size:13px;color:var(--ink2);margin-top:1px}
+.open{margin-left:auto;flex:0 0 auto;text-decoration:none;background:var(--ink);color:#fff;font-size:13px;font-weight:600;border-radius:980px;padding:9px 18px}
+.open:hover{background:#000}
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.scard{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04),0 10px 28px rgba(0,0,0,.06)}
+.scard img{display:block;width:100%;height:auto;border-bottom:1px solid var(--line)}
+.scard .cap{padding:13px 18px;font-size:13.5px}
+.scard .cap b{display:block;font-size:14px}
+.scard .cap span{color:var(--ink2);font-size:12.5px}
+@media(max-width:900px){.sgrid{grid-template-columns:1fr}}
+.note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:14px 18px;font-size:14px;max-width:720px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="crumb"><a href="index.html">← Back to the app</a></div>
+<h1>Design Lab</h1>
+<p class="lede">Five Apple-grade directions for the Hearth homepage — same content, five materials. Click any to open the live page, then tell us which one Hearth should become.</p>
+<div class="note"><b>How to choose:</b> imagine Maria at 7 AM, tired, coffee in hand. Which of these makes her exhale?</div>
+
+<h2>The five candidates</h2>
+<p class="sub2">Each is a fully working page — open it live, resize it, feel it.</p>
+<div class="vgrid">
+  <div class="vcard"><a href="variants/variant-1.html"><img src="shots/variant-1.png" alt="Liquid Glass variant"></a>
+    <div class="vmeta"><span class="vnum" style="background:linear-gradient(135deg,#7CB8FF,#B39DDB)">1</span><div><h3>Liquid Glass</h3><p>Apple's 2025 material — frosted lenses floating over a luminous mesh gradient. Airy, dreamy, new.</p></div><a class="open" href="variants/variant-1.html">Open live</a></div></div>
+  <div class="vcard"><a href="variants/variant-2.html"><img src="shots/variant-2.png" alt="visionOS Spatial variant"></a>
+    <div class="vmeta"><span class="vnum" style="background:linear-gradient(135deg,#30304A,#0A0A0F)">2</span><div><h3>visionOS Spatial</h3><p>Dark glass windows floating in space — cinematic, weightless, quietly glowing.</p></div><a class="open" href="variants/variant-2.html">Open live</a></div></div>
+  <div class="vcard"><a href="variants/variant-3.html"><img src="shots/variant-3.png" alt="Ivory Editorial variant"></a>
+    <div class="vmeta"><span class="vnum" style="background:#1D1D1F">3</span><div><h3>Ivory Editorial</h3><p>Apple.com restraint — pure white, hairlines, giant type. Luxury through subtraction.</p></div><a class="open" href="variants/variant-3.html">Open live</a></div></div>
+  <div class="vcard"><a href="variants/variant-4.html"><img src="shots/variant-4.png" alt="Apple Health variant"></a>
+    <div class="vmeta"><span class="vnum" style="background:linear-gradient(135deg,#FF375F,#FF9F0A)">4</span><div><h3>Apple Health</h3><p>Activity rings for people — friendly, familiar, quantified-care. The most "iPhone" of the five.</p></div><a class="open" href="variants/variant-4.html">Open live</a></div></div>
+  <div class="vcard"><a href="variants/variant-5.html"><img src="shots/variant-5.png" alt="Graphite Pro variant"></a>
+    <div class="vmeta"><span class="vnum" style="background:linear-gradient(135deg,#E8703A,#B2451F)">5</span><div><h3>Graphite Pro</h3><p>Matte pro-console (Final Cut energy) — dense, precise, one ember accent. For power caregivers.</p></div><a class="open" href="variants/variant-5.html">Open live</a></div></div>
+</div>
+
+<h2>The current app — all 8 screens</h2>
+<p class="sub2">Today's ember theme, for reference. The winning variant's material will be applied across all of these.</p>
+<div class="sgrid">
+  <div class="scard"><img src="screenshots/dashboard.png" alt="Dashboard"><div class="cap"><b>Dashboard</b><span>Digest · roster · duty calendar · family update</span></div></div>
+  <div class="scard"><img src="screenshots/scan.png" alt="Scan and confirm"><div class="cap"><b>Scan &amp; Confirm</b><span>Crop-per-field OCR verification — the hero</span></div></div>
+  <div class="scard"><img src="screenshots/robert.png" alt="Patient 360"><div class="cap"><b>Patient 360</b><span>Trends, runways, records, transparent status rules</span></div></div>
+  <div class="scard"><img src="screenshots/meds.png" alt="Medications"><div class="cap"><b>Medications</b><span>Cross-person inventory + med-sync</span></div></div>
+  <div class="scard"><img src="screenshots/er.png" alt="ER sheet"><div class="cap"><b>ER Sheet</b><span>The grab-and-go one-pager</span></div></div>
+  <div class="scard"><img src="screenshots/handoff.png" alt="Handoff pack"><div class="cap"><b>Handoff Pack</b><span>Routines, protocols + respite mode</span></div></div>
+  <div class="scard"><img src="screenshots/appts.png" alt="Appointments"><div class="cap"><b>Appointments</b><span>Prep sheet · call script · post-visit capture</span></div></div>
+  <div class="scard"><img src="screenshots/assistant.png" alt="Assistant"><div class="cap"><b>Assistant</b><span>Cited answers + warm clinical refusal</span></div></div>
+</div>
+</body>
+</html>

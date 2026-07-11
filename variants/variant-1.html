@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hearth — Home</title>
+<style>
+  /* ============ RESET & TOKENS ============ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --blue: #007AFF;
+    --red: #FF3B30;
+    --amber: #FF9500;
+    --green: #34C759;
+    --purple: #AF52DE;
+    --teal: #30B0C7;
+    --ink: #1c2033;
+    --ink-2: rgba(28, 32, 60, 0.78);
+    --muted: rgba(56, 62, 94, 0.60);
+    --faint: rgba(56, 62, 94, 0.42);
+    --glass: rgba(255, 255, 255, 0.52);
+    --glass-lite: rgba(255, 255, 255, 0.36);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --shadow: 0 24px 60px rgba(60, 70, 130, 0.14);
+    --shadow-sm: 0 12px 32px rgba(60, 70, 130, 0.10);
+    --r-lg: 28px;
+    --r-md: 24px;
+    --r-sm: 18px;
+  }
+  html, body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background: #f2f3f8;
+  }
+  button { font: inherit; border: none; background: none; cursor: pointer; color: inherit; }
+  a { text-decoration: none; color: inherit; cursor: pointer; }
+  svg { display: block; }
+
+  /* ============ AMBIENT BACKGROUND ============ */
+  .ambient { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .8; }
+  .blob-sky   { width: 720px; height: 720px; left: -160px; top: -220px;
+                background: radial-gradient(circle at 40% 40%, #aednff 0%, rgba(168,216,255,0) 70%);
+                animation: drift-a 46s ease-in-out infinite alternate; }
+  .blob-lilac { width: 640px; height: 640px; right: -140px; top: -120px;
+                background: radial-gradient(circle at 50% 50%, #dcccff 0%, rgba(213,197,255,0) 70%);
+                animation: drift-b 52s ease-in-out infinite alternate; }
+  .blob-peach { width: 560px; height: 560px; right: 240px; bottom: -240px;
+                background: radial-gradient(circle at 50% 50%, #ffdcc4 0%, rgba(255,217,192,0) 70%);
+                animation: drift-c 58s ease-in-out infinite alternate; }
+  .blob-mint  { width: 620px; height: 620px; left: 320px; bottom: -280px;
+                background: radial-gradient(circle at 50% 50%, #c5f4dd 0%, rgba(194,242,217,0) 70%);
+                animation: drift-d 49s ease-in-out infinite alternate; }
+  @keyframes drift-a { to { transform: translate(90px, 60px)  scale(1.08); } }
+  @keyframes drift-b { to { transform: translate(-70px, 90px) scale(1.05); } }
+  @keyframes drift-c { to { transform: translate(-90px, -50px) scale(1.1);  } }
+  @keyframes drift-d { to { transform: translate(80px, -70px) scale(1.06); } }
+  .noise {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ GLASS MATERIAL ============ */
+  .glass {
+    position: relative;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow);
+  }
+  .glass::before {
+    content: ""; position: absolute; top: -1px; left: 8%; right: 8%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.98), transparent);
+    pointer-events: none;
+  }
+
+  /* ============ SHELL ============ */
+  .shell {
+    position: relative; z-index: 2;
+    display: flex; gap: 20px;
+    min-height: 100vh;
+    padding: 18px 24px 24px 18px;
+    max-width: 1512px; margin: 0 auto;
+  }
+
+  /* ============ SIDEBAR (floating glass rail) ============ */
+  .rail {
+    width: 236px; flex: none;
+    border-radius: var(--r-lg);
+    display: flex; flex-direction: column;
+    padding: 22px 14px 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 0 10px 20px; }
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 11px; flex: none;
+    background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.45));
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 6px 16px rgba(255, 120, 60, 0.18);
+    display: grid; place-items: center;
+  }
+  .brand-name { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
+  .rail-label {
+    font-size: 10.5px; font-weight: 650; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--faint); padding: 18px 12px 7px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 14px;
+    font-size: 13.5px; font-weight: 500; color: var(--ink-2);
+    transition: background .15s ease, transform .15s ease;
+  }
+  .nav-item svg { color: var(--muted); flex: none; }
+  .nav-item:hover { background: rgba(255,255,255,0.5); }
+  .nav-item.active {
+    background: rgba(0, 122, 255, 0.13);
+    color: var(--blue); font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.18);
+  }
+  .nav-item.active svg { color: var(--blue); }
+  .dot-red {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--red);
+    margin-left: auto; flex: none;
+    box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.15);
+  }
+  .mini-ava {
+    width: 24px; height: 24px; border-radius: 50%; flex: none;
+    display: grid; place-items: center;
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.01em;
+  }
+  .ava-lilac { background: linear-gradient(145deg, #e6dcff, #cdbcf5); color: #6b47b8; }
+  .ava-blue  { background: linear-gradient(145deg, #cfe6ff, #a9cdf7); color: #1c5fb8; }
+  .ava-mint  { background: linear-gradient(145deg, #d1f5e2, #a9e5c4); color: #1e7a4d; }
+  .rail-foot {
+    margin-top: auto;
+    padding: 12px 14px; border-radius: 16px;
+    background: var(--glass-lite);
+    border: 1px solid rgba(255,255,255,0.55);
+    font-size: 11.5px; color: var(--muted); line-height: 1.45;
+  }
+  .rail-foot b { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--ink-2); margin-bottom: 2px; }
+  .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
+
+  /* ============ MAIN ============ */
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+  /* Top bar */
+  .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .search {
+    display: flex; align-items: center; gap: 9px;
+    width: 350px; padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .15s ease, background .15s ease;
+  }
+  .search:focus-within { background: rgba(255,255,255,0.68); box-shadow: 0 12px 32px rgba(0,122,255,0.14); }
+  .search svg { color: var(--faint); flex: none; }
+  .search input {
+    border: none; outline: none; background: transparent; width: 100%;
+    font: inherit; font-size: 13.5px; color: var(--ink);
+  }
+  .search input::placeholder { color: var(--faint); }
+  .respite-pill {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 16px 9px 12px; border-radius: 999px;
+    background: rgba(175, 82, 222, 0.10);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(175, 82, 222, 0.22);
+    box-shadow: var(--shadow-sm);
+    font-size: 12.5px; font-weight: 550; color: #8a3bb8;
+    transition: transform .15s ease;
+  }
+  .respite-pill:hover { transform: translateY(-1px); }
+  .respite-pill svg { flex: none; }
+  .user-chip {
+    display: flex; align-items: center; gap: 9px;
+    padding: 6px 14px 6px 7px; border-radius: 999px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+    font-size: 13px; font-weight: 600;
+    transition: transform .15s ease;
+  }
+  .user-chip:hover { transform: translateY(-1px); }
+  .user-ava {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(145deg, #8fc2ff, #4a90e8);
+    color: #fff; font-size: 11px; font-weight: 700;
+    display: grid; place-items: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+
+  /* Greeting */
+  .greeting { margin: 2px 4px 22px; }
+  .greeting h1 { font-size: 32px; font-weight: 680; letter-spacing: -0.028em; }
+  .greeting p { font-size: 14px; color: var(--muted); margin-top: 5px; letter-spacing: -0.006em; }
+
+  /* Content grid */
+  .content-grid {
+    display: grid; flex: 1;
+    grid-template-columns: 1.58fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "digest family"
+      "people people"
+      "duty   actions";
+    gap: 18px;
+  }
+
+  .card { padding: 22px 24px; }
+  .card-label-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .card-label {
+    font-size: 11px; font-weight: 680; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--faint);
+  }
+  .card-sub { font-size: 12px; color: var(--muted); }
+
+  /* ============ DIGEST ============ */
+  .digest { grid-area: digest; display: flex; flex-direction: column; }
+  .digest-list { display: flex; flex-direction: column; margin-top: 12px; flex: 1; justify-content: space-between; }
+  .digest-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 4px;
+  }
+  .digest-item + .digest-item { border-top: 1px solid rgba(255,255,255,0.55); }
+  .sig {
+    width: 34px; height: 34px; border-radius: 12px; flex: none;
+    display: grid; place-items: center;
+  }
+  .sig-red   { background: rgba(255, 59, 48, 0.12);  color: var(--red); }
+  .sig-amber { background: rgba(255, 149, 0, 0.13);  color: var(--amber); }
+  .sig-green { background: rgba(52, 199, 89, 0.13);  color: var(--green); }
+  .digest-text { flex: 1; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); letter-spacing: -0.004em; }
+  .digest-text strong { font-weight: 640; color: var(--ink); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 15px; border-radius: 999px; flex: none;
+    font-size: 12.5px; font-weight: 600; letter-spacing: -0.004em;
+    background: rgba(0, 122, 255, 0.11);
+    border: 1px solid rgba(0, 122, 255, 0.22);
+    color: var(--blue);
+    box-shadow: 0 4px 14px rgba(0, 122, 255, 0.08);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { background: rgba(0, 122, 255, 0.18); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,122,255,0.14); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary {
+    background: linear-gradient(180deg, #2b90ff, #007AFF);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(0, 122, 255, 0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+  .btn-primary:hover { background: linear-gradient(180deg, #3d9aff, #0a80ff); box-shadow: 0 12px 28px rgba(0,122,255,0.42), inset 0 1px 0 rgba(255,255,255,0.4); }
+
+  /* ============ FAMILY UPDATE ============ */
+  .family { grid-area: family; display: flex; flex-direction: column; }
+  .chip {
+    padding: 3px 10px; border-radius: 999px;
+    font-size: 10.5px; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase;
+    background: rgba(0, 122, 255, 0.10); color: var(--blue);
+    border: 1px solid rgba(0, 122, 255, 0.18);
+  }
+  .ready { margin-left: auto; font-size: 11.5px; color: var(--faint); font-weight: 500; }
+  .draft-sheet {
+    margin-top: 12px; flex: 1;
+    padding: 14px 16px; border-radius: var(--r-sm);
+    background: rgba(255, 255, 255, 0.46);
+    border: 1px solid rgba(255,255,255,0.6);
+    font-size: 13px; line-height: 1.6; color: var(--ink-2);
+    letter-spacing: -0.004em;
+  }
+  .family-actions { display: flex; gap: 9px; margin-top: 14px; }
+
+  /* ============ PERSON CARDS ============ */
+  .people { grid-area: people; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .person {
+    padding: 20px 22px 18px;
+    display: flex; flex-direction: column; gap: 0;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .person:hover { transform: translateY(-3px); box-shadow: 0 30px 70px rgba(60,70,130,0.19); }
+  .person-head { display: flex; align-items: flex-start; gap: 12px; }
+  .person-ava {
+    width: 44px; height: 44px; border-radius: 50%; flex: none;
+    display: grid; place-items: center;
+    font-size: 14px; font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 6px 16px rgba(60,70,130,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .person-id { min-width: 0; }
+  .person-name { font-size: 15.5px; font-weight: 650; letter-spacing: -0.015em; }
+  .person-meta { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .status {
+    margin-left: auto; flex: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px; border-radius: 999px;
+    font-size: 11px; font-weight: 680; letter-spacing: 0.01em;
+  }
+  .status i { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .status-red   { background: rgba(255, 59, 48, 0.12);  color: #d92d23; border: 1px solid rgba(255,59,48,0.22); }
+  .status-red i   { background: var(--red); box-shadow: 0 0 0 3px rgba(255,59,48,0.15); }
+  .status-amber { background: rgba(255, 149, 0, 0.13);  color: #c67300; border: 1px solid rgba(255,149,0,0.24); }
+  .status-amber i { background: var(--amber); }
+  .status-green { background: rgba(52, 199, 89, 0.14);  color: #1e8e43; border: 1px solid rgba(52,199,89,0.26); }
+  .status-green i { background: var(--green); }
+  .vitals { margin-top: 16px; display: flex; flex-direction: column; gap: 9px; }
+  .vital { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--ink-2); letter-spacing: -0.004em; }
+  .vital svg { color: var(--faint); flex: none; }
+  .vital.alert { color: #d92d23; font-weight: 620; }
+  .vital.alert svg { color: var(--red); }
+  .person-tag {
+    margin-top: 15px; align-self: flex-start;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600; color: var(--muted);
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.65);
+  }
+
+  /* ============ WHO'S ON DUTY ============ */
+  .duty { grid-area: duty; display: flex; flex-direction: column; }
+  .duty-strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 14px; flex: 1; }
+  .day {
+    border-radius: 16px;
+    background: rgba(255,255,255,0.38);
+    border: 1px solid rgba(255,255,255,0.55);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; padding: 10px 4px;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .day:hover { background: rgba(255,255,255,0.55); transform: translateY(-1px); }
+  .day-name { font-size: 10px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+  .day-num { font-size: 23px; font-weight: 300; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; }
+  .day-who {
+    width: 22px; height: 22px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 8.5px; font-weight: 700; margin-top: 2px;
+  }
+  .who-ma { background: rgba(0, 122, 255, 0.14);  color: #1264c4; border: 1px solid rgba(0,122,255,0.22); }
+  .who-mg { background: rgba(48, 176, 199, 0.16); color: #157889; border: 1px solid rgba(48,176,199,0.26); }
+  .who-da { background: rgba(175, 82, 222, 0.13); color: #8a3bb8; border: 1px solid rgba(175,82,222,0.22); }
+  .day.today {
+    background: rgba(0, 122, 255, 0.13);
+    border: 1px solid rgba(0, 122, 255, 0.3);
+    box-shadow: 0 10px 26px rgba(0, 122, 255, 0.18), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .day.today .day-name { color: var(--blue); }
+  .day.today .day-num { font-weight: 500; color: var(--blue); }
+
+  /* ============ QUICK ACTIONS ============ */
+  .actions { grid-area: actions; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; }
+  .qa {
+    padding: 15px 17px;
+    border-radius: 22px;
+    display: flex; align-items: center; gap: 12px;
+    text-align: left;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .qa:hover { transform: translateY(-2px); box-shadow: 0 28px 60px rgba(60,70,130,0.18); background: rgba(255,255,255,0.62); }
+  .qa-icon {
+    width: 38px; height: 38px; border-radius: 13px; flex: none;
+    display: grid; place-items: center;
+  }
+  .qi-blue   { background: rgba(0, 122, 255, 0.12);  color: var(--blue); }
+  .qi-red    { background: rgba(255, 59, 48, 0.11);  color: var(--red); }
+  .qi-purple { background: rgba(175, 82, 222, 0.12); color: var(--purple); }
+  .qi-teal   { background: rgba(48, 176, 199, 0.14); color: var(--teal); }
+  .qa-title { font-size: 13px; font-weight: 640; letter-spacing: -0.01em; }
+  .qa-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- Ambient dreamscape -->
+<div class="ambient" aria-hidden="true">
+  <div class="blob blob-sky"></div>
+  <div class="blob blob-lilac"></div>
+  <div class="blob blob-peach"></div>
+  <div class="blob blob-mint"></div>
+</div>
+<div class="noise" aria-hidden="true"></div>
+
+<div class="shell">
+
+  <!-- ============ SIDEBAR RAIL ============ -->
+  <aside class="rail glass">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="flame" x1="7" y1="4" x2="17" y2="20" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#FFB340"/><stop offset="1" stop-color="#FF6448"/>
+            </linearGradient>
+          </defs>
+          <path d="M12 3c.3 2.7-1 4.3-2.4 5.9C8.2 10.5 7 12.1 7 14.2 7 17.1 9.2 19.5 12 19.5s5-2.4 5-5.3c0-1.7-.7-3.3-1.8-4.7-.4 1.2-1 2.1-2 2.7.5-3-.2-6.5-1.2-9.2z" fill="url(#flame)"/>
+        </svg>
+      </div>
+      <span class="brand-name">Hearth</span>
+    </div>
+
+    <nav>
+      <a class="nav-item active">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7v8.5a1.5 1.5 0 0 1-1.5 1.5h-4v-6h-6v6H5a1.5 1.5 0 0 1-1.5-1.5z"/></svg>
+        Home
+      </a>
+      <a class="nav-item">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="m8.4 14.6 7.2-5.2"/></svg>
+        Medications
+        <span class="dot-red"></span>
+      </a>
+      <a class="nav-item">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M7 12h10"/></svg>
+        Scan a label
+      </a>
+      <a class="nav-item">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M4 10h16M8.5 3.5v3M15.5 3.5v3"/></svg>
+        Appointments
+      </a>
+      <a class="nav-item">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5c.7 3.7 2.8 5.8 6.5 6.5-3.7.7-5.8 2.8-6.5 6.5-.7-3.7-2.8-5.8-6.5-6.5 3.7-.7 5.8-2.8 6.5-6.5zM18.5 15.5c.3 1.6 1.2 2.5 2.8 2.8-1.6.3-2.5 1.2-2.8 2.8-.3-1.6-1.2-2.5-2.8-2.8 1.6-.3 2.5-1.2 2.8-2.8z"/></svg>
+        Assistant
+      </a>
+    </nav>
+
+    <div class="rail-label">Care circle</div>
+    <nav>
+      <a class="nav-item">
+        <span class="mini-ava ava-lilac">EA</span>
+        Eleanor · Mom
+      </a>
+      <a class="nav-item">
+        <span class="mini-ava ava-blue">RA</span>
+        Robert · Dad
+        <span class="dot-red"></span>
+      </a>
+      <a class="nav-item">
+        <span class="mini-ava ava-mint">RM</span>
+        Aunt Rosa
+      </a>
+    </nav>
+
+    <div class="rail-label">Tools</div>
+    <nav>
+      <a class="nav-item">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8.5L19 8v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1-1.5z"/><path d="M12 10.5v5M9.5 13h5"/></svg>
+        ER Sheet
+      </a>
+      <a class="nav-item">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12.5" rx="2.5"/><path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5M3.5 12.5h17"/></svg>
+        Handoff Pack
+      </a>
+    </nav>
+
+    <div class="rail-foot">
+      <b><span class="pulse-dot"></span>All quiet since 7:00 AM</b>
+      14 events archived · synced 2 min ago
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg>
+        <input type="text" placeholder="Search people, meds, records…" aria-label="Search">
+      </div>
+      <button class="respite-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8 8 0 0 1 10.5 4a8 8 0 1 0 9.5 9.5z"/></svg>
+        Respite mode: Eleanor · expires Mon 8 AM
+      </button>
+      <button class="user-chip">
+        <span class="user-ava">MA</span>
+        Maria
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--faint)" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Greeting -->
+    <header class="greeting">
+      <h1>Good afternoon, Maria</h1>
+      <p>Saturday, July 11 · Here&rsquo;s the one thing that needs you, and the calm around it.</p>
+    </header>
+
+    <div class="content-grid">
+
+      <!-- ============ TODAY'S DIGEST ============ -->
+      <section class="card glass digest">
+        <div class="card-label-row">
+          <span class="card-label">Today&rsquo;s Digest</span>
+          <span class="card-sub">Composed 7:00 AM from 14 quiet events · 1 needs action</span>
+        </div>
+        <div class="digest-list">
+          <div class="digest-item">
+            <span class="sig sig-red">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21 19.5H3z"/><path d="M12 10v4M12 16.8v.2"/></svg>
+            </span>
+            <p class="digest-text"><strong>Robert&rsquo;s metformin runs out Thursday</strong> — refill not yet picked up at CVS.</p>
+            <button class="btn btn-primary">Request refill</button>
+          </div>
+          <div class="digest-item">
+            <span class="sig sig-amber">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8 8 0 0 1 10.5 4a8 8 0 1 0 9.5 9.5z"/></svg>
+            </span>
+            <p class="digest-text"><strong>Eleanor&rsquo;s sleep is trending shorter</strong> — 6.1 h avg this week, 48 min under her norm. Worth a call?</p>
+            <button class="btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.5L10 8.5 7.8 10a12.5 12.5 0 0 0 6.2 6.2L15.5 14 20 15.5V19a1.5 1.5 0 0 1-1.6 1.5C10.4 20 4 13.6 3.5 5.6A1.5 1.5 0 0 1 5 4z"/></svg>
+              Call Mom
+            </button>
+          </div>
+          <div class="digest-item">
+            <span class="sig sig-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-5"/></svg>
+            </span>
+            <p class="digest-text"><strong>Dr. Chen (cardiology) is Thursday 9:30</strong> — Robert&rsquo;s prep sheet is ready. Rosa&rsquo;s granddaughter visits Sunday.</p>
+            <button class="btn">Prep sheet</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAMILY UPDATE ============ -->
+      <section class="card glass family">
+        <div class="card-label-row">
+          <span class="card-label">Family Update</span>
+          <span class="chip">drafted</span>
+          <span class="ready">Ready to edit</span>
+        </div>
+        <div class="draft-sheet">
+          Hi Miguel — good week overall. Dad&rsquo;s refill is handled and his cardiology visit is Thursday. Mom&rsquo;s been sleeping a little less, so I&rsquo;m calling her today…
+        </div>
+        <div class="family-actions">
+          <button class="btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 5 19 8.5 8.5 19H5v-3.5z"/></svg>
+            Edit &amp; send
+          </button>
+          <button class="btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.9-3M4 13a8 8 0 0 0 14.9 3"/><path d="M5 3.5V8h4.5M19 20.5V16h-4.5"/></svg>
+            Regenerate
+          </button>
+        </div>
+      </section>
+
+      <!-- ============ PERSON CARDS ============ -->
+      <div class="people">
+
+        <article class="card glass person">
+          <div class="person-head">
+            <span class="person-ava ava-lilac">EA</span>
+            <div class="person-id">
+              <div class="person-name">Eleanor Alvarez</div>
+              <div class="person-meta">Mom · 78 · early-stage Alzheimer&rsquo;s</div>
+            </div>
+            <span class="status status-amber"><i></i>Worth a look</span>
+          </div>
+          <div class="vitals">
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8 8 0 0 1 10.5 4a8 8 0 1 0 9.5 9.5z"/></svg>
+              Sleep 6.1 h · trending down
+            </div>
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="m8.4 14.6 7.2-5.2"/></svg>
+              Sertraline refill in 12 days
+            </div>
+          </div>
+          <span class="person-tag">Respite: Dana</span>
+        </article>
+
+        <article class="card glass person">
+          <div class="person-head">
+            <span class="person-ava ava-blue">RA</span>
+            <div class="person-id">
+              <div class="person-name">Robert Alvarez</div>
+              <div class="person-meta">Dad · 81 · T2 diabetes · AFib</div>
+            </div>
+            <span class="status status-red"><i></i>Act now</span>
+          </div>
+          <div class="vitals">
+            <div class="vital alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="m8.4 14.6 7.2-5.2"/></svg>
+              Metformin: 4 days left
+            </div>
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12h4l2-4.5 3 9 2.5-6 1.5 1.5h4"/></svg>
+              Resting HR 74 · up 6 bpm / 2 wks
+            </div>
+          </div>
+          <span class="person-tag">Cardiology Thu</span>
+        </article>
+
+        <article class="card glass person">
+          <div class="person-head">
+            <span class="person-ava ava-mint">RM</span>
+            <div class="person-id">
+              <div class="person-name">Rosa Marquez</div>
+              <div class="person-meta">Aunt · 74 · hypothyroid</div>
+            </div>
+            <span class="status status-green"><i></i>All good</span>
+          </div>
+          <div class="vitals">
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-5"/></svg>
+              All meds on track · 32 days runway
+            </div>
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19.5s-7-4.3-7-9.2A3.9 3.9 0 0 1 12 7.6a3.9 3.9 0 0 1 7 2.7c0 4.9-7 9.2-7 9.2z"/></svg>
+              Granddaughter visits Sunday
+            </div>
+          </div>
+          <span class="person-tag">Next check-in Tue</span>
+        </article>
+
+      </div>
+
+      <!-- ============ WHO'S ON DUTY ============ -->
+      <section class="card glass duty">
+        <div class="card-label-row">
+          <span class="card-label">Who&rsquo;s on Duty</span>
+          <span class="card-sub">This week · shared with Dana &amp; Miguel</span>
+        </div>
+        <div class="duty-strip">
+          <div class="day">
+            <span class="day-name">Sun</span><span class="day-num">5</span><span class="day-who who-ma">MA</span>
+          </div>
+          <div class="day">
+            <span class="day-name">Mon</span><span class="day-num">6</span><span class="day-who who-ma">MA</span>
+          </div>
+          <div class="day">
+            <span class="day-name">Tue</span><span class="day-num">7</span><span class="day-who who-mg">MG</span>
+          </div>
+          <div class="day">
+            <span class="day-name">Wed</span><span class="day-num">8</span><span class="day-who who-ma">MA</span>
+          </div>
+          <div class="day">
+            <span class="day-name">Thu</span><span class="day-num">9</span><span class="day-who who-ma">MA</span>
+          </div>
+          <div class="day">
+            <span class="day-name">Fri</span><span class="day-num">10</span><span class="day-who who-da">DA</span>
+          </div>
+          <div class="day today">
+            <span class="day-name">Sat</span><span class="day-num">11</span><span class="day-who who-da">DA</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ QUICK ACTIONS ============ -->
+      <div class="actions">
+        <button class="glass qa">
+          <span class="qa-icon qi-blue">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M7 12h10"/></svg>
+          </span>
+          <span>
+            <span class="qa-title">Scan a label</span><br>
+            <span class="qa-sub">Add meds from a photo</span>
+          </span>
+        </button>
+        <button class="glass qa">
+          <span class="qa-icon qi-red">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8.5L19 8v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1-1.5z"/><path d="M12 10.5v5M9.5 13h5"/></svg>
+          </span>
+          <span>
+            <span class="qa-title">ER sheet</span><br>
+            <span class="qa-sub">Grab-and-go one-pager</span>
+          </span>
+        </button>
+        <button class="glass qa">
+          <span class="qa-icon qi-purple">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12.5" rx="2.5"/><path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5M3.5 12.5h17"/></svg>
+          </span>
+          <span>
+            <span class="qa-title">Handoff Pack</span><br>
+            <span class="qa-sub">For a substitute caregiver</span>
+          </span>
+        </button>
+        <button class="glass qa">
+          <span class="qa-icon qi-teal">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M4 10h16M8.5 3.5v3M15.5 3.5v3M9 15l2 2 3.8-4"/></svg>
+          </span>
+          <span>
+            <span class="qa-title">Visit prep</span><br>
+            <span class="qa-sub">Dr. Chen · Thursday</span>
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hearth — Home</title>
+<style>
+  :root{
+    --bg:#161618;
+    --panel:#1E1E20;
+    --card:#262628;
+    --card-raise:#2C2C2E;
+    --chip:#2E2E30;
+    --line:#333336;
+    --inset:rgba(255,255,255,0.06);
+    --text:#E9E9EB;
+    --text-2:#C7C7CC;
+    --mut:#98989D;
+    --faint:#6E6E73;
+    --ember:#E8703A;
+    --ember-hi:#F58150;
+    --ember-dim:rgba(232,112,58,0.12);
+    --ember-line:rgba(232,112,58,0.32);
+    --red:#F2555A;
+    --red-dim:rgba(242,85,90,0.12);
+    --red-line:rgba(242,85,90,0.28);
+    --amber:#E3A33C;
+    --amber-dim:rgba(227,163,60,0.12);
+    --amber-line:rgba(227,163,60,0.28);
+    --green:#4CC38A;
+    --green-dim:rgba(76,195,138,0.12);
+    --green-line:rgba(76,195,138,0.28);
+    --r:12px;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+    font-size:13px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  .num{
+    font-family:var(--mono);
+    font-variant-numeric:tabular-nums;
+    font-size:0.95em;
+    letter-spacing:-0.01em;
+  }
+  svg{display:block;flex:none}
+
+  /* ---------- shell ---------- */
+  .app{display:flex;height:100vh;min-height:640px}
+
+  /* ---------- sidebar ---------- */
+  .side{
+    width:232px;flex:none;
+    background:var(--panel);
+    border-right:1px solid var(--line);
+    display:flex;flex-direction:column;
+    padding:16px 12px 12px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;padding:2px 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
+  .brand-mark{
+    width:28px;height:28px;border-radius:8px;background:var(--ember);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14);
+  }
+  .brand-mark svg{stroke:#221008}
+  .brand-name{font-size:15px;font-weight:700;letter-spacing:-0.02em}
+  .brand-sub{font-size:10.5px;color:var(--faint);letter-spacing:0.06em;text-transform:uppercase;margin-top:1px}
+
+  .nav-sec{margin-bottom:14px}
+  .nav-label{
+    font-size:10.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;
+    color:var(--faint);padding:6px 8px 6px;
+  }
+  .nav-item{
+    display:flex;align-items:center;gap:10px;
+    padding:7px 8px;border-radius:8px;color:var(--mut);
+    font-size:13px;font-weight:500;cursor:pointer;
+    position:relative;transition:background .12s,color .12s;
+  }
+  .nav-item svg{stroke:var(--faint);transition:stroke .12s}
+  .nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text-2)}
+  .nav-item:hover svg{stroke:var(--mut)}
+  .nav-item.active{background:var(--ember-dim);color:var(--ember-hi)}
+  .nav-item.active svg{stroke:var(--ember-hi)}
+  .nav-item.active::before{
+    content:"";position:absolute;left:-12px;top:7px;bottom:7px;width:2px;
+    background:var(--ember);border-radius:0 2px 2px 0;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;margin-left:auto;flex:none}
+  .dot.red{background:var(--red);box-shadow:0 0 0 3px var(--red-dim)}
+  .mini-av{
+    width:20px;height:20px;border-radius:6px;background:var(--chip);
+    box-shadow:inset 0 0 0 1px var(--inset);
+    display:flex;align-items:center;justify-content:center;
+    font-size:9.5px;font-weight:700;color:var(--text-2);letter-spacing:0.02em;flex:none;
+  }
+  .side-foot{
+    margin-top:auto;border-top:1px solid var(--line);
+    padding:12px 8px 2px;display:flex;align-items:center;gap:8px;
+    font-size:11.5px;color:var(--faint);
+  }
+  .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none}
+
+  /* ---------- main ---------- */
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+
+  .topbar{
+    height:52px;flex:none;display:flex;align-items:center;gap:12px;
+    padding:0 24px;border-bottom:1px solid var(--line);background:var(--panel);
+  }
+  .search{position:relative;width:340px}
+  .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);stroke:var(--faint)}
+  .search input{
+    width:100%;height:30px;border-radius:8px;border:1px solid var(--line);
+    background:var(--bg);color:var(--text);
+    font:inherit;font-size:12.5px;padding:0 12px 0 32px;outline:none;
+    transition:border-color .12s,background .12s;
+  }
+  .search input::placeholder{color:var(--faint)}
+  .search input:hover{background:#1A1A1C}
+  .search input:focus{border-color:var(--ember-line);background:#1A1A1C}
+  .kbd{
+    position:absolute;right:8px;top:50%;transform:translateY(-50%);
+    font-family:var(--mono);font-size:10px;color:var(--faint);
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:var(--panel);
+  }
+  .respite{
+    margin-left:auto;display:flex;align-items:center;gap:7px;
+    height:28px;padding:0 12px;border-radius:999px;
+    background:var(--ember-dim);border:1px solid var(--ember-line);
+    color:var(--ember-hi);font-size:12px;font-weight:500;cursor:pointer;
+    transition:background .12s;
+  }
+  .respite:hover{background:rgba(232,112,58,0.18)}
+  .respite svg{stroke:var(--ember-hi)}
+  .top-div{width:1px;height:20px;background:var(--line)}
+  .userchip{
+    display:flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 4px;
+    border-radius:9px;cursor:pointer;transition:background .12s;
+  }
+  .userchip:hover{background:rgba(255,255,255,0.05)}
+  .avatar{
+    width:26px;height:26px;border-radius:8px;background:#3A3A3D;
+    box-shadow:inset 0 0 0 1px var(--inset);
+    display:flex;align-items:center;justify-content:center;
+    font-size:10.5px;font-weight:700;color:var(--text);letter-spacing:0.02em;
+  }
+  .userchip .uname{font-size:13px;font-weight:600}
+  .userchip svg{stroke:var(--faint)}
+
+  .content{
+    flex:1;min-height:0;overflow-y:auto;
+    padding:22px 24px 22px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+
+  /* ---------- greeting ---------- */
+  .greet h1{font-size:22px;font-weight:700;letter-spacing:-0.025em;line-height:1.2}
+  .greet p{font-size:13px;color:var(--mut);margin-top:3px}
+
+  /* ---------- generic card ---------- */
+  .card{
+    background:var(--card);border-radius:var(--r);
+    box-shadow:inset 0 0 0 1px var(--inset);
+  }
+  .card-label{
+    font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--mut);
+  }
+
+  /* ---------- digest ---------- */
+  .digest-head{
+    display:flex;align-items:center;gap:9px;padding:12px 16px;
+    border-bottom:1px solid var(--line);
+  }
+  .digest-head svg{stroke:var(--ember)}
+  .digest-meta{margin-left:auto;font-size:11.5px;color:var(--faint)}
+  .digest-row{
+    display:flex;align-items:center;gap:12px;padding:11px 16px;
+  }
+  .digest-row + .digest-row{border-top:1px solid var(--line)}
+  .sdot{width:7px;height:7px;border-radius:50%;flex:none}
+  .sdot.red{background:var(--red);box-shadow:0 0 0 3px var(--red-dim)}
+  .sdot.amber{background:var(--amber);box-shadow:0 0 0 3px var(--amber-dim)}
+  .sdot.green{background:var(--green);box-shadow:0 0 0 3px var(--green-dim)}
+  .digest-row p{font-size:13px;color:var(--text-2);min-width:0}
+  .digest-row p strong{color:var(--text);font-weight:600}
+  .digest-row .btn{margin-left:auto}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    flex:none;font:inherit;font-size:12px;font-weight:600;
+    height:28px;padding:0 12px;border-radius:8px;cursor:pointer;
+    border:1px solid transparent;transition:background .12s,border-color .12s,transform .08s;
+    letter-spacing:0;white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--ember);color:#221008}
+  .btn-primary:hover{background:var(--ember-hi)}
+  .btn-ghost{background:var(--chip);color:var(--text);border-color:#3A3A3D}
+  .btn-ghost:hover{background:#353538;border-color:#454548}
+  .btn:focus-visible,.search input:focus-visible,.nav-item:focus-visible{outline:2px solid var(--ember-line);outline-offset:1px}
+
+  /* ---------- person cards ---------- */
+  .people{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .person{padding:14px 16px 12px;display:flex;flex-direction:column;transition:box-shadow .12s}
+  .person:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12)}
+  .person-head{display:flex;align-items:flex-start;gap:11px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+  .pav{
+    width:36px;height:36px;border-radius:10px;background:#313134;
+    box-shadow:inset 0 0 0 1px var(--inset);flex:none;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12.5px;font-weight:700;color:var(--text-2);letter-spacing:0.02em;
+  }
+  .person-name{font-size:14px;font-weight:600;letter-spacing:-0.01em;line-height:1.25}
+  .person-meta{font-size:11.5px;color:var(--mut);margin-top:1px}
+  .status{
+    margin-left:auto;flex:none;display:flex;align-items:center;gap:6px;
+    height:22px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:600;
+  }
+  .status.red{color:var(--red);background:var(--red-dim);border:1px solid var(--red-line)}
+  .status.amber{color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-line)}
+  .status.green{color:var(--green);background:var(--green-dim);border:1px solid var(--green-line)}
+  .status i{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .vitals{padding:10px 0 11px;display:flex;flex-direction:column;gap:7px}
+  .vital{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-2)}
+  .vital svg{stroke:var(--faint)}
+  .vital.alert{color:var(--red)}
+  .vital.alert svg{stroke:var(--red)}
+  .tags{margin-top:auto;display:flex;gap:6px}
+  .tag{
+    font-size:11px;font-weight:500;color:var(--mut);
+    background:var(--chip);border:1px solid #3A3A3D;border-radius:6px;
+    padding:2.5px 8px;display:inline-flex;align-items:center;gap:5px;
+  }
+  .tag svg{stroke:var(--faint)}
+
+  /* ---------- middle row ---------- */
+  .midrow{display:grid;grid-template-columns:1fr 1.08fr;gap:16px;flex:1;min-height:186px}
+  .midrow .card{display:flex;flex-direction:column;padding:14px 16px}
+  .mid-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+
+  /* duty */
+  .duty-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;flex:1}
+  .duty-cell{
+    border-radius:9px;background:var(--panel);
+    box-shadow:inset 0 0 0 1px var(--inset);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    padding:8px 2px;min-height:78px;cursor:default;transition:box-shadow .12s,background .12s;
+  }
+  .duty-cell:hover{background:#232325}
+  .duty-day{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint)}
+  .duty-date{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:14px;color:var(--text-2)}
+  .duty-who{
+    font-family:var(--mono);font-size:10px;letter-spacing:0.03em;
+    color:var(--text-2);background:var(--chip);border-radius:5px;padding:2px 6px;
+    box-shadow:inset 0 0 0 1px var(--inset);
+  }
+  .duty-cell.today{
+    background:var(--ember-dim);
+    box-shadow:inset 0 0 0 1px var(--ember-line);
+  }
+  .duty-cell.today .duty-day,.duty-cell.today .duty-date{color:var(--ember-hi)}
+  .duty-cell.today .duty-who{background:var(--ember);color:#221008;box-shadow:none;font-weight:700}
+  .duty-cap{margin-top:11px;font-size:11.5px;color:var(--faint);display:flex;align-items:center;gap:6px}
+  .duty-cap svg{stroke:var(--faint)}
+
+  /* family update */
+  .fchip{
+    font-size:10.5px;font-weight:600;letter-spacing:0.04em;
+    padding:2px 8px;border-radius:999px;
+    background:var(--ember-dim);color:var(--ember-hi);border:1px solid var(--ember-line);
+  }
+  .fready{margin-left:auto;font-size:11.5px;color:var(--faint)}
+  .fbody{
+    font-size:13px;line-height:1.6;color:var(--text-2);
+    padding:11px 12px;background:var(--panel);border-radius:9px;
+    box-shadow:inset 0 0 0 1px var(--inset);
+  }
+  .fbody .to{color:var(--text);font-weight:600}
+  .factions{margin-top:auto;padding-top:12px;display:flex;gap:8px}
+
+  /* ---------- quick actions ---------- */
+  .qa-sec{display:flex;flex-direction:column;gap:9px}
+  .qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .qa{
+    display:flex;align-items:center;gap:12px;padding:13px 15px;
+    background:var(--card);border-radius:var(--r);
+    box-shadow:inset 0 0 0 1px var(--inset);
+    cursor:pointer;transition:box-shadow .12s,background .12s;
+  }
+  .qa:hover{box-shadow:inset 0 0 0 1px var(--ember-line);background:#28282A}
+  .qa:hover .qa-ico{background:var(--ember-dim)}
+  .qa:hover .qa-ico svg{stroke:var(--ember-hi)}
+  .qa-ico{
+    width:34px;height:34px;border-radius:9px;background:var(--chip);
+    box-shadow:inset 0 0 0 1px var(--inset);flex:none;
+    display:flex;align-items:center;justify-content:center;transition:background .12s;
+  }
+  .qa-ico svg{stroke:var(--mut);transition:stroke .12s}
+  .qa b{display:block;font-size:13px;font-weight:600;letter-spacing:-0.005em}
+  .qa span{display:block;font-size:11.5px;color:var(--mut);margin-top:1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Hearth</div>
+        <div class="brand-sub">Care console</div>
+      </div>
+    </div>
+
+    <nav class="nav-sec">
+      <div class="nav-item active" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        Home
+      </div>
+      <div class="nav-item" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 1 1 7-7l7 7a4.95 4.95 0 1 1-7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+        Medications
+        <i class="dot red"></i>
+      </div>
+      <div class="nav-item" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+        Scan a label
+      </div>
+      <div class="nav-item" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Appointments
+      </div>
+      <div class="nav-item" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+        Assistant
+      </div>
+    </nav>
+
+    <nav class="nav-sec">
+      <div class="nav-label">Care circle</div>
+      <div class="nav-item" tabindex="0">
+        <span class="mini-av">EA</span>
+        Eleanor · Mom
+      </div>
+      <div class="nav-item" tabindex="0">
+        <span class="mini-av">RA</span>
+        Robert · Dad
+        <i class="dot red"></i>
+      </div>
+      <div class="nav-item" tabindex="0">
+        <span class="mini-av">RM</span>
+        Aunt Rosa
+      </div>
+    </nav>
+
+    <nav class="nav-sec">
+      <div class="nav-label">Tools</div>
+      <div class="nav-item" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v6M9 15h6"/></svg>
+        ER Sheet
+      </div>
+      <div class="nav-item" tabindex="0">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg>
+        Handoff Pack
+      </div>
+    </nav>
+
+    <div class="side-foot">
+      <i class="pulse"></i>
+      All quiet · synced <span class="num" style="margin-left:2px">2:41 PM</span>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- top bar -->
+    <header class="topbar">
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search people, meds, records…" aria-label="Search">
+        <span class="kbd">⌘K</span>
+      </div>
+
+      <button class="respite">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2v4M7 22v-4"/><path d="M3 11a8 8 0 0 1 13-6.2M21 13a8 8 0 0 1-13 6.2"/></svg>
+        Respite mode: Eleanor · expires <span class="num">Mon 8 AM</span>
+      </button>
+
+      <div class="top-div"></div>
+
+      <div class="userchip" tabindex="0">
+        <span class="avatar">MA</span>
+        <span class="uname">Maria</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- greeting -->
+      <div class="greet">
+        <h1>Good afternoon, Maria</h1>
+        <p>Saturday, July 11 · Here&rsquo;s the one thing that needs you, and the calm around it.</p>
+      </div>
+
+      <!-- today's digest -->
+      <section class="card" aria-label="Today's digest">
+        <div class="digest-head">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          <span class="card-label">Today&rsquo;s Digest</span>
+          <span class="digest-meta">Composed <span class="num">7:00 AM</span> from <span class="num">14</span> quiet events · <span class="num">1</span> needs action</span>
+        </div>
+        <div class="digest-row">
+          <i class="sdot red"></i>
+          <p><strong>Robert&rsquo;s metformin runs out Thursday</strong> — refill not yet picked up at CVS.</p>
+          <button class="btn btn-primary">Request refill</button>
+        </div>
+        <div class="digest-row">
+          <i class="sdot amber"></i>
+          <p><strong>Eleanor&rsquo;s sleep is trending shorter</strong> — <span class="num">6.1 h</span> avg this week, <span class="num">48 min</span> under her norm. Worth a call?</p>
+          <button class="btn btn-ghost">Call Mom</button>
+        </div>
+        <div class="digest-row">
+          <i class="sdot green"></i>
+          <p><strong>Dr. Chen (cardiology) is Thursday <span class="num">9:30</span></strong> — Robert&rsquo;s prep sheet is ready. Rosa&rsquo;s granddaughter visits Sunday.</p>
+          <button class="btn btn-ghost">Prep sheet</button>
+        </div>
+      </section>
+
+      <!-- person cards -->
+      <section class="people" aria-label="Care circle status">
+
+        <article class="card person">
+          <div class="person-head">
+            <span class="pav">EA</span>
+            <div>
+              <div class="person-name">Eleanor Alvarez</div>
+              <div class="person-meta">Mom · <span class="num">78</span> · early-stage Alzheimer&rsquo;s</div>
+            </div>
+            <span class="status amber"><i></i>Worth a look</span>
+          </div>
+          <div class="vitals">
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+              Sleep <span class="num">6.1 h</span> · trending down
+            </div>
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 1 1 7-7l7 7a4.95 4.95 0 1 1-7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+              Sertraline refill in <span class="num">12 days</span>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2v4M7 22v-4"/><path d="M3 11a8 8 0 0 1 13-6.2M21 13a8 8 0 0 1-13 6.2"/></svg>
+              Respite: Dana
+            </span>
+          </div>
+        </article>
+
+        <article class="card person">
+          <div class="person-head">
+            <span class="pav">RA</span>
+            <div>
+              <div class="person-name">Robert Alvarez</div>
+              <div class="person-meta">Dad · <span class="num">81</span> · T2 diabetes · AFib</div>
+            </div>
+            <span class="status red"><i></i>Act now</span>
+          </div>
+          <div class="vitals">
+            <div class="vital alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 1 1 7-7l7 7a4.95 4.95 0 1 1-7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+              Metformin: <span class="num">4 days</span> left
+            </div>
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>
+              Resting HR <span class="num">74</span> · up <span class="num">6 bpm</span> / <span class="num">2 wks</span>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              Cardiology Thu
+            </span>
+          </div>
+        </article>
+
+        <article class="card person">
+          <div class="person-head">
+            <span class="pav">RM</span>
+            <div>
+              <div class="person-name">Rosa Marquez</div>
+              <div class="person-meta">Aunt · <span class="num">74</span> · hypothyroid</div>
+            </div>
+            <span class="status green"><i></i>All good</span>
+          </div>
+          <div class="vitals">
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              All meds on track · <span class="num">32 days</span> runway
+            </div>
+            <div class="vital">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Granddaughter visits Sunday
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag" style="visibility:hidden">—</span>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- who's on duty + family update -->
+      <section class="midrow">
+
+        <article class="card" aria-label="Who's on duty">
+          <div class="mid-head">
+            <span class="card-label">Who&rsquo;s on Duty</span>
+          </div>
+          <div class="duty-grid">
+            <div class="duty-cell"><span class="duty-day">Sun</span><span class="duty-date">5</span><span class="duty-who">MA</span></div>
+            <div class="duty-cell"><span class="duty-day">Mon</span><span class="duty-date">6</span><span class="duty-who">MA</span></div>
+            <div class="duty-cell"><span class="duty-day">Tue</span><span class="duty-date">7</span><span class="duty-who">MG</span></div>
+            <div class="duty-cell"><span class="duty-day">Wed</span><span class="duty-date">8</span><span class="duty-who">MA</span></div>
+            <div class="duty-cell"><span class="duty-day">Thu</span><span class="duty-date">9</span><span class="duty-who">MA</span></div>
+            <div class="duty-cell"><span class="duty-day">Fri</span><span class="duty-date">10</span><span class="duty-who">DA</span></div>
+            <div class="duty-cell today"><span class="duty-day">Sat</span><span class="duty-date">11</span><span class="duty-who">DA</span></div>
+          </div>
+          <div class="duty-cap">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            This week · shared with Dana &amp; Miguel
+          </div>
+        </article>
+
+        <article class="card" aria-label="Family update">
+          <div class="mid-head">
+            <span class="card-label">Family Update</span>
+            <span class="fchip">drafted</span>
+            <span class="fready">Ready to edit</span>
+          </div>
+          <div class="fbody">
+            <span class="to">Hi Miguel</span> — good week overall. Dad&rsquo;s refill is handled and his cardiology visit is Thursday. Mom&rsquo;s been sleeping a little less, so I&rsquo;m calling her today…
+          </div>
+          <div class="factions">
+            <button class="btn btn-primary">Edit &amp; send</button>
+            <button class="btn btn-ghost">Regenerate</button>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- quick actions -->
+      <section class="qa-sec" aria-label="Quick actions">
+        <span class="card-label">Quick Actions</span>
+        <div class="qa-grid">
+          <div class="qa" tabindex="0">
+            <span class="qa-ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+            </span>
+            <div><b>Scan a label</b><span>Add meds from a photo</span></div>
+          </div>
+          <div class="qa" tabindex="0">
+            <span class="qa-ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v6M9 15h6"/></svg>
+            </span>
+            <div><b>ER sheet</b><span>Grab-and-go one-pager</span></div>
+          </div>
+          <div class="qa" tabindex="0">
+            <span class="qa-ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg>
+            </span>
+            <div><b>Handoff Pack</b><span>For a substitute caregiver</span></div>
+          </div>
+          <div class="qa" tabindex="0">
+            <span class="qa-ico">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+            </span>
+            <div><b>Visit prep</b><span>Dr. Chen · Thursday</span></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

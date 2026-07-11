@@ -174,6 +174,41 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 .confirm-ic.ok{background:var(--green)} .confirm-ic.warn{background:var(--orange)}
 .confirm-ic svg{width:13px;height:13px}
 
+/* ============ SCAN SCENE (live OCR) ============ */
+.scene3{position:relative;background:radial-gradient(120% 90% at 50% 0%,#3A3A40 0%,#232326 55%,#141416 100%);border-radius:18px;padding:30px 20px 24px;overflow:hidden}
+.scene3 .vf i{position:absolute;width:26px;height:26px;border:2.5px solid rgba(255,255,255,.85);z-index:5}
+.scene3 .vf i:nth-child(1){top:12px;left:12px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+.scene3 .vf i:nth-child(2){top:12px;right:12px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+.scene3 .vf i:nth-child(3){bottom:12px;left:12px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+.scene3 .vf i:nth-child(4){bottom:12px;right:12px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+.scanchip{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:6;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:7px}
+.scanchip .pulse{width:8px;height:8px;border-radius:50%;background:#FF9F0A;animation:pl 1.1s ease-in-out infinite}
+@keyframes pl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.bwrap{position:relative;width:300px;margin:14px auto 6px}
+.beam{position:absolute;left:-6%;right:-6%;height:44px;z-index:4;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(255,170,90,.22),transparent);
+  border-top:1.5px solid rgba(255,190,120,.95);box-shadow:0 -2px 18px rgba(255,160,70,.45);
+  animation:sweep 3s cubic-bezier(.4,.1,.6,.9) infinite alternate;animation-delay:-1.2s}
+@keyframes sweep{from{top:16%}to{top:80%}}
+.detect{position:absolute;border:1.6px dashed rgba(255,255,255,.92);border-radius:6px;z-index:5;box-shadow:0 0 0 3px rgba(232,112,58,.25);animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.detect.warn2{border-color:#FFB340;box-shadow:0 0 0 3px rgba(255,159,10,.3)}
+.detect .dtag{position:absolute;top:-21px;left:-2px;background:#fff;color:#1D1D1F;font-size:9.5px;font-weight:800;border-radius:5px;padding:2px 7px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.detect.warn2 .dtag{background:#FFB340;color:#3A2200}
+.detect .dtag.b{top:auto;bottom:-21px}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.scenecap{text-align:center;color:rgba(255,255,255,.55);font-size:11px;position:relative;z-index:6;margin-top:10px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.pstep{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;border-radius:99px;padding:6px 12px;background:rgba(0,0,0,.045);color:var(--ink2)}
+.pstep.done{background:var(--green-soft);color:#248A3D}
+.pstep.now{background:var(--blue-soft);color:var(--blue)}
+.spin{width:12px;height:12px;border-radius:50%;border:2px solid rgba(196,81,45,.25);border-top-color:var(--blue);animation:rot .9s linear infinite;flex:0 0 auto}
+@keyframes rot{to{transform:rotate(360deg)}}
+.skel{position:relative;overflow:hidden;background:#EFEFF1;border-radius:6px;color:transparent!important}
+.skel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:sh 1.3s infinite}
+@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.addrow{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid rgba(196,81,45,.35);border-radius:14px;padding:12px 16px;margin-top:12px;box-shadow:0 8px 24px rgba(196,81,45,.08)}
+.addrow .runmath{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--ink2)}
+
 /* ============ ER SHEET ============ */
 .ersheet{max-width:760px;background:#fff;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow-lg);overflow:hidden}
 .ersheet .erhead{background:linear-gradient(135deg,#FF3B30,#FF6482);color:#fff;padding:22px 28px;display:flex;align-items:center;gap:16px}
@@ -264,6 +299,9 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
   <div class="navlabel">Tools</div>
   <button class="nav" data-v="er"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>ER Sheet</button>
   <button class="nav" data-v="handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M4 12h16"/></svg>Handoff Pack</button>
+
+  <div class="navlabel">Design</div>
+  <a class="nav" href="variants.html" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18c-2 0-2.5-1.4-1.6-2.6.8-1.1.3-2.4-1.1-2.4H7.5C5.6 16 5 14.6 5 13"/><circle cx="9" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="17" cy="11.5" r="1.2" fill="currentColor" stroke="none"/></svg>Design Lab · pick a theme</a>
 
   <div class="side-foot"><b>Maria Alvarez</b><br>Caring for 3 people<br><span style="color:#34C759">●</span> All data private &amp; audited</div>
 </aside>
@@ -484,32 +522,117 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
   <!-- ========== SCAN ========== -->
   <section class="view" id="v-scan">
     <h1 class="page">Scan &amp; confirm</h1>
-    <p class="sub">Photograph a pharmacy label. Hearth reads it — <b>you confirm every field beside the exact crop it was read from.</b> Nothing saves itself.</p>
+    <p class="sub">Point the camera at the bottle. Hearth reads the label live — <b>you confirm every field beside the exact crop it was read from.</b> Nothing saves itself.</p>
     <div class="grid scanwrap">
       <div>
-        <div class="labelmock">
-          <div class="scanline"></div>
-          <div class="store">CVS pharmacy<span style="font-weight:400;font-size:11px"> · #2213 · (415) 555-0119</span></div>
-          <div class="rx">RX# 8841207-06  ·  DR. S. CHEN</div>
-          <div style="font-family:-apple-system;font-size:12px;font-weight:700;margin-bottom:6px">ALVAREZ, ROBERT M &nbsp;·&nbsp; DOB 02/14/1945</div>
-          <div class="drug">METFORMIN HCL 500MG TABLETS</div>
-          <div class="sig">TAKE ONE TABLET BY MOUTH TWICE DAILY<br>WITH MEALS</div>
-          <div class="meta"><span>QTY: 60</span><span>REFILLS: 2</span><span>FILLED: 06/29/26</span><span>DAY SUPPLY: 30</span><span>NDC 00093-1048-01</span><span>USE BY: 06/29/27</span></div>
-          <div class="sticker">REFILL STICKER<br>PARTIAL OVERLAP ⚠</div>
+        <div class="scene3">
+          <div class="vf"><i></i><i></i><i></i><i></i></div>
+          <div class="scanchip"><span class="pulse"></span>SCANNING LABEL…</div>
+          <div class="bwrap">
+            <div class="beam"></div>
+            <!-- detection overlays -->
+            <div class="detect" style="top:46.5%;left:27%;width:47%;height:4.6%"><span class="dtag">PATIENT ✓</span></div>
+            <div class="detect" style="top:52.5%;left:27%;width:50%;height:5.5%"><span class="dtag b">DRUG NAME ✓</span></div>
+            <div class="detect" style="top:68.5%;left:27%;width:24%;height:4.5%"><span class="dtag">FILL DATE ✓</span></div>
+            <div class="detect warn2" style="top:75%;left:27%;width:27%;height:4.5%"><span class="dtag b">DAY SUPPLY ⚠</span></div>
+            <!-- the bottle -->
+            <svg viewBox="0 0 320 430" width="300" style="display:block">
+              <defs>
+                <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#B26E0F"/><stop offset=".18" stop-color="#E89A22"/>
+                  <stop offset=".5" stop-color="#F5B449"/><stop offset=".82" stop-color="#DE8F1B"/>
+                  <stop offset="1" stop-color="#A5650C"/>
+                </linearGradient>
+                <linearGradient id="capg" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#C9C9CF"/><stop offset=".2" stop-color="#FAFAFC"/>
+                  <stop offset=".5" stop-color="#E8E8EC"/><stop offset=".8" stop-color="#F5F5F8"/>
+                  <stop offset="1" stop-color="#BFBFC6"/>
+                </linearGradient>
+                <linearGradient id="lshade" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset=".12" stop-color="#000" stop-opacity="0"/>
+                  <stop offset=".88" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/>
+                </linearGradient>
+              </defs>
+              <!-- ground shadow -->
+              <ellipse cx="160" cy="408" rx="112" ry="14" fill="#000" opacity=".35"/>
+              <!-- cap -->
+              <rect x="96" y="26" width="128" height="46" rx="10" fill="url(#capg)"/>
+              <g stroke="#A9A9B2" stroke-width="1.6" opacity=".7">
+                <line x1="108" y1="30" x2="108" y2="68"/><line x1="124" y1="28" x2="124" y2="70"/>
+                <line x1="140" y1="27" x2="140" y2="71"/><line x1="160" y1="26.5" x2="160" y2="71.5"/>
+                <line x1="180" y1="27" x2="180" y2="71"/><line x1="196" y1="28" x2="196" y2="70"/>
+                <line x1="212" y1="30" x2="212" y2="68"/>
+              </g>
+              <rect x="96" y="62" width="128" height="8" rx="4" fill="#9C9CA4" opacity=".55"/>
+              <!-- neck -->
+              <rect x="106" y="70" width="108" height="16" fill="#C58312"/>
+              <!-- body -->
+              <rect x="92" y="84" width="136" height="312" rx="16" fill="url(#amber)"/>
+              <!-- shoulder highlight -->
+              <rect x="102" y="90" width="18" height="296" rx="9" fill="#FFF" opacity=".28"/>
+              <rect x="204" y="92" width="8" height="292" rx="4" fill="#FFF" opacity=".14"/>
+              <!-- pills seen through plastic -->
+              <g fill="#FFFDF4" opacity=".5">
+                <ellipse cx="128" cy="118" rx="15" ry="9" transform="rotate(-18 128 118)"/>
+                <ellipse cx="162" cy="126" rx="15" ry="9" transform="rotate(12 162 126)"/>
+                <ellipse cx="192" cy="115" rx="14" ry="8.5" transform="rotate(-30 192 115)"/>
+                <ellipse cx="146" cy="140" rx="14" ry="8.5" transform="rotate(24 146 140)"/>
+              </g>
+              <!-- label -->
+              <g>
+                <rect x="86" y="160" width="148" height="200" rx="5" fill="#FDFDF8"/>
+                <rect x="86" y="160" width="148" height="200" rx="5" fill="url(#lshade)"/>
+                <rect x="86" y="160" width="148" height="26" rx="5" fill="#CC0000"/>
+                <text x="94" y="177" font-family="-apple-system,Helvetica" font-size="12" font-weight="800" fill="#FFF">CVS pharmacy</text>
+                <text x="185" y="177" font-family="-apple-system,Helvetica" font-size="7.5" fill="#FFD9D9">#2213</text>
+                <text x="94" y="199" font-family="Menlo,monospace" font-size="7.5" fill="#666">RX# 8841207-06 · DR. S. CHEN</text>
+                <text x="94" y="214" font-family="Menlo,monospace" font-size="9" font-weight="700" fill="#111">ALVAREZ, ROBERT M</text>
+                <text x="94" y="226" font-family="Menlo,monospace" font-size="7.5" fill="#444">DOB 02/14/1945</text>
+                <rect x="91" y="233" width="140" height="15" fill="#FFF3B8"/>
+                <text x="94" y="244" font-family="Menlo,monospace" font-size="9.5" font-weight="800" fill="#111">METFORMIN HCL 500MG</text>
+                <text x="94" y="262" font-family="Menlo,monospace" font-size="7.8" fill="#222">TAKE ONE TABLET BY MOUTH</text>
+                <text x="94" y="273" font-family="Menlo,monospace" font-size="7.8" fill="#222">TWICE DAILY WITH MEALS</text>
+                <line x1="94" y1="283" x2="226" y2="283" stroke="#DDD" stroke-width="1"/>
+                <text x="94" y="298" font-family="Menlo,monospace" font-size="7.6" fill="#333">QTY: 60      REFILLS: 2</text>
+                <text x="94" y="312" font-family="Menlo,monospace" font-size="7.6" fill="#333">FILLED: 06/29/26</text>
+                <text x="94" y="326" font-family="Menlo,monospace" font-size="7.6" fill="#333">DAY SUPPLY: 30</text>
+                <text x="94" y="343" font-family="Menlo,monospace" font-size="6.8" fill="#888">NDC 00093-1048-01 · USE BY 06/29/27</text>
+                <!-- refill sticker overlapping day-supply -->
+                <g transform="rotate(-4 205 322)">
+                  <rect x="178" y="312" width="58" height="24" fill="#FFFDF2" stroke="#E0A030" stroke-dasharray="3 2"/>
+                  <text x="184" y="322" font-family="Menlo,monospace" font-size="5.6" fill="#8A6210">REFILL STICKER</text>
+                  <text x="184" y="330" font-family="Menlo,monospace" font-size="5.6" fill="#8A6210">OVERLAP ⚠</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="scenecap">Live capture · 2:38 PM · processed on a private, zero-retention endpoint · photo never leaves your vault</div>
         </div>
-        <div class="mini" style="margin-top:12px;text-align:center">Photo · taken 2:38 PM · processed on a private, zero-retention endpoint</div>
       </div>
       <div>
+        <div class="pipe">
+          <span class="pstep done">✓ Photo captured</span>
+          <span class="pstep done">✓ Label found</span>
+          <span class="pstep now"><span class="spin"></span>Extracting fields… 4 of 5</span>
+          <span class="pstep">RxNorm check</span>
+        </div>
         <div class="field ok"><div class="crop">METFORMIN HCL 500MG</div><div class="fk"><b>Drug name</b><div class="val">Metformin HCl 500 mg</div><div class="chk" style="color:#248A3D">✓ RxNorm match · 860975</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-        <div class="field ok"><div class="crop">TAKE ONE TABLET…TWICE DAILY</div><div class="fk"><b>Schedule</b><div class="val">1 tablet · 2× daily · with meals</div><div class="chk" style="color:#248A3D">✓ Within typical dose range</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-        <div class="field ok"><div class="crop">FILLED: 06/29/26</div><div class="fk"><b>Fill date</b><div class="val">June 29, 2026</div><div class="chk" style="color:#248A3D">✓ Confirmed</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-        <div class="field warn"><div class="crop">DAY SUPPLY: 3<span style="background:#FFE9B8">0?</span></div><div class="fk"><b>Day supply</b><div class="val">30 days — <span style="color:#C93400">verify</span></div><div class="chk" style="color:#C93400">⚠ Refill sticker overlaps this field — please check the bottle</div></div><span class="confirm-ic warn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/></svg></span></div>
         <div class="field ok"><div class="crop">ALVAREZ, ROBERT M</div><div class="fk"><b>Patient</b><div class="val">Robert Alvarez</div><div class="chk" style="color:#248A3D">✓ Matches the open profile</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+        <div class="field ok"><div class="crop">FILLED: 06/29/26</div><div class="fk"><b>Fill date</b><div class="val">June 29, 2026</div><div class="chk" style="color:#248A3D">✓ Confirmed</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+        <div class="field"><div class="crop skel">TAKE ONE TABLET…TW</div><div class="fk"><b>Schedule</b><div class="val skel" style="width:180px">1 tablet · 2× daily</div><div class="chk" style="color:var(--ink3)"><span class="spin" style="display:inline-block;vertical-align:-2px;margin-right:5px"></span>Reading sig…</div></div></div>
+        <div class="field warn"><div class="crop">DAY SUPPLY: 3<span style="background:#FFE9B8">0?</span></div><div class="fk"><b>Day supply</b><div class="val">30 days — <span style="color:#C93400">verify</span></div><div class="chk" style="color:#C93400">⚠ Refill sticker overlaps this field — please check the bottle</div></div><span class="confirm-ic warn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/></svg></span></div>
+
+        <div class="addrow">
+          <span class="pill-ic" style="background:var(--blue-soft)"><span class="cap" style="background:linear-gradient(90deg,#fff 50%,#FF9F0A 50%)"></span></span>
+          <div style="flex:1"><b style="font-size:13.5px">Joining Robert's medication list…</b>
+            <div class="runmath">runway = Jun 29 fill + 30-day supply − 26 days elapsed = <b style="color:#D70015">4 days left</b></div></div>
+          <span class="spin"></span>
+        </div>
         <div class="row" style="margin-top:14px;gap:10px">
-          <button class="btn primary" disabled style="opacity:.45">Save medication — 1 field to verify</button>
+          <button class="btn primary" disabled style="opacity:.45">Save medication — 2 fields pending</button>
           <button class="btn quiet">Retake photo</button>
         </div>
-        <p class="mini" style="margin-top:12px">High-alert medications (insulin, blood thinners, opioids) always require field-by-field confirmation. A name mismatch blocks saving entirely.</p>
+        <p class="mini" style="margin-top:12px">High-alert medications (insulin, blood thinners, opioids) always require field-by-field confirmation. A name mismatch blocks saving entirely. Nothing is ever auto-saved.</p>
       </div>
     </div>
   </section>
