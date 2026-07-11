@@ -242,6 +242,46 @@ table.tbl tr:last-child td{border-bottom:none}
 .gc{background:#fff;padding:16px 18px}
 .gc b{display:block;font-size:13.5px;margin-bottom:2px}
 .gc span{font-size:12px;color:var(--ink3)}
+
+/* ===== PATIENT RICH RECORD ===== */
+.tabpanel{display:none} .tabpanel.on{display:block;animation:fade .25s ease}
+.allergy{display:flex;align-items:center;gap:9px;border:1px solid #E6C4C1;border-radius:10px;padding:10px 15px;margin:16px 0;font-size:13.5px;color:var(--ink)}
+.allergy b{color:var(--red)}
+.live{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink3)}
+.live .p{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livep 2s infinite}
+@keyframes livep{0%,100%{opacity:1}50%{opacity:.3}}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px}
+.vcell{background:#fff;padding:15px 18px}
+.vcell .vl{font-size:12px;color:var(--ink2)}
+.vcell .vn{font-size:25px;font-weight:600;letter-spacing:-.02em;margin:5px 0 2px}
+.vcell .vn small{font-size:12.5px;color:var(--ink3);font-weight:500}
+.vcell .vd{font-size:12px}
+.mspark{width:100%;height:26px;margin-top:6px;display:block}
+.rangebar{display:inline-flex;background:var(--hover);border-radius:9px;padding:3px;gap:2px}
+.rangebar button{border:none;background:none;font-family:inherit;font-size:12.5px;font-weight:600;color:var(--ink2);padding:5px 13px;border-radius:7px;cursor:pointer}
+.rangebar button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.chartbox{border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;margin-top:14px}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.chart-head .big{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.chart-head .big small{font-size:13px;color:var(--ink3);font-weight:500}
+.chartbox svg{width:100%;height:180px;display:block}
+.chart-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3);margin-top:8px}
+.tl .tli{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid var(--line2)}
+.tl .tli:last-child{border:none}
+.tl .yr{flex:0 0 auto;width:78px;font-weight:600;font-size:13.5px}
+.tl .ev b{font-weight:600}
+.lrow{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
+.lrow:last-child{border:none}
+.lrow .r{color:var(--ink2);text-align:right;flex:0 0 auto}
+.lrow b{font-weight:600}
+.labgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px}
+.lab{background:#fff;padding:14px 16px}
+.lab .ll{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em}
+.lab .lv{font-size:20px;font-weight:600;margin-top:5px}
+.lab .lr{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.lab .lv.high{color:var(--amber)} .lab .lv.watch{color:var(--red)}
+.subhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:26px 0 4px}
+.privacy{font-size:12px;color:var(--ink3);border-top:1px solid var(--line);padding-top:14px;margin-top:26px}
 </style>
 </head>
 <body>
@@ -362,37 +402,106 @@ table.tbl tr:last-child td{border-bottom:none}
     </div>
   </section>
 
-  <!-- ========== ROBERT ========== -->
+    <!-- ========== ROBERT ========== -->
   <section class="view" id="v-robert">
-    <div class="phead"><h1>Robert Alvarez <span class="sub">· Dad · 81</span></h1>
-      <div class="chips"><span class="chip">Type 2 diabetes</span><span class="chip">Hypertension</span><span class="chip">AFib</span><span class="chip" style="border-color:#E6C4C1;color:var(--red)">Penicillin allergy</span></div>
+    <div class="phead"><h1>Robert Alvarez <span class="sub">&#183; Dad &#183; 81 &#183; he/him</span></h1>
+      <div class="chips"><span class="chip">Type 2 diabetes</span><span class="chip">Hypertension</span><span class="chip">Atrial fibrillation</span><span class="chip">Osteoarthritis</span><span class="chip" style="border-color:#E6C4C1;color:var(--red)">Penicillin allergy</span></div>
     </div>
-    <div class="seg"><button class="on">Overview</button><button>Medications</button><button>Records</button><button>Visits</button></div>
-    <div class="vitrow">
-      <div class="vit"><div class="vl">Resting heart rate</div><div class="vn">74 <small>bpm</small></div><div class="vd up">▲ 6 bpm · 2 wks</div></div>
-      <div class="vit"><div class="vl">Sleep</div><div class="vn">7.2 <small>h avg</small></div><div class="vd flat">— steady</div></div>
-      <div class="vit"><div class="vl">Steps</div><div class="vn">3,240 <small>/day</small></div><div class="vd down">▲ active</div></div>
-      <div class="vit"><div class="vl">Weight</div><div class="vn">182 <small>lb</small></div><div class="vd flat">— stable</div></div>
+    <div class="seg" data-tabs="robert"><button class="on" data-tab="ov">Overview</button><button data-tab="ac">Activity &amp; vitals</button><button data-tab="mx">Medications</button><button data-tab="hx">History</button><button data-tab="rec">Records &amp; labs</button></div>
+
+    <div class="tabpanel on" data-panel="robert-ov">
+      <div class="allergy"><span class="dot red"></span><b>Penicillin (anaphylaxis)</b> &#183; also sulfa drugs (rash) &#183; on a blood thinner (apixaban)</div>
+      <div class="seclabel"><span class="l">Current vitals</span><span class="line"></span><span class="m"><span class="live"><span class="p"></span>Live &#183; refreshes every 3 min &#183; updated <span id="liveAgo">just now</span></span></span></div>
+      <div class="vgrid">
+        <div class="vcell"><div class="vl">Resting heart rate</div><div class="vn"><span id="hrVal">74</span> <small>bpm</small></div><div class="vd up">&#9650; 6 &#183; 2 wks &#183; irregular (AFib)</div></div>
+        <div class="vcell"><div class="vl">Blood pressure</div><div class="vn">138/82 <small>mmHg</small></div><div class="vd flat">at goal &lt;140/90</div></div>
+        <div class="vcell"><div class="vl">Blood glucose (fasting)</div><div class="vn">142 <small>mg/dL</small></div><div class="vd up">&#9650; slightly high</div></div>
+        <div class="vcell"><div class="vl">Oxygen (SpO&#8322;)</div><div class="vn">96 <small>%</small></div><div class="vd flat">normal</div></div>
+        <div class="vcell"><div class="vl">Sleep</div><div class="vn">7.2 <small>h avg</small></div><div class="vd flat">steady</div></div>
+        <div class="vcell"><div class="vl">Weight</div><div class="vn">182 <small>lb</small></div><div class="vd flat">stable &#183; BMI 26.1</div></div>
+      </div>
+      <div class="note"><b style="color:var(--ink)">Why Robert is flagged:</b> medication runway under 7 days with no pickup. Metformin (filled Jun 29) exhausts Thu Jul 16. Cardiology follow-up Thursday 9:30 with Dr. Chen.</div>
     </div>
 
-    <div class="cols c2">
-      <div>
-        <div class="seclabel"><span class="l">Medications · runway</span><span class="line"></span><span class="m">from label facts — no logging</span></div>
-        <table class="tbl">
-          <tr><td class="mname"><b>Metformin 500 mg</b><span>1 tab, twice daily · CVS #2213</span></td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
-          <tr><td class="mname"><b>Apixaban 5 mg</b> <span style="color:var(--red)">· high-alert</span></td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td></td></tr>
-          <tr><td class="mname"><b>Lisinopril 10 mg</b><span>changed Jun 12</span></td><td><span class="rway"><i style="width:60%"></i></span></td><td><span class="days">18 days</span></td><td></td></tr>
-          <tr><td class="mname"><b>Atorvastatin 20 mg</b><span>at bedtime</span></td><td><span class="rway"><i style="width:83%"></i></span></td><td><span class="days">25 days</span></td><td></td></tr>
-        </table>
-        <div class="note"><b style="color:var(--ink)">Why Robert is flagged:</b> medication runway under 7 days with no pickup recorded. Metformin (filled Jun 29, 30-day supply) exhausts Thu Jul 16. You can override this if you've handled it.</div>
+    <div class="tabpanel" data-panel="robert-ac">
+      <div class="chartbox">
+        <div class="chart-head"><div class="big" id="stpTot">3,240 <small>steps</small></div><div class="rangebar" data-chart="robert"><button data-r="1D">1D</button><button data-r="1W">1W</button><button class="on" data-r="1M">1M</button><button data-r="6M">6M</button><button data-r="1Y">1Y</button></div></div>
+        <svg id="chart-robert" viewBox="0 0 720 180" preserveAspectRatio="none"></svg>
+        <div class="chart-meta"><span id="stpFrom"></span><span>average <span id="stpAvg"></span> &#183; goal 3,000/day</span><span id="stpTo"></span></div>
       </div>
-      <div>
-        <div class="seclabel"><span class="l">Recent records</span><span class="line"></span></div>
-        <div class="doc"><span class="ic">PDF</span><div><b>Visit summary — Dr. Chen</b><div class="mini">Jun 12 · lisinopril 20→10 mg</div></div></div>
-        <div class="doc"><span class="ic">PDF</span><div><b>Discharge summary</b><div class="mini">May 3 · observation stay</div></div></div>
-        <div class="doc"><span class="ic">IMG</span><div><b>Insurance card</b><div class="mini">Medicare + supplemental</div></div></div>
-        <div class="doc"><span class="ic">DOC</span><div><b>Power of attorney</b><div class="mini">Maria Alvarez</div></div></div>
+      <div class="vgrid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="vcell"><div class="vl">Resting HR trend</div><div class="vn">74 <small>bpm</small></div><svg class="mspark" viewBox="0 0 120 26"><polyline fill="none" stroke="#1D1D1F" stroke-width="2" points="0,20 20,19 40,18 60,16 80,15 100,13 120,11"/></svg></div>
+        <div class="vcell"><div class="vl">Sleep trend</div><div class="vn">7.2 <small>h</small></div><svg class="mspark" viewBox="0 0 120 26"><polyline fill="none" stroke="#98989D" stroke-width="2" points="0,12 20,14 40,11 60,13 80,12 100,13 120,12"/></svg></div>
+        <div class="vcell"><div class="vl">Weight trend</div><div class="vn">182 <small>lb</small></div><svg class="mspark" viewBox="0 0 120 26"><polyline fill="none" stroke="#98989D" stroke-width="2" points="0,13 40,13 80,12 120,13"/></svg></div>
+        <div class="vcell"><div class="vl">Active minutes</div><div class="vn">28 <small>/day</small></div><svg class="mspark" viewBox="0 0 120 26"><polyline fill="none" stroke="#1D1D1F" stroke-width="2" points="0,18 20,16 40,17 60,14 80,15 100,12 120,13"/></svg></div>
       </div>
+      <p class="privacy">Wearable data (Apple Watch) is shown as trends for awareness only, not as clinical alerts. Robert consented to share activity and heart rate; he keeps weight private from other viewers. Every view is recorded in the access log.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="robert-mx">
+      <div class="seclabel"><span class="l">Prescriptions &#183; runway</span><span class="line"></span><span class="m">from label facts, no logging</span></div>
+      <table class="tbl">
+        <tr><td class="mname"><b>Metformin 500 mg</b><span>1 tab, twice daily &#183; CVS #2213</span></td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
+        <tr><td class="mname"><b>Apixaban 5 mg</b> <span style="color:var(--red)">&#183; high-alert blood thinner</span></td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td></td></tr>
+        <tr><td class="mname"><b>Lisinopril 10 mg</b><span>daily &#183; dose changed Jun 12</span></td><td><span class="rway"><i style="width:60%"></i></span></td><td><span class="days">18 days</span></td><td></td></tr>
+        <tr><td class="mname"><b>Atorvastatin 20 mg</b><span>at bedtime</span></td><td><span class="rway"><i style="width:83%"></i></span></td><td><span class="days">25 days</span></td><td></td></tr>
+      </table>
+      <div class="subhead">Vitamins &amp; supplements</div>
+      <div class="lrow"><b>Vitamin D3 &#183; 2000 IU</b><span class="r">daily, with breakfast</span></div>
+      <div class="lrow"><b>Vitamin B12 &#183; 1000 mcg</b><span class="r">daily</span></div>
+      <div class="lrow"><b>Fish oil (omega-3) &#183; 1000 mg</b><span class="r">daily</span></div>
+      <div class="lrow"><b>Magnesium &#183; 400 mg</b><span class="r">at bedtime</span></div>
+      <div class="note"><b style="color:var(--ink)">Med-sync opportunity:</b> apixaban, lisinopril and atorvastatin can align to one pickup day (the 28th) at CVS. One trip instead of three. <button class="btn sm" style="margin-left:6px">View drafted request</button></div>
+    </div>
+
+    <div class="tabpanel" data-panel="robert-hx">
+      <div class="seclabel"><span class="l">Medical history</span><span class="line"></span></div>
+      <div class="tl">
+        <div class="tli"><div class="yr">May 2026</div><div class="ev"><b>Observation stay for chest pain.</b><div class="mini">UCSF, 2 nights. Heart attack ruled out. Stress test normal.</div></div></div>
+        <div class="tli"><div class="yr">2024</div><div class="ev"><b>Right knee osteoarthritis.</b><div class="mini">Managed with physical therapy and acetaminophen.</div></div></div>
+        <div class="tli"><div class="yr">2023</div><div class="ev"><b>Hospitalized for pneumonia.</b><div class="mini">5-day stay, full recovery.</div></div></div>
+        <div class="tli"><div class="yr">2022</div><div class="ev"><b>Atrial fibrillation diagnosed.</b><div class="mini">Started apixaban (blood thinner).</div></div></div>
+        <div class="tli"><div class="yr">2019</div><div class="ev"><b>Cataract surgery, right eye.</b></div></div>
+        <div class="tli"><div class="yr">2011</div><div class="ev"><b>Type 2 diabetes diagnosed.</b><div class="mini">Started metformin.</div></div></div>
+        <div class="tli"><div class="yr">2008</div><div class="ev"><b>Hypertension diagnosed.</b></div></div>
+      </div>
+      <div class="subhead">Family history</div>
+      <div class="lrow"><b>Father</b><span class="r">heart disease &#183; heart attack at 79 (deceased)</span></div>
+      <div class="lrow"><b>Mother</b><span class="r">type 2 diabetes &#183; stroke at 82</span></div>
+      <div class="lrow"><b>Brother</b><span class="r">hypertension</span></div>
+      <div class="lrow"><b>Sister</b><span class="r">no chronic conditions</span></div>
+      <div class="subhead">Immunizations</div>
+      <div class="lrow"><b>Influenza</b><span class="r">Oct 2025</span></div>
+      <div class="lrow"><b>COVID-19 (updated)</b><span class="r">Sep 2025</span></div>
+      <div class="lrow"><b>Pneumococcal (PCV20)</b><span class="r">2023</span></div>
+      <div class="lrow"><b>Shingles (Shingrix, 2 doses)</b><span class="r">2022</span></div>
+      <div class="lrow"><b>Tdap booster</b><span class="r">2019</span></div>
+      <div class="subhead">Allergies</div>
+      <div class="lrow"><b style="color:var(--red)">Penicillin</b><span class="r">anaphylaxis (severe)</span></div>
+      <div class="lrow"><b>Sulfa drugs</b><span class="r">rash</span></div>
+    </div>
+
+    <div class="tabpanel" data-panel="robert-rec">
+      <div class="seclabel"><span class="l">Recent labs</span><span class="line"></span><span class="m">Apr 2, 2026 &#183; Quest Diagnostics</span></div>
+      <div class="labgrid">
+        <div class="lab"><div class="ll">HbA1c</div><div class="lv high">7.1%</div><div class="lr">target &lt;7.0</div></div>
+        <div class="lab"><div class="ll">LDL cholesterol</div><div class="lv">88 mg/dL</div><div class="lr">at goal on statin</div></div>
+        <div class="lab"><div class="ll">Kidney (eGFR)</div><div class="lv">68</div><div class="lr">mildly reduced</div></div>
+        <div class="lab"><div class="ll">Potassium</div><div class="lv">4.2</div><div class="lr">normal</div></div>
+      </div>
+      <div class="subhead">Past visits</div>
+      <div class="lrow"><div><b>Dr. Chen &#183; Cardiology</b><div class="mini">AFib follow-up (upcoming)</div></div><span class="r">Jul 16, 2026</span></div>
+      <div class="lrow"><div><b>Dr. Chen &#183; Cardiology</b><div class="mini">Lisinopril reduced 20 to 10 mg</div></div><span class="r">Jun 12, 2026</span></div>
+      <div class="lrow"><div><b>UCSF Emergency</b><div class="mini">Chest pain, MI ruled out, 2-night observation</div></div><span class="r">May 3, 2026</span></div>
+      <div class="lrow"><div><b>Dr. Okafor &#183; Primary care</b><div class="mini">Diabetes review, A1c 7.1%</div></div><span class="r">Apr 2, 2026</span></div>
+      <div class="lrow"><div><b>Dr. Okafor &#183; Primary care</b><div class="mini">Annual wellness visit</div></div><span class="r">Jan 15, 2026</span></div>
+      <div class="subhead">Documents</div>
+      <div class="doc"><span class="ic">PDF</span><div><b>Visit summary &#183; Dr. Chen</b><div class="mini">Jun 12, 2026</div></div></div>
+      <div class="doc"><span class="ic">PDF</span><div><b>Discharge summary &#183; UCSF</b><div class="mini">May 5, 2026</div></div></div>
+      <div class="doc"><span class="ic">PDF</span><div><b>Lab report &#183; Quest</b><div class="mini">Apr 2, 2026</div></div></div>
+      <div class="doc"><span class="ic">IMG</span><div><b>Insurance card</b><div class="mini">Medicare + supplemental</div></div></div>
+      <div class="doc"><span class="ic">DOC</span><div><b>Power of attorney &amp; advance directive</b><div class="mini">Maria Alvarez &#183; in the vault</div></div></div>
+      <p class="privacy">This full record is visible only to Robert's assigned caregivers (Maria, and Dana during respite). Every view is logged. Robert consented to share, and can export everything or revoke access at any time by phone.</p>
     </div>
   </section>
 
@@ -561,17 +670,90 @@ table.tbl tr:last-child td{border-bottom:none}
     </div>
   </section>
 
-  <!-- ========== ELEANOR ========== -->
+    <!-- ========== ELEANOR ========== -->
   <section class="view" id="v-eleanor">
-    <div class="phead"><h1>Eleanor Alvarez <span class="sub">· Mom · 78</span></h1>
-      <div class="chips"><span class="chip">Early-stage Alzheimer's</span><span class="chip">Hypertension</span><span class="chip">Respite: Dana until Mon</span></div>
+    <div class="phead"><h1>Eleanor Alvarez <span class="sub">&#183; Mom &#183; 78 &#183; she/her</span></h1>
+      <div class="chips"><span class="chip">Early-stage Alzheimer's</span><span class="chip">Hypertension</span><span class="chip">Osteoporosis</span><span class="chip">Respite: Dana until Mon</span></div>
     </div>
-    <div class="vitrow" style="grid-template-columns:repeat(3,1fr)">
-      <div class="vit"><div class="vl">Sleep</div><div class="vn">6.1 <small>h avg</small></div><div class="vd up">▼ 48 min · worth a call</div></div>
-      <div class="vit"><div class="vl">Hard evenings (ABC log)</div><div class="vn">2 <small>this wk</small></div><div class="vd flat">follow short-sleep nights</div></div>
-      <div class="vit"><div class="vl">Sertraline runway</div><div class="vn">12 <small>days</small></div><div class="vd" style="color:var(--amber)">refill soon</div></div>
+    <div class="seg" data-tabs="eleanor"><button class="on" data-tab="ov">Overview</button><button data-tab="ac">Activity &amp; cognition</button><button data-tab="mx">Medications</button><button data-tab="hx">History</button><button data-tab="rec">Records &amp; labs</button></div>
+
+    <div class="tabpanel on" data-panel="eleanor-ov">
+      <div class="seclabel"><span class="l">Current vitals</span><span class="line"></span><span class="m"><span class="live"><span class="p"></span>Live &#183; refreshes every 3 min &#183; updated <span id="liveAgo2">just now</span></span></span></div>
+      <div class="vgrid">
+        <div class="vcell"><div class="vl">Sleep</div><div class="vn">6.1 <small>h avg</small></div><div class="vd up" style="color:var(--red)">&#9660; 48 min &#183; worth a call</div></div>
+        <div class="vcell"><div class="vl">Hard evenings (ABC log)</div><div class="vn">2 <small>this wk</small></div><div class="vd flat">follow short-sleep nights</div></div>
+        <div class="vcell"><div class="vl">Resting heart rate</div><div class="vn">68 <small>bpm</small></div><div class="vd flat">normal</div></div>
+        <div class="vcell"><div class="vl">Blood pressure</div><div class="vn">128/76 <small>mmHg</small></div><div class="vd flat">at goal</div></div>
+        <div class="vcell"><div class="vl">Weight</div><div class="vn">138 <small>lb</small></div><div class="vd flat">stable</div></div>
+        <div class="vcell"><div class="vl">Sertraline runway</div><div class="vn">12 <small>days</small></div><div class="vd" style="color:var(--amber)">refill soon</div></div>
+      </div>
+      <div class="note"><b style="color:var(--ink)">Pattern the quick-logs found:</b> across 6 weeks of 20-second ABC logs, hard evenings follow nights under 6.5 h of sleep (5 of 6 times). Shared to Dr. Patel's prep sheet for Jul 24, as a hypothesis to discuss, not a diagnosis.</div>
     </div>
-    <div class="note"><b style="color:var(--ink)">Pattern the quick-logs found:</b> across 6 weeks of 20-second ABC logs, hard evenings follow nights under 6.5 h of sleep (5 of 6 times). Shared to Dr. Patel's prep sheet for Jul 24 — a hypothesis to discuss, not a diagnosis.</div>
+
+    <div class="tabpanel" data-panel="eleanor-ac">
+      <div class="chartbox">
+        <div class="chart-head"><div class="big" id="eslTot">6.4 h <small>nightly average</small></div><div class="rangebar" data-chart="eleanor"><button data-r="1W">1W</button><button class="on" data-r="1M">1M</button><button data-r="6M">6M</button><button data-r="1Y">1Y</button></div></div>
+        <svg id="chart-eleanor" viewBox="0 0 720 180" preserveAspectRatio="none"></svg>
+        <div class="chart-meta"><span id="eslFrom"></span><span>average <span id="eslAvg"></span> &#183; nightly sleep, hours</span><span id="eslTo"></span></div>
+      </div>
+      <div class="subhead">Cognition over time (MoCA, 0&#8211;30)</div>
+      <div class="lrow"><b>Jul 2026 (estimate)</b><span class="r">23 / 30 &#183; mild decline</span></div>
+      <div class="lrow"><b>Jan 2026</b><span class="r">24 / 30</span></div>
+      <div class="lrow"><b>Jul 2025</b><span class="r">26 / 30</span></div>
+      <div class="subhead">Recent ABC behavior logs</div>
+      <div class="lrow"><div><b>Wed &#183; sundowning, 6:40 PM</b><div class="mini">Antecedent: poor sleep, unfamiliar visitor. Helped: dim lights + Tamil playlist.</div></div><span class="r">20 sec</span></div>
+      <div class="lrow"><div><b>Sun &#183; agitation, 7:10 PM</b><div class="mini">Antecedent: loud TV. Helped: quiet room, photo album.</div></div><span class="r">20 sec</span></div>
+      <p class="privacy">Cognitive scores and behavior notes are shared only with Eleanor's caregivers and, with her proxy's consent, Dr. Patel. Not a diagnosis, a hypothesis to discuss.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="eleanor-mx">
+      <div class="seclabel"><span class="l">Prescriptions &#183; runway</span><span class="line"></span></div>
+      <table class="tbl">
+        <tr><td class="mname"><b>Donepezil 10 mg</b><span>bedtime &#183; for memory</span></td><td><span class="rway"><i style="width:70%"></i></span></td><td><span class="days">21 days</span></td><td></td></tr>
+        <tr><td class="mname"><b>Sertraline 50 mg</b><span>morning &#183; mood &amp; sleep</span></td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td style="text-align:right"><button class="btn sm">Remind</button></td></tr>
+        <tr><td class="mname"><b>Amlodipine 5 mg</b><span>daily &#183; blood pressure</span></td><td><span class="rway"><i style="width:85%"></i></span></td><td><span class="days">26 days</span></td><td></td></tr>
+      </table>
+      <div class="subhead">Vitamins &amp; supplements</div>
+      <div class="lrow"><b>Vitamin D3 &#183; 2000 IU</b><span class="r">daily &#183; for bone health</span></div>
+      <div class="lrow"><b>Calcium &#183; 600 mg</b><span class="r">twice daily</span></div>
+      <div class="lrow"><b>Vitamin B12 &#183; 1000 mcg</b><span class="r">daily</span></div>
+      <div class="lrow"><b>Omega-3 &#183; 1000 mg</b><span class="r">daily</span></div>
+    </div>
+
+    <div class="tabpanel" data-panel="eleanor-hx">
+      <div class="seclabel"><span class="l">Medical history</span><span class="line"></span></div>
+      <div class="tl">
+        <div class="tli"><div class="yr">2025</div><div class="ev"><b>Sertraline added.</b><div class="mini">For mood and sleep changes.</div></div></div>
+        <div class="tli"><div class="yr">2024</div><div class="ev"><b>Early-stage Alzheimer's diagnosed.</b><div class="mini">Dr. Patel, neurology. Started donepezil.</div></div></div>
+        <div class="tli"><div class="yr">2023</div><div class="ev"><b>Mild cognitive impairment noted.</b><div class="mini">Memory workup: B12, thyroid, folate all normal.</div></div></div>
+        <div class="tli"><div class="yr">2020</div><div class="ev"><b>Osteoporosis diagnosed.</b><div class="mini">DEXA scan. Started calcium + vitamin D.</div></div></div>
+        <div class="tli"><div class="yr">2018</div><div class="ev"><b>Hypertension diagnosed.</b></div></div>
+      </div>
+      <div class="subhead">Family history</div>
+      <div class="lrow"><b>Mother</b><span class="r">Alzheimer's disease at 80</span></div>
+      <div class="lrow"><b>Father</b><span class="r">heart disease</span></div>
+      <div class="subhead">Allergies</div>
+      <div class="lrow"><b>No known drug allergies</b><span class="r">confirmed 2024</span></div>
+    </div>
+
+    <div class="tabpanel" data-panel="eleanor-rec">
+      <div class="seclabel"><span class="l">Recent labs</span><span class="line"></span><span class="m">Mar 2026 &#183; dementia workup</span></div>
+      <div class="labgrid">
+        <div class="lab"><div class="ll">Vitamin B12</div><div class="lv">540 pg/mL</div><div class="lr">normal</div></div>
+        <div class="lab"><div class="ll">Thyroid (TSH)</div><div class="lv">2.1</div><div class="lr">normal</div></div>
+        <div class="lab"><div class="ll">Folate</div><div class="lv">12 ng/mL</div><div class="lr">normal</div></div>
+        <div class="lab"><div class="ll">Vitamin D</div><div class="lv high">24 ng/mL</div><div class="lr">low-normal</div></div>
+      </div>
+      <div class="subhead">Past visits</div>
+      <div class="lrow"><div><b>Dr. Patel &#183; Neurology</b><div class="mini">6-month cognitive review (upcoming)</div></div><span class="r">Jul 24, 2026</span></div>
+      <div class="lrow"><div><b>Dr. Patel &#183; Neurology</b><div class="mini">MoCA 24, medication review</div></div><span class="r">Jan 20, 2026</span></div>
+      <div class="lrow"><div><b>Dr. Okafor &#183; Primary care</b><div class="mini">Annual wellness, bone density stable</div></div><span class="r">Nov 8, 2025</span></div>
+      <div class="subhead">Documents</div>
+      <div class="doc"><span class="ic">PDF</span><div><b>Neurology summary &#183; Dr. Patel</b><div class="mini">Jan 20, 2026</div></div></div>
+      <div class="doc"><span class="ic">PDF</span><div><b>Cognitive assessment (MoCA)</b><div class="mini">Jan 20, 2026</div></div></div>
+      <div class="doc"><span class="ic">DOC</span><div><b>Healthcare proxy &amp; POLST</b><div class="mini">Maria Alvarez &#183; in the vault</div></div></div>
+      <p class="privacy">Eleanor (through her healthcare proxy) consented to sharing this record with her caregivers. She can see who has viewed it, limit any category, and revoke access at any time.</p>
+    </div>
   </section>
 
   <!-- ========== ROSA ========== -->
@@ -614,11 +796,45 @@ function go(v){
   if(history.replaceState) history.replaceState(null,'','#'+v);
 }
 document.querySelectorAll('.nav[data-v]').forEach(n=>n.addEventListener('click',()=>go(n.dataset.v)));
-document.querySelectorAll('.seg').forEach(function(seg){
-  seg.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
-    seg.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
-  })});
-});
+function gen(n,base,amp,ph){var a=[];for(var i=0;i<n;i++){var v=base+amp*(.62*Math.sin(i*.55+ph)+.38*Math.sin(i*1.35+ph*1.6));a.push(Math.max(0,Math.round(v)))}return a}
+function genf(n,base,amp,ph){var a=[];for(var i=0;i<n;i++){var v=base+amp*(.6*Math.sin(i*.5+ph)+.4*Math.sin(i*1.4+ph*1.5));a.push(Math.round(Math.max(3,v)*10)/10)}return a}
+var CFG={
+ robert:{svg:'chart-robert',color:'#1D1D1F',ids:{tot:'stpTot',from:'stpFrom',to:'stpTo',avg:'stpAvg'},
+  '1D':{d:gen(18,250,240,.6),from:'6 AM',to:'11 PM',tot:'3,240',sub:'steps today',avg:'180/hr'},
+  '1W':{d:gen(7,3300,750,1.2),from:'Mon 5',to:'Sun 11',tot:'23,120',sub:'steps this week',avg:'3,300/day'},
+  '1M':{d:gen(30,3200,900,2.1),from:'Jun 12',to:'Jul 11',tot:'96,400',sub:'steps this month',avg:'3,210/day'},
+  '6M':{d:gen(26,3100,850,.4),from:'Jan',to:'Jul',tot:'3,150',sub:'weekly average',avg:'3,150/day'},
+  '1Y':{d:gen(12,3000,1000,1.7),from:"Aug '25",to:"Jul '26",tot:'3,050',sub:'monthly average',avg:'3,050/day'}},
+ eleanor:{svg:'chart-eleanor',color:'#1D1D1F',ids:{tot:'eslTot',from:'eslFrom',to:'eslTo',avg:'eslAvg'},
+  '1W':{d:genf(7,6.1,.9,1),from:'Mon',to:'Sun',tot:'6.1 h',sub:'nightly average',avg:'6.1 h'},
+  '1M':{d:genf(30,6.4,1,2),from:'Jun 12',to:'Jul 11',tot:'6.4 h',sub:'nightly average',avg:'6.4 h'},
+  '6M':{d:genf(26,6.6,.8,.5),from:'Jan',to:'Jul',tot:'6.6 h',sub:'weekly average',avg:'6.6 h'},
+  '1Y':{d:genf(12,6.8,.9,1.5),from:"Aug '25",to:"Jul '26",tot:'6.8 h',sub:'monthly average',avg:'6.8 h'}}
+};
+var CUR={robert:'1M',eleanor:'1M'};
+function drawChart(key){var C=CFG[key];if(!C)return;var cfg=C[CUR[key]];if(!cfg)return;var svg=document.getElementById(C.svg);if(!svg)return;
+ var W=720,H=180,pad=6,n=cfg.d.length,mx=Math.max.apply(null,cfg.d)*1.12,bw=(W-pad*2)/n,out='',sum=0;
+ for(var k=0;k<n;k++)sum+=cfg.d[k];var avg=sum/n,avgY=H-(avg/mx)*(H-16);
+ for(var i=0;i<n;i++){var h=(cfg.d[i]/mx)*(H-16),x=pad+i*bw,g=Math.min(bw*.3,7);
+  out+='<rect x="'+(x+g/2).toFixed(1)+'" y="'+(H-h).toFixed(1)+'" width="'+(bw-g).toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2.5" fill="'+(i===n-1?C.color:'#D2D2D7')+'"/>';}
+ out+='<line x1="'+pad+'" y1="'+avgY.toFixed(1)+'" x2="'+(W-pad)+'" y2="'+avgY.toFixed(1)+'" stroke="#1D1D1F" stroke-dasharray="3 3" opacity=".35"/>';
+ svg.innerHTML=out;
+ function s(id,v){var e=document.getElementById(id);if(e)e.innerHTML=v}
+ s(C.ids.tot,cfg.tot+' <small>'+cfg.sub+'</small>');s(C.ids.from,cfg.from);s(C.ids.to,cfg.to);s(C.ids.avg,cfg.avg);}
+document.querySelectorAll('.seg[data-tabs]').forEach(function(seg){var key=seg.dataset.tabs;
+ seg.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+  seg.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  document.querySelectorAll('[data-panel^="'+key+'-"]').forEach(p=>p.classList.remove('on'));
+  var pan=document.querySelector('[data-panel="'+key+'-'+b.dataset.tab+'"]');if(pan)pan.classList.add('on');
+  if(b.dataset.tab==='ac')drawChart(key);
+ })});});
+document.querySelectorAll('.rangebar[data-chart]').forEach(function(rb){var key=rb.dataset.chart;
+ rb.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+  rb.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');CUR[key]=b.dataset.r;drawChart(key);
+ })});});
+var _lt=0;setInterval(function(){_lt+=3;var t=_lt<60?_lt+'s ago':Math.floor(_lt/60)+'m ago';['liveAgo','liveAgo2'].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=t});},3000);
+setInterval(function(){var h=document.getElementById('hrVal');if(h)h.textContent=72+Math.floor(Math.random()*5);},4000);
+drawChart('robert');drawChart('eleanor');
 var h=(location.hash||'').replace('#',''); if(h && document.getElementById('v-'+h)) go(h);
 </script>
 </body>
