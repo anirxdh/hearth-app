@@ -6,314 +6,237 @@
 <title>Hearth</title>
 <style>
 :root{
-  --bg:#FDFCF8; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#6E6E73; --ink3:#86868B;
-  --line:#E8E4DC; --line2:#EFECE4;
-  --blue:#1D1D1F; --blue-soft:rgba(29,29,31,.06);
-  --green:#34C759; --green-soft:rgba(52,199,89,.12);
-  --orange:#FF9500; --orange-soft:rgba(255,149,0,.13);
-  --red:#FF3B30; --red-soft:rgba(255,59,48,.10);
-  --purple:#8A5A36; --pink:#D9552F; --teal:#8E8E93;
-  --shadow:0 1px 2px rgba(50,40,20,.04);
-  --shadow-lg:0 2px 10px rgba(50,40,20,.07);
-  --r:18px;
+  --paper:#FFFFFF; --ink:#1D1D1F; --ink2:#6E6E73; --ink3:#98989D;
+  --line:#E8E8ED; --line2:#F0F0F2; --line-strong:#D2D2D7;
+  --hover:#F5F5F7;
+  --red:#C4362F; --amber:#9A7213; --green:#2F7D53;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
-  background:var(--bg); color:var(--ink); font-size:14px; line-height:1.5;
-  -webkit-font-smoothing:antialiased; letter-spacing:-.006em;
-}
-.app{display:grid;grid-template-columns:248px 1fr;height:100vh;overflow:hidden}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.006em}
+.app{display:grid;grid-template-columns:236px 1fr;height:100vh;overflow:hidden}
+button{font-family:inherit}
+a{color:inherit}
 
-/* ============ SIDEBAR ============ */
-aside{
-  background:rgba(253,252,248,.88);backdrop-filter:blur(30px);
-  border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;
-}
-.logo{display:flex;align-items:center;gap:10px;padding:4px 10px 18px}
-.logo .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#FF9500,#FF3B30);display:grid;place-items:center;box-shadow:0 4px 12px rgba(255,90,40,.35)}
-.logo .mark svg{width:16px;height:16px}
-.logo b{font-size:17px;letter-spacing:-.02em}
-.navlabel{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;padding:14px 12px 6px}
-.nav{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;cursor:pointer;color:#3a3a3c;font-weight:500;font-size:13.5px;border:none;background:none;width:100%;text-align:left;transition:background .15s}
-.nav:hover{background:rgba(0,0,0,.045)}
-.nav.on{background:rgba(29,29,31,.07);color:var(--ink);font-weight:700}
+/* SIDEBAR */
+aside{border-right:1px solid var(--line);padding:26px 16px 20px;display:flex;flex-direction:column;gap:1px;overflow-y:auto}
+.logo{display:flex;align-items:center;gap:9px;padding:2px 10px 22px}
+.logo svg{width:22px;height:22px}
+.logo b{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.navlabel{font-size:10.5px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;padding:16px 12px 7px}
+.nav{position:relative;display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:none;background:none;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--ink2);padding:8px 12px;border-radius:8px;transition:background .15s,color .15s;text-decoration:none}
+.nav:hover{background:var(--hover);color:var(--ink)}
+.nav.on{color:var(--ink);font-weight:600}
+.nav.on::before{content:"";position:absolute;left:8px;width:3px;height:16px;border-radius:2px;background:var(--ink)}
 .nav svg{width:17px;height:17px;flex:0 0 auto;opacity:.85}
-.nav .dotb{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--red)}
-.nav .av{width:22px;height:22px;border-radius:50%;font-size:9px}
-.side-foot{margin-top:auto;padding:12px;font-size:11px;color:var(--ink3);line-height:1.5}
+.nav .av{width:22px;height:22px;border-radius:50%;border:1.3px solid var(--line-strong);display:grid;place-items:center;font-size:9px;font-weight:600;color:var(--ink2);flex:0 0 auto}
+.nav .dotb{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.nav.em{color:var(--red)} .nav.em:hover{background:#FBEEED}
+.side-foot{margin-top:auto;padding:14px 12px 0;font-size:11px;color:var(--ink3);line-height:1.6;border-top:1px solid var(--line)}
 .side-foot b{color:var(--ink2)}
 
-/* ============ MAIN ============ */
+/* MAIN */
 main{overflow-y:auto;position:relative}
-.topbar{
-  position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
-  padding:14px 34px;background:rgba(253,252,248,.85);backdrop-filter:blur(28px);border-bottom:1px solid var(--line2);
-}
-.search{flex:0 0 320px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.05);border-radius:10px;padding:7px 12px;color:var(--ink3);font-size:13px}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:13px 40px;background:rgba(255,255,255,.86);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.search{flex:0 0 300px;display:flex;align-items:center;gap:8px;background:var(--hover);border-radius:9px;padding:7px 12px;color:var(--ink3);font-size:13px}
 .search svg{width:13px;height:13px}
 .topbar .spacer{flex:1}
-.chip-user{display:flex;align-items:center;gap:9px;font-weight:600;font-size:13px}
-.pagewrap{padding:30px 34px 60px;max-width:1180px}
-h1.page{font-size:34px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
-.sub{color:var(--ink2);font-size:14.5px;margin-bottom:26px}
-.view{display:none}.view.on{display:block;animation:vin .35s cubic-bezier(.2,.7,.3,1)}
-@keyframes vin{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.em-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--red);text-decoration:none;padding:6px 12px;border:1px solid #E6C4C1;border-radius:99px}
+.em-link:hover{background:#FBEEED}
+.em-link .d{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.respite{font-size:12.5px;color:var(--ink2)}
+.respite b{color:var(--ink);font-weight:600}
+.chip-user{display:flex;align-items:center;gap:8px;font-weight:600;font-size:13px}
+.chip-user .av{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:700}
 
-/* ============ PRIMS ============ */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
-.pad{padding:20px 22px}
-.grid{display:grid;gap:16px}
-.row{display:flex;align-items:center;gap:10px}
-.btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13.5px;border-radius:980px;padding:9px 18px;transition:.15s;letter-spacing:-.01em}
-.btn.primary{background:var(--blue);color:#fff}
-.btn.primary:hover{background:#000;transform:scale(1.02)}
-.btn.quiet{background:rgba(0,0,0,.05);color:var(--ink)}
-.btn.quiet:hover{background:rgba(0,0,0,.08)}
-.btn.tint{background:var(--blue-soft);color:var(--blue)}
-.btn.sm{padding:6px 13px;font-size:12.5px}
-.tag{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;border-radius:7px;padding:3px 9px}
-.tag.green{background:var(--green-soft);color:#248A3D}
-.tag.orange{background:var(--orange-soft);color:#C93400}
-.tag.red{background:var(--red-soft);color:#D70015}
-.tag.blue{background:var(--blue-soft);color:var(--blue)}
-.tag.gray{background:rgba(0,0,0,.05);color:var(--ink2)}
-.tag.purple{background:rgba(166,123,91,.16);color:#7A5434}
-.av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;letter-spacing:0}
-.av.g1{background:linear-gradient(135deg,#E0A075,#C97B4B)}
-.av.g2{background:linear-gradient(135deg,#B85C38,#8F3D22)}
-.av.g3{background:linear-gradient(135deg,#DDB27A,#C08A3E)}
-.av.g4{background:linear-gradient(135deg,#5A5A60,#2C2C2E)}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-.dot.green{background:var(--green)}.dot.orange{background:var(--orange)}.dot.red{background:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
-.hr{height:1px;background:var(--line2);margin:14px 0}
-.mini{font-size:12px;color:var(--ink3)}
-.kv{font-size:13px}.kv b{display:block;font-size:12px;color:var(--ink3);font-weight:600;margin-bottom:1px}
+.page{max-width:1060px;padding:40px 40px 80px}
+.view{display:none} .view.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
 
-/* ============ DASHBOARD ============ */
-.digest{background:transparent;border:none;border-top:1px solid #1D1D1F;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
-.digest .dhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.digest .dhead .ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#FF9500,#FF3B30);display:grid;place-items:center;box-shadow:0 6px 16px rgba(255,90,40,.32)}
-.digest .dhead .ic svg{width:17px;height:17px}
-.digest h3{font-size:16px;letter-spacing:-.015em}
-.digest .items{display:flex;flex-direction:column;gap:9px;margin-top:4px}
-.ditem{display:flex;gap:11px;align-items:flex-start;font-size:13.8px}
-.ditem .b{flex:0 0 auto;margin-top:5px}
-.ditem .act{margin-left:auto;flex:0 0 auto}
-.roster{grid-template-columns:repeat(3,1fr)}
-.pcard{padding:20px;cursor:pointer;transition:.2s;position:relative}
-.pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.pcard .top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.pcard .av{width:46px;height:46px;font-size:16px}
-.pcard h4{font-size:15.5px;letter-spacing:-.01em}
-.pcard .rel{font-size:12px;color:var(--ink3)}
-.pcard .status{position:absolute;top:20px;right:20px}
-.pcard .stat-line{display:flex;gap:8px;align-items:center;font-size:12.8px;color:var(--ink2);margin-top:6px}
-.pcard .stat-line svg{width:13px;height:13px;opacity:.6;flex:0 0 auto}
-.pcard .foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line2);display:flex;gap:6px;flex-wrap:wrap}
-.quick{grid-template-columns:repeat(4,1fr)}
-.qa{padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.18s}
-.qa:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.qa .ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center}
-.qa .ic svg{width:17px;height:17px}
-.qa b{font-size:13.5px;letter-spacing:-.01em}
-.qa span{font-size:11.5px;color:var(--ink3);margin-top:-6px}
-.duty{display:flex;gap:8px}
-.duty .day{flex:1;text-align:center;padding:10px 4px;border-radius:12px;background:rgba(0,0,0,.03)}
-.duty .day.today{background:var(--blue-soft);outline:1.5px solid rgba(29,29,31,.3)}
-.duty .d{font-size:10.5px;font-weight:600;color:var(--ink3);text-transform:uppercase}
-.duty .n{font-size:15px;font-weight:700;margin:2px 0 6px}
-.duty .av{width:22px;height:22px;font-size:8.5px;margin:0 auto}
+/* PRIMITIVES */
+h1.greet{font-size:clamp(38px,5vw,52px);font-weight:600;letter-spacing:-.032em;line-height:1.02}
+.subline{font-size:16px;color:var(--ink2);margin-top:12px}
+.seclabel{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-top:18px;margin-top:44px;border-top:1px solid var(--ink)}
+.seclabel .l{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.seclabel .m{font-size:12.5px;color:var(--ink3)}
+.btn{border:1px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:600;font-size:13px;border-radius:980px;padding:9px 17px;cursor:pointer;transition:.15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn:hover{background:var(--hover)}
+.btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.dark:hover{background:#000}
+.btn.sm{padding:7px 14px;font-size:12.5px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.dot.red{background:var(--red)} .dot.amber{background:var(--amber)} .dot.green{background:var(--green)}
+.status{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.status.red{color:var(--red)} .status.amber{color:var(--amber)} .status.green{color:var(--green)}
+.chip{display:inline-block;font-size:12px;color:var(--ink2);border:1px solid var(--line-strong);border-radius:99px;padding:3px 10px}
+.muted{color:var(--ink2)} .mini{font-size:12px;color:var(--ink3)} .mono{font-family:var(--mono)}
 
-/* ============ RINGS + SPARK ============ */
-.ring{position:relative;width:52px;height:52px;flex:0 0 auto}
-.ring svg{transform:rotate(-90deg)}
-.ring .num{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:700}
-.spark{width:100%;height:38px}
-.vit{grid-template-columns:repeat(4,1fr)}
-.vcard{padding:16px 18px}
-.vcard .vh{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
-.vcard .vh b{font-size:12.5px;color:var(--ink2);font-weight:600}
-.vcard .num{font-size:22px;font-weight:700;letter-spacing:-.02em}
-.vcard .num small{font-size:12px;color:var(--ink3);font-weight:500}
-.vcard .delta{font-size:11.5px;font-weight:600}
-.up{color:#C93400}.down{color:#248A3D}.flat{color:var(--ink3)}
+.digest .ditem{display:flex;align-items:flex-start;gap:14px;padding:17px 2px;border-bottom:1px solid var(--line)}
+.digest .ditem:last-child{border-bottom:none}
+.digest .ditem .dot{margin-top:6px}
+.digest .ditem .tx{flex:1;font-size:15px}
+.digest .ditem .btn{margin-left:auto}
 
-/* ============ MEDS ============ */
-table.meds{width:100%;border-collapse:collapse}
-table.meds th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
-table.meds td{padding:13px 14px;border-bottom:1px solid var(--line2);font-size:13.5px;vertical-align:middle}
-table.meds tr:last-child td{border-bottom:none}
-table.meds tr:hover td{background:rgba(0,0,0,.015)}
-.pill-ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto}
-.runbar{width:120px;height:6px;border-radius:99px;background:rgba(0,0,0,.06);overflow:hidden}
-.runbar i{display:block;height:100%;border-radius:99px}
-.med-name b{display:block;font-size:13.5px}
-.med-name span{font-size:11.5px;color:var(--ink3)}
+.circle{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px}
+.person{padding:0 26px;border-left:1px solid var(--line);cursor:pointer}
+.person:first-child{padding-left:0;border-left:none}
+.person:hover .pname{text-decoration:underline}
+.person .pname{font-size:20px;font-weight:600;letter-spacing:-.02em;margin:10px 0 3px}
+.person .pmeta{font-size:13px;color:var(--ink2)}
+.person .pstat{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:9px 0;border-top:1px solid var(--line2)}
+.person .pstat:nth-of-type(1){margin-top:14px}
+.person .pstat .v{color:var(--ink2)}
+.person .pstat .v.red{color:var(--red);font-weight:600}
+.person .pfoot{margin-top:12px;font-size:12.5px;color:var(--ink3)}
 
-/* ============ SCAN ============ */
-.scanwrap{grid-template-columns:400px 1fr}
-.labelmock{background:linear-gradient(180deg,#fff,#FAFAF8);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:inset 0 0 40px rgba(0,0,0,.03);position:relative;font-family:"SF Mono",ui-monospace,Menlo,monospace}
-.labelmock .store{font-weight:800;font-size:15px;letter-spacing:.01em;font-family:-apple-system,sans-serif}
-.labelmock .rx{font-size:11px;color:#555;margin:2px 0 10px}
-.labelmock .drug{font-size:15px;font-weight:700;background:#FFF9C9;padding:2px 4px;display:inline-block}
-.labelmock .sig{font-size:12px;margin:8px 0;line-height:1.6}
-.labelmock .meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:#333;margin-top:10px}
-.labelmock .sticker{position:absolute;right:14px;bottom:44px;background:#fff;border:1px dashed #E0A030;color:#8a6210;font-size:10px;padding:5px 8px;transform:rotate(-3deg);box-shadow:0 3px 8px rgba(0,0,0,.12)}
-.scanline{position:absolute;left:8px;right:8px;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);top:52%;opacity:.7;border-radius:99px}
-.field{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:10px}
-.field .crop{flex:0 0 auto;width:120px;background:#FFFEF5;border:1px solid #EDE6C8;border-radius:8px;font-family:"SF Mono",ui-monospace,monospace;font-size:10.5px;padding:6px 8px;color:#444;white-space:nowrap;overflow:hidden}
-.field .fk{flex:1}
-.field .fk b{display:block;font-size:11px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.field .fk .val{font-size:14.5px;font-weight:600}
-.field .fk .chk{font-size:11.5px;margin-top:1px}
-.field.ok{border-color:rgba(52,199,89,.4);background:linear-gradient(0deg,rgba(52,199,89,.04),rgba(52,199,89,.04)),#fff}
-.field.warn{border-color:rgba(255,149,0,.5);background:linear-gradient(0deg,rgba(255,149,0,.05),rgba(255,149,0,.05)),#fff}
-.confirm-ic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto}
-.confirm-ic.ok{background:var(--green)} .confirm-ic.warn{background:var(--orange)}
-.confirm-ic svg{width:13px;height:13px}
+.cols{display:grid;gap:44px;margin-top:22px}
+.cols.c2{grid-template-columns:1.3fr 1fr}
+.cols.c2b{grid-template-columns:1fr 1fr}
 
-/* ============ SCAN SCENE (live OCR) ============ */
-.scene3{position:relative;background:radial-gradient(120% 90% at 50% 0%,#3A3A40 0%,#232326 55%,#141416 100%);border-radius:18px;padding:30px 20px 24px;overflow:hidden}
-.scene3 .vf i{position:absolute;width:26px;height:26px;border:2.5px solid rgba(255,255,255,.85);z-index:5}
-.scene3 .vf i:nth-child(1){top:12px;left:12px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
-.scene3 .vf i:nth-child(2){top:12px;right:12px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
-.scene3 .vf i:nth-child(3){bottom:12px;left:12px;border-right:none;border-top:none;border-radius:0 0 0 6px}
-.scene3 .vf i:nth-child(4){bottom:12px;right:12px;border-left:none;border-top:none;border-radius:0 0 6px 0}
-.scanchip{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:6;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:7px}
-.scanchip .pulse{width:8px;height:8px;border-radius:50%;background:#FF9F0A;animation:pl 1.1s ease-in-out infinite}
-@keyframes pl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
-.bwrap{position:relative;width:300px;margin:14px auto 6px}
-.beam{position:absolute;left:-6%;right:-6%;height:44px;z-index:4;pointer-events:none;
-  background:linear-gradient(180deg,transparent,rgba(255,170,90,.22),transparent);
-  border-top:1.5px solid rgba(255,190,120,.95);box-shadow:0 -2px 18px rgba(255,160,70,.45);
-  animation:sweep 3s cubic-bezier(.4,.1,.6,.9) infinite alternate;animation-delay:-1.2s}
-@keyframes sweep{from{top:16%}to{top:80%}}
-.detect{position:absolute;border:1.6px dashed rgba(255,255,255,.92);border-radius:6px;z-index:5;box-shadow:0 0 0 3px rgba(232,112,58,.25);animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
-.detect.warn2{border-color:#FFB340;box-shadow:0 0 0 3px rgba(255,159,10,.3)}
-.detect .dtag{position:absolute;top:-21px;left:-2px;background:#fff;color:#1D1D1F;font-size:9.5px;font-weight:800;border-radius:5px;padding:2px 7px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
-.detect.warn2 .dtag{background:#FFB340;color:#3A2200}
-.detect .dtag.b{top:auto;bottom:-21px}
-@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-.scenecap{text-align:center;color:rgba(255,255,255,.55);font-size:11px;position:relative;z-index:6;margin-top:10px}
-.pipe{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.pstep{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;border-radius:99px;padding:6px 12px;background:rgba(0,0,0,.045);color:var(--ink2)}
-.pstep.done{background:var(--green-soft);color:#248A3D}
-.pstep.now{background:var(--blue-soft);color:var(--blue)}
-.spin{width:12px;height:12px;border-radius:50%;border:2px solid rgba(196,81,45,.25);border-top-color:var(--blue);animation:rot .9s linear infinite;flex:0 0 auto}
-@keyframes rot{to{transform:rotate(360deg)}}
-.skel{position:relative;overflow:hidden;background:#EFEFF1;border-radius:6px;color:transparent!important}
-.skel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:sh 1.3s infinite}
-@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
-.addrow{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid rgba(196,81,45,.35);border-radius:14px;padding:12px 16px;margin-top:12px;box-shadow:0 8px 24px rgba(196,81,45,.08)}
-.addrow .runmath{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--ink2)}
+.duty{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;margin-top:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--line)}
+.duty .d{background:#fff;text-align:center;padding:12px 4px}
+.duty .d.today{background:var(--hover)}
+.duty .d .dn{font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em}
+.duty .d .num{font-size:16px;font-weight:600;margin:3px 0 8px}
+.duty .d .who{font-size:10px;font-weight:700;color:var(--ink2);border:1px solid var(--line-strong);border-radius:99px;padding:2px 0;display:inline-block;width:26px}
 
-/* ============ ER SHEET ============ */
-.ersheet{max-width:760px;background:#fff;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow-lg);overflow:hidden}
-.ersheet .erhead{background:linear-gradient(135deg,#FF3B30,#FF6482);color:#fff;padding:22px 28px;display:flex;align-items:center;gap:16px}
-.ersheet .erhead .cross{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.22);display:grid;place-items:center}
-.ersheet .erhead h2{font-size:21px;letter-spacing:-.02em}
-.ersheet .erhead p{font-size:12.5px;opacity:.9}
-.erbody{padding:24px 28px}
-.ergrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px}
-.erblock h5{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--line)}
-.erblock li{list-style:none;font-size:13.5px;padding:3px 0;display:flex;justify-content:space-between;gap:10px}
-.erblock li span{color:var(--ink2);font-size:12.5px}
-.alert-band{background:var(--red-soft);border:1px solid rgba(255,59,48,.25);border-radius:12px;padding:10px 14px;margin:16px 0;display:flex;gap:10px;align-items:center;font-weight:600;font-size:13.5px;color:#D70015}
-.erfoot{border-top:1px dashed var(--line);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--ink3);background:#FAFAFA}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--line)}
+.qa{background:#fff;padding:18px;cursor:pointer;transition:background .15s}
+.qa:hover{background:var(--hover)}
+.qa svg{width:18px;height:18px;opacity:.8}
+.qa b{display:block;font-size:13.5px;margin:12px 0 2px;letter-spacing:-.01em}
+.qa span{font-size:12px;color:var(--ink3)}
 
-/* ============ HANDOFF ============ */
-.respite{background:linear-gradient(135deg,#FBF2EA,#FFF);border:1px solid rgba(166,123,91,.32)}
-.switch{width:46px;height:28px;border-radius:99px;background:var(--green);position:relative;flex:0 0 auto;cursor:pointer}
-.switch::after{content:"";position:absolute;top:2px;left:20px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:.2s}
-.hsec{margin-bottom:14px}
-.hsec h5{font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:7px}
-.hitem{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px;align-items:flex-start}
-.hitem:last-child{border-bottom:none}
-.hitem .em{flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,.04);display:grid;place-items:center;font-size:14px}
-.hitem b{font-weight:600}
-.hitem .mini{display:block}
-.pillrow{display:flex;align-items:center;gap:10px}
-.cap{width:22px;height:12px;border-radius:99px;flex:0 0 auto;box-shadow:inset 0 -2px 3px rgba(0,0,0,.15)}
+table.tbl{width:100%;border-collapse:collapse}
+table.tbl th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);text-align:left;font-weight:700;padding:10px 12px 10px 0;border-bottom:1px solid var(--line)}
+table.tbl td{padding:14px 12px 14px 0;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle}
+table.tbl tr:last-child td{border-bottom:none}
+.mname b{display:block;font-size:14px;font-weight:600}
+.mname span{font-size:12px;color:var(--ink3)}
+.rway{width:96px;height:4px;border-radius:99px;background:#EDEDF0;overflow:hidden;display:inline-block;vertical-align:middle}
+.rway i{display:block;height:100%;background:var(--ink3)}
+.rway i.red{background:var(--red)} .rway i.amber{background:var(--amber)} .rway i.green{background:var(--green)}
+.days{font-weight:600} .days.red{color:var(--red)} .days.amber{color:var(--amber)} .days.green{color:var(--green)}
 
-/* ============ APPTS ============ */
-.appt{display:flex;gap:14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line2)}
-.appt:last-child{border-bottom:none}
-.datebox{flex:0 0 auto;width:52px;text-align:center;background:rgba(0,0,0,.035);border-radius:12px;padding:7px 0}
-.datebox b{display:block;font-size:18px;letter-spacing:-.02em}
-.datebox span{font-size:10px;text-transform:uppercase;font-weight:700;color:var(--red)}
-.prep li{list-style:none;padding:7px 0;border-bottom:1px solid var(--line2);font-size:13.5px;display:flex;gap:9px;align-items:flex-start}
-.prep li:last-child{border:none}
-.prep .n{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
-.script{background:#1D1D1F;color:#F5F5F7;border-radius:14px;padding:16px 18px;font-size:13.5px;line-height:1.7}
-.script b{color:#FFB48A}
-
-/* ============ CHAT ============ */
-.chatwrap{max-width:720px}
-.msg{display:flex;gap:12px;margin-bottom:18px}
-.msg .av{width:30px;height:30px;font-size:11px;flex:0 0 auto}
-.bubble{border-radius:16px;padding:12px 16px;font-size:14px;max-width:78%}
-.msg.user{flex-direction:row-reverse}
-.msg.user .bubble{background:var(--blue);color:#fff;border-bottom-right-radius:5px}
-.msg.ai .bubble{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;box-shadow:var(--shadow)}
-.cite{display:inline-flex;align-items:center;gap:5px;background:var(--blue-soft);color:var(--blue);font-size:11px;font-weight:600;border-radius:7px;padding:3px 8px;margin-top:8px}
-.cite svg{width:10px;height:10px}
-.chatinput{display:flex;gap:10px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 8px 8px 18px;box-shadow:var(--shadow);align-items:center;margin-top:8px}
-.chatinput input{flex:1;border:none;outline:none;font-family:inherit;font-size:14px;color:var(--ink)}
-.chatinput .send{width:32px;height:32px;border-radius:50%;background:var(--blue);border:none;display:grid;place-items:center;cursor:pointer}
-.refusal{background:linear-gradient(0deg,rgba(255,149,0,.06),rgba(255,149,0,.06)),#fff;border:1px solid rgba(255,149,0,.35)}
-
-/* patient header */
-.phead{display:flex;align-items:center;gap:18px;margin-bottom:22px}
-.phead .av{width:64px;height:64px;font-size:22px}
-.phead h1{font-size:26px;letter-spacing:-.02em}
-.phead .chips{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
-.seg{display:inline-flex;background:rgba(0,0,0,.05);border-radius:10px;padding:3px;gap:2px;margin-bottom:20px}
-.seg button{border:none;background:none;font-family:inherit;font-size:13px;font-weight:600;padding:6px 16px;border-radius:8px;cursor:pointer;color:var(--ink2)}
-.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
-.doc{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid var(--line2);font-size:13.5px}
+.phead{margin-bottom:6px}
+.phead h1{font-size:34px;font-weight:600;letter-spacing:-.03em}
+.phead .sub{font-size:14px;color:var(--ink2);font-weight:400}
+.chips{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--hover);border-radius:9px;padding:3px;gap:2px;margin:22px 0 8px}
+.seg button{border:none;background:none;font-size:13px;font-weight:600;padding:6px 15px;border-radius:7px;cursor:pointer;color:var(--ink2)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.vitrow{display:grid;grid-template-columns:repeat(4,1fr);margin-top:8px}
+.vit{padding:16px 20px 16px 0;border-right:1px solid var(--line)}
+.vit:last-child{border-right:none;padding-right:0}
+.vit .vl{font-size:12px;color:var(--ink2)}
+.vit .vn{font-size:28px;font-weight:600;letter-spacing:-.02em;margin:6px 0 2px}
+.vit .vn small{font-size:13px;color:var(--ink3);font-weight:500}
+.vit .vd{font-size:12px}
+.up{color:var(--red)} .down{color:var(--green)} .flat{color:var(--ink3)}
+.doc{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
 .doc:last-child{border:none}
-.doc .ic{width:34px;height:34px;border-radius:9px;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);font-weight:700;font-size:10px}
+.doc .ic{width:30px;height:30px;border-radius:7px;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2);font-weight:700;font-size:9px}
+.note{border-top:1px solid var(--line);padding-top:14px;margin-top:16px;font-size:13.5px;color:var(--ink2);max-width:660px}
 
-/* ===== EDITORIAL SYSTEM · Dawn Ridge + Quiet Meadow ===== */
-body{background:#FDFCF8}
-aside{background:#FDFCF8;border-right:1px solid var(--line)}
-.logo .mark{background:none;box-shadow:none;width:26px;height:26px}
-.logo .mark svg path{fill:#1D1D1F}
-.topbar{background:rgba(253,252,248,.9);border-bottom:1px solid var(--line)}
-.search{background:#F1EEE6}
-.nav .av{background:none!important;border:1.4px solid var(--line-strong);color:var(--ink2);font-weight:600;font-size:9px}
-.chip-user .av{background:#1D1D1F!important}
-.pagewrap{padding-top:0}
-.hero{position:relative;margin:0 -34px 10px;height:238px;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero-art{position:absolute;inset:0;width:100%;height:100%}
-.hero-inner{position:absolute;left:34px;right:34px;bottom:24px}
-.hero-inner h1{font-size:clamp(40px,5vw,58px);font-weight:700;letter-spacing:-.032em;line-height:1;color:#1D1D1F;margin:0}
-.hero-inner p{font-size:16.5px;color:#5A5148;margin-top:12px}
-.digest{background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important}
-.digest .dhead{border-top:1px solid #1D1D1F;padding-top:16px;margin-bottom:2px}
-.digest .dhead .ic{background:none!important;box-shadow:none!important;width:22px;height:22px}
-.digest .dhead .ic svg{stroke:#B8892E;width:20px;height:20px}
-.digest .items{margin-top:6px}
-.ditem{border-bottom:1px solid var(--line);padding:17px 2px;margin:0}
-.ditem:last-child{border-bottom:none}
-.card{box-shadow:none}
-.pcard{box-shadow:none;border:1px solid var(--line)}
-.pcard:hover,.qa:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
-.em-btn{background:#fff!important;color:#C42B1C!important;border:1.4px solid #E7B7AE!important;box-shadow:none!important;font-weight:700!important}
-.em-btn span{background:#C42B1C!important}
-.day.today{outline:1.5px solid rgba(29,29,31,.28)}
+.scanwrap{display:grid;grid-template-columns:360px 1fr;gap:44px;margin-top:24px}
+.viewer{background:var(--hover);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative}
+.vf i{position:absolute;width:22px;height:22px;border:2px solid var(--ink3);z-index:3}
+.vf i:nth-child(1){top:14px;left:14px;border-right:none;border-bottom:none;border-radius:5px 0 0 0}
+.vf i:nth-child(2){top:14px;right:14px;border-left:none;border-bottom:none;border-radius:0 5px 0 0}
+.vf i:nth-child(3){bottom:14px;left:14px;border-right:none;border-top:none;border-radius:0 0 0 5px}
+.vf i:nth-child(4){bottom:14px;right:14px;border-left:none;border-top:none;border-radius:0 0 5px 0}
+.scanchip{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:5;background:var(--ink);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:7px}
+.scanchip .p{width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.bwrap{position:relative;width:250px;margin:10px auto}
+.beam{position:absolute;left:-4%;right:-4%;height:36px;z-index:4;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(29,29,31,.06),transparent);border-top:1.5px solid rgba(29,29,31,.35);animation:sweep 3s ease-in-out infinite alternate;animation-delay:-1.2s}
+@keyframes sweep{from{top:14%}to{top:78%}}
+.det{position:absolute;border:1.4px dashed var(--ink);border-radius:5px;z-index:5;animation:pop .5s cubic-bezier(.2,1.3,.4,1) both}
+.det.warn{border-color:var(--amber)}
+.det .t{position:absolute;top:-19px;left:-2px;background:var(--ink);color:#fff;font-size:9px;font-weight:800;border-radius:4px;padding:2px 6px;white-space:nowrap}
+.det .t.b{top:auto;bottom:-19px}
+.det.warn .t{background:var(--amber)}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1}}
+.field{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.field:last-of-type{border-bottom:none}
+.field .crop{flex:0 0 auto;width:118px;background:var(--hover);border:1px solid var(--line);border-radius:7px;font-family:var(--mono);font-size:10.5px;padding:6px 8px;color:var(--ink2);white-space:nowrap;overflow:hidden}
+.field .fk{flex:1}
+.field .fk .k{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.field .fk .val{font-size:14.5px;font-weight:600}
+.field .fk .chk{font-size:12px;margin-top:1px}
+.field .st{flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center}
+.field .st.ok{background:var(--green)} .field .st.warn{background:var(--amber)}
+.field .st svg{width:12px;height:12px}
+.pipe{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;font-size:12px}
+.pstep{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:5px 12px;color:var(--ink2);font-weight:600}
+.pstep.done{border-color:var(--green);color:var(--green)}
+.pstep.now{border-color:var(--ink);color:var(--ink)}
+.spin{width:11px;height:11px;border-radius:50%;border:2px solid var(--line-strong);border-top-color:var(--ink);animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.skel{background:#EFEFF1;border-radius:5px;color:transparent!important;position:relative;overflow:hidden}
+.skel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);animation:sh 1.3s infinite}
+@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+.ersheet{max-width:720px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:8px}
+.erhead{border-bottom:1px solid var(--line);padding:22px 26px;display:flex;justify-content:space-between;align-items:flex-start}
+.erhead h2{font-size:24px;font-weight:600;letter-spacing:-.02em}
+.erhead .sub{font-size:12.5px;color:var(--ink2);margin-top:3px}
+.erbody{padding:22px 26px}
+.erband{border:1px solid var(--red);color:var(--red);border-radius:9px;padding:9px 14px;font-size:13.5px;font-weight:600;margin-bottom:18px;display:flex;gap:9px;align-items:center}
+.ergrid{display:grid;grid-template-columns:1fr 1fr;gap:20px 30px}
+.erb h5{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:8px}
+.erb li{list-style:none;display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:3px 0}
+.erb li span{color:var(--ink2);font-size:12.5px}
+.erfoot{border-top:1px solid var(--line);padding:13px 26px;display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3)}
+
+.hitem{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
+.hitem:last-child{border:none}
+.hitem .em{flex:0 0 auto;color:var(--ink3);font-size:12px;font-weight:700;width:74px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.hitem b{font-weight:600}
+.toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.sw{width:42px;height:25px;border-radius:99px;background:var(--green);position:relative;flex:0 0 auto}
+.sw::after{content:"";position:absolute;top:2px;left:19px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+
+.appt{display:flex;gap:16px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}
+.appt:last-child{border:none}
+.datebox{flex:0 0 auto;width:50px;text-align:center;border:1px solid var(--line);border-radius:10px;padding:7px 0}
+.datebox b{display:block;font-size:18px;font-weight:600}
+.datebox span{font-size:10px;text-transform:uppercase;font-weight:700;color:var(--ink3)}
+.prep li{list-style:none;display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
+.prep li:last-child{border:none}
+.prep .n{flex:0 0 auto;width:19px;height:19px;border-radius:50%;border:1px solid var(--line-strong);color:var(--ink2);font-size:10.5px;font-weight:700;display:grid;place-items:center}
+.script{background:var(--hover);border:1px solid var(--line);border-radius:12px;padding:15px 17px;font-size:13.5px;line-height:1.65}
+.script b{font-weight:600}
+
+.chatwrap{max-width:680px;margin-top:20px}
+.msg{display:flex;gap:11px;margin-bottom:16px}
+.msg .av{width:28px;height:28px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;font-size:10px;font-weight:700}
+.msg.user{flex-direction:row-reverse}
+.msg.user .av{background:var(--ink);color:#fff}
+.msg.ai .av{border:1px solid var(--line-strong);color:var(--ink2)}
+.bubble{border-radius:14px;padding:11px 15px;font-size:14px;max-width:80%}
+.msg.user .bubble{background:var(--ink);color:#fff;border-bottom-right-radius:4px}
+.msg.ai .bubble{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.cite{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink2);border-top:1px solid var(--line);margin-top:8px;padding-top:7px}
+.cite svg{width:11px;height:11px}
+.refuse{border-color:var(--amber)}
+.chatin{display:flex;gap:10px;align-items:center;border:1px solid var(--line-strong);border-radius:99px;padding:7px 7px 7px 18px;margin-top:8px}
+.chatin input{flex:1;border:none;outline:none;font-family:inherit;font-size:14px}
+.chatin .send{width:32px;height:32px;border-radius:50%;background:var(--ink);border:none;display:grid;place-items:center;cursor:pointer}
+
+.gcards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--line)}
+.gc{background:#fff;padding:16px 18px}
+.gc b{display:block;font-size:13.5px;margin-bottom:2px}
+.gc span{font-size:12px;color:var(--ink3)}
 </style>
 </head>
 <body>
 <div class="app">
 <!-- ================= SIDEBAR ================= -->
 <aside>
-  <div class="logo">
-    <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3c.8 3.2-2.4 4-2.4 7.2a2.4 2.4 0 0 0 4.8 0c0-.8-.4-1.6-.4-1.6 1.6.8 2.8 2.4 2.8 4.4a4.8 4.8 0 1 1-9.6 0C7.2 9.4 10.4 7.8 12 3Z" fill="#fff"/></svg></div>
-    <b>Hearth</b>
-  </div>
+  <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3c.8 3.2-2.4 4-2.4 7.2a2.4 2.4 0 0 0 4.8 0c0-.8-.4-1.6-.4-1.6 1.6.8 2.8 2.4 2.8 4.4a4.8 4.8 0 1 1-9.6 0C7.2 9.4 10.4 7.8 12 3Z" fill="#1D1D1F"/></svg><b>Hearth</b></div>
   <button class="nav on" data-v="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Home</button>
   <button class="nav" data-v="meds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-40 12 12)"/><path d="M9.5 8.6l5 6.8"/></svg>Medications <span class="dotb"></span></button>
   <button class="nav" data-v="scan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg>Scan a label</button>
@@ -321,20 +244,20 @@ aside{background:#FDFCF8;border-right:1px solid var(--line)}
   <button class="nav" data-v="assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.9A8 8 0 1 1 21 12Z"/></svg>Assistant</button>
 
   <div class="navlabel">Care circle</div>
-  <button class="nav" data-v="eleanor"><span class="av g1">EA</span>Eleanor · Mom</button>
-  <button class="nav" data-v="robert"><span class="av g2">RA</span>Robert · Dad <span class="dotb"></span></button>
-  <button class="nav" data-v="rosa"><span class="av g3">RM</span>Aunt Rosa</button>
+  <button class="nav" data-v="eleanor"><span class="av">E</span>Eleanor · Mom</button>
+  <button class="nav" data-v="robert"><span class="av">R</span>Robert · Dad <span class="dotb"></span></button>
+  <button class="nav" data-v="rosa"><span class="av">R</span>Aunt Rosa</button>
 
   <div class="navlabel">Tools</div>
   <button class="nav" data-v="er"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>ER Sheet</button>
   <button class="nav" data-v="handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M4 12h16"/></svg>Handoff Pack</button>
-  <button class="nav" data-v="guides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg>Emergency Guides</button>
+  <a class="nav em" href="guides.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18v.5"/></svg>Emergency Guides</a>
 
-  <div class="navlabel">Design</div>
-  <a class="nav" href="https://acl-caretaker.vercel.app" target="_blank" rel="noopener" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H4z"/><path d="M9 21h6M12 17v4"/></svg>ACL challenge brief</a>
-  <a class="nav" href="variants.html" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18c-2 0-2.5-1.4-1.6-2.6.8-1.1.3-2.4-1.1-2.4H7.5C5.6 16 5 14.6 5 13"/><circle cx="9" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="17" cy="11.5" r="1.2" fill="currentColor" stroke="none"/></svg>Design Lab · pick a theme</a>
+  <div class="navlabel">More</div>
+  <a class="nav" href="variants.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.3"/><circle cx="18" cy="13" r="1.8"/><circle cx="6" cy="12" r="2.6"/><circle cx="13" cy="18.5" r="2.3"/></svg>Design Lab</a>
+  <a class="nav" href="https://acl-caretaker.vercel.app" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H4z"/><path d="M9 21h6M12 17v4"/></svg>ACL challenge brief</a>
 
-  <div class="side-foot"><b>Maria Alvarez</b><br>Caring for 3 people<br><span style="color:#34C759">●</span> All data private &amp; audited<br><span style="opacity:.65">Demo · every person, record &amp; number is fictional</span></div>
+  <div class="side-foot"><b>Maria Alvarez</b><br>Caring for 3 people · private &amp; audited<br><span style="opacity:.7">Demo — every person, record and number is fictional.</span></div>
 </aside>
 
 <!-- ================= MAIN ================= -->
@@ -342,572 +265,320 @@ aside{background:#FDFCF8;border-right:1px solid var(--line)}
   <div class="topbar">
     <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search people, meds, records…</div>
     <div class="spacer"></div>
-    <a class="em-btn" href="guides.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;border-radius:99px;padding:8px 15px"><span style="width:7px;height:7px;border-radius:50%"></span>Emergency</a>
-    <span class="tag purple">Respite mode: Eleanor · expires Mon 8 AM</span>
-    <div class="chip-user"><span class="av g4" style="width:28px;height:28px;font-size:10px">MA</span>Maria</div>
+    <a class="em-link" href="guides.html"><span class="d"></span>Emergency</a>
+    <span class="respite">Respite: <b>Eleanor</b> · until Mon 8 AM</span>
+    <div class="chip-user"><span class="av">MA</span>Maria</div>
   </div>
 
-  <div class="pagewrap">
+  <div class="page">
 
   <!-- ========== DASHBOARD ========== -->
   <section class="view on" id="v-dashboard">
-    <header class="hero">
-      <svg class="hero-art" viewBox="0 0 1212 250" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="dr-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCFBF9"/><stop offset="0.38" stop-color="#F9F1EA"/><stop offset="0.70" stop-color="#F5E8E1"/><stop offset="1" stop-color="#EFDFDC"/></linearGradient>
-          <linearGradient id="dr-lav" x1="0" y1="0" x2="0" y2="1"><stop offset="0.50" stop-color="#E3DBE4" stop-opacity="0"/><stop offset="1" stop-color="#E3DBE4" stop-opacity="0.38"/></linearGradient>
-          <radialGradient id="dr-halo" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F3D3A8" stop-opacity="0.55"/><stop offset="0.35" stop-color="#F5DCBC" stop-opacity="0.30"/><stop offset="0.70" stop-color="#F7E5D2" stop-opacity="0.13"/><stop offset="1" stop-color="#F7E5D2" stop-opacity="0"/></radialGradient>
-          <radialGradient id="dr-sun" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F8E3BF" stop-opacity="1"/><stop offset="0.55" stop-color="#F5DBB4" stop-opacity="0.9"/><stop offset="0.85" stop-color="#F4D9B6" stop-opacity="0.35"/><stop offset="1" stop-color="#F4D9B6" stop-opacity="0"/></radialGradient>
-          <filter id="dr-mist" x="-20%" y="-300%" width="140%" height="700%"><feGaussianBlur stdDeviation="5"/></filter>
-          <filter id="dr-spill" x="-60%" y="-120%" width="220%" height="340%"><feGaussianBlur stdDeviation="14"/></filter>
-        </defs>
-        <rect x="0" y="0" width="1212" height="250" fill="url(#dr-sky)"/>
-        <rect x="0" y="0" width="1212" height="250" fill="url(#dr-lav)"/>
-        <circle cx="955" cy="146" r="175" fill="url(#dr-halo)"/>
-        <circle cx="955" cy="146" r="40" fill="url(#dr-sun)"/>
-        <g fill="none" stroke="#4A5361" stroke-linecap="round">
-          <path d="M770 52 q3.4 -3 6.6 -0.3 q3.2 -2.7 6.6 0.3" stroke-width="1" stroke-opacity="0.55" vector-effect="non-scaling-stroke"/>
-          <path d="M818 39 q2.9 -2.5 5.6 -0.2 q2.7 -2.3 5.6 0.2" stroke-width="0.9" stroke-opacity="0.46" vector-effect="non-scaling-stroke"/>
-          <path d="M856 63 q2.4 -2.1 4.7 -0.2 q2.3 -1.9 4.7 0.2" stroke-width="0.85" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
-          <path d="M1078 46 q2.6 -2.2 5 -0.2 q2.4 -2 5 0.2" stroke-width="0.85" stroke-opacity="0.36" vector-effect="non-scaling-stroke"/>
-        </g>
-        <path fill="#EBE2E6" d="M0 150 C60 146 120 144 190 146 C260 148 330 150 420 149 C500 148 560 146 640 143 C690 141 715 128 745 121 C770 115 795 118 820 127 C850 138 875 146 905 149 C930 151 945 152 965 152 C1000 152 1030 146 1060 139 C1085 133 1108 131 1132 137 C1160 144 1190 149 1212 150 L1212 250 L0 250 Z"/>
-        <path fill="#D9D4DE" d="M0 164 C70 160 130 157 200 159 C270 161 330 163 400 161 C460 159 505 150 555 145 C585 142 610 143 640 149 C685 158 720 163 770 164 C830 165 880 162 930 161 C980 160 1020 156 1060 152 C1095 149 1130 152 1165 158 C1190 162 1205 163 1212 164 L1212 250 L0 250 Z"/>
-        <ellipse cx="955" cy="168" rx="190" ry="26" fill="#F3D9BE" opacity="0.22" filter="url(#dr-spill)"/>
-        <path fill="#C2C1D0" d="M0 175 C60 178 110 170 170 166 C230 162 290 170 350 174 C410 178 460 172 510 168 C560 164 600 166 650 172 C700 178 750 181 810 180 C860 179 905 172 950 168 C990 164 1030 166 1075 172 C1120 178 1170 180 1212 178 L1212 250 L0 250 Z"/>
-        <rect x="-40" y="170" width="1300" height="7" fill="#FFFFFF" opacity="0.5" filter="url(#dr-mist)"/>
-        <path fill="#A8ACBD" d="M0 200 C70 192 120 184 190 182 C250 180 300 188 360 192 C420 196 480 192 540 186 C590 181 630 182 680 188 C740 195 790 200 850 199 C910 198 960 190 1010 186 C1055 182 1100 186 1150 192 C1185 196 1205 197 1212 197 L1212 250 L0 250 Z"/>
-        <rect x="140" y="202" width="1120" height="9" fill="#FFFFFF" opacity="0.4" filter="url(#dr-mist)"/>
-        <path fill="#8B93A3" d="M0 214 C80 218 140 208 210 205 C280 202 340 210 410 214 C470 217 530 212 590 208 C650 204 710 208 770 213 C830 218 890 219 950 216 C1010 213 1060 207 1110 209 C1160 211 1195 214 1212 214 L1212 250 L0 250 Z"/>
-        <rect x="-40" y="224" width="1292" height="8" fill="#FFFFFF" opacity="0.32" filter="url(#dr-mist)"/>
-        <path fill="#6E7B8A" d="M0 236 C90 230 160 224 250 226 C330 228 400 234 480 234 C560 234 630 227 710 228 C790 229 860 236 940 237 C1010 238 1080 232 1140 232 C1180 232 1200 234 1212 235 L1212 250 L0 250 Z"/>
-      </svg>
-      <div class="hero-inner">
-        <h1>Good afternoon, Maria</h1>
-        <p>Saturday, July 11 · Here's the one thing that needs you, and the calm around it.</p>
-      </div>
-    </header>
+    <h1 class="greet">Good afternoon, Maria</h1>
+    <p class="subline">Saturday, July 11 · Here's the one thing that needs you, and the calm around it.</p>
 
-    <div class="card digest pad" style="margin-bottom:16px">
-      <div class="dhead">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg></div>
-        <div><h3>Today's digest</h3><div class="mini">Composed 7:00 AM from 14 quiet events · 1 needs action</div></div>
+    <div class="seclabel"><span class="l">Today's digest</span><span class="m">Composed 7:00 AM from 14 quiet events · 1 needs action</span></div>
+    <div class="digest">
+      <div class="ditem"><span class="dot red"></span><div class="tx"><b>Robert's metformin runs out Thursday.</b> <span class="muted">Refill not yet picked up at CVS.</span></div><button class="btn dark sm">Request refill</button></div>
+      <div class="ditem"><span class="dot amber"></span><div class="tx"><b>Eleanor's sleep is trending shorter.</b> <span class="muted">6.1 h average this week, 48 min under her norm. Worth a call?</span></div><button class="btn sm">Call Mom</button></div>
+      <div class="ditem"><span class="dot green"></span><div class="tx">Dr. Chen (cardiology) is <b>Thursday 9:30</b>. Robert's prep sheet is ready. Rosa's granddaughter visits Sunday.</div><button class="btn sm">Prep sheet</button></div>
+    </div>
+
+    <div class="seclabel"><span class="l">Care circle</span><span class="m">3 people · updated moments ago</span></div>
+    <div class="circle">
+      <div class="person" onclick="go('eleanor')">
+        <span class="status amber"><span class="dot amber"></span>Worth a look</span>
+        <div class="pname">Eleanor Alvarez</div>
+        <div class="pmeta">Mom · 78 · early-stage Alzheimer's</div>
+        <div class="pstat"><span>Sleep</span><span class="v">6.1 h · trending down</span></div>
+        <div class="pstat"><span>Sertraline</span><span class="v">refill in 12 days</span></div>
+        <div class="pfoot">Respite: Dana until Monday</div>
       </div>
-      <div class="items">
-        <div class="ditem"><span class="b dot red"></span><div><b>Robert's metformin runs out Thursday</b> · refill not yet picked up at CVS.</div><button class="btn sm primary act">Request refill</button></div>
-        <div class="ditem"><span class="b dot orange"></span><div><b>Eleanor's sleep is trending shorter</b> · 6.1 h avg this week, 48 min under her norm. Worth a call?</div><button class="btn sm quiet act">Call Mom</button></div>
-        <div class="ditem"><span class="b dot green"></span><div>Dr. Chen (cardiology) is <b>Thursday 9:30</b> · Robert's prep sheet is ready. Rosa's granddaughter visits Sunday.</div><button class="btn sm quiet act">Prep sheet</button></div>
+      <div class="person" onclick="go('robert')">
+        <span class="status red"><span class="dot red"></span>Act now</span>
+        <div class="pname">Robert Alvarez</div>
+        <div class="pmeta">Dad · 81 · T2 diabetes · AFib</div>
+        <div class="pstat"><span>Metformin</span><span class="v red">4 days left</span></div>
+        <div class="pstat"><span>Resting HR</span><span class="v">74 · up 6 bpm / 2 wks</span></div>
+        <div class="pfoot">Cardiology · Thursday 9:30</div>
+      </div>
+      <div class="person" onclick="go('rosa')">
+        <span class="status green"><span class="dot green"></span>All good</span>
+        <div class="pname">Rosa Marquez</div>
+        <div class="pmeta">Aunt · 74 · hypothyroid</div>
+        <div class="pstat"><span>Medications</span><span class="v">on track · 32 days</span></div>
+        <div class="pstat"><span>This week</span><span class="v">granddaughter Sunday</span></div>
+        <div class="pfoot">No action needed</div>
       </div>
     </div>
 
-    <div class="grid roster" style="margin-bottom:16px">
-      <div class="card pcard" onclick="go('eleanor')">
-        <svg viewBox="0 0 400 54" width="100%" height="54" style="display:block;border-radius:10px;margin-bottom:12px" preserveAspectRatio="none"><rect width="400" height="54" fill="#EAE3EE"/><rect y="26" width="400" height="28" fill="#C7B6D6"/><path d="M0 54 L170 30 M60 54 L185 30 M130 54 L200 30 M270 54 L215 30 M340 54 L230 30 M400 50 L240 30" stroke="#A98FC2" stroke-width="2.5"/><circle cx="330" cy="14" r="8" fill="#E6D4EE"/></svg>
-        <span class="status dot orange"></span>
-        <div class="top"><span class="av g1">EA</span><div><h4>Eleanor Alvarez</h4><div class="rel">Mom · 78 · early-stage Alzheimer's</div></div></div>
-        <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-6 4 12 2-6h6" stroke-linecap="round" stroke-linejoin="round"/></svg>Sleep 6.1 h · trending down</div>
-        <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="5" rx="2.5" transform="rotate(-30 12 12)"/></svg>Sertraline refill in 12 days</div>
-        <div class="foot"><span class="tag orange">Worth a look</span><span class="tag purple">Respite: Dana</span></div>
-      </div>
-      <div class="card pcard" onclick="go('robert')">
-        <svg viewBox="0 0 400 54" width="100%" height="54" style="display:block;border-radius:10px;margin-bottom:12px" preserveAspectRatio="none"><rect width="400" height="54" fill="#EDEBE2"/><circle cx="96" cy="22" r="11" fill="#F2D9A0"/><rect y="30" width="400" height="24" fill="#CAD8DC"/><path d="M40 34 h44 M300 38 h56 M150 44 h64" stroke="#E5EEF0" stroke-width="3" stroke-linecap="round"/><path d="M330 30 v-16 M344 30 v-12 M356 30 v-18" stroke="#6E7B6A" stroke-width="2.5"/></svg>
-        <span class="status dot red"></span>
-        <div class="top"><span class="av g2">RA</span><div><h4>Robert Alvarez</h4><div class="rel">Dad · 81 · T2 diabetes · AFib</div></div></div>
-        <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="5" rx="2.5" transform="rotate(-30 12 12)"/></svg><b style="color:#D70015">Metformin: 4 days left</b></div>
-        <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21C7 16.6 4 13.3 4 9.8A4.6 4.6 0 0 1 12 6.7a4.6 4.6 0 0 1 8 3.1c0 3.5-3 6.8-8 11.2Z" stroke-linejoin="round"/></svg>Resting HR 74 · up 6 bpm / 2 wks</div>
-        <div class="foot"><span class="tag red">Act now</span><span class="tag gray">Cardiology Thu</span></div>
-      </div>
-      <div class="card pcard" onclick="go('rosa')">
-        <svg viewBox="0 0 400 54" width="100%" height="54" style="display:block;border-radius:10px;margin-bottom:12px" preserveAspectRatio="none"><rect width="400" height="54" fill="#F2EFDF"/><path d="M0 40 Q100 22 200 34 T400 30 V54 H0 Z" fill="#C9CFA8"/><path d="M0 48 Q140 34 280 44 T400 44 V54 H0 Z" fill="#A8B584"/><circle cx="70" cy="44" r="2.4" fill="#FFF"/><circle cx="150" cy="41" r="2.4" fill="#F2D9A0"/><circle cx="240" cy="46" r="2.4" fill="#FFF"/><circle cx="320" cy="43" r="2.4" fill="#F2D9A0"/></svg>
-        <span class="status dot green"></span>
-        <div class="top"><span class="av g3">RM</span><div><h4>Rosa Marquez</h4><div class="rel">Aunt · 74 · hypothyroid</div></div></div>
-        <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5" stroke-linejoin="round"/></svg>All meds on track · 32 days runway</div>
-        <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Granddaughter visits Sunday</div>
-        <div class="foot"><span class="tag green">All good</span></div>
-      </div>
-    </div>
-
-    <div class="grid" style="grid-template-columns:1.35fr 1fr;margin-bottom:16px">
-      <div class="card pad">
-        <div class="row" style="justify-content:space-between;margin-bottom:12px"><b style="font-size:15px">Who's on duty</b><span class="mini">This week · shared with Dana &amp; Miguel</span></div>
-        <div class="duty">
-          <div class="day"><div class="d">Sun</div><div class="n">5</div><span class="av g4">MA</span></div>
-          <div class="day"><div class="d">Mon</div><div class="n">6</div><span class="av g4">MA</span></div>
-          <div class="day"><div class="d">Tue</div><div class="n">7</div><span class="av g2" style="background:linear-gradient(135deg,#8A8A90,#55555A)">MG</span></div>
-          <div class="day"><div class="d">Wed</div><div class="n">8</div><span class="av g4">MA</span></div>
-          <div class="day"><div class="d">Thu</div><div class="n">9</div><span class="av g4">MA</span></div>
-          <div class="day"><div class="d">Fri</div><div class="n">10</div><span class="av g1">DA</span></div>
-          <div class="day today"><div class="d">Sat</div><div class="n">11</div><span class="av g1">DA</span></div>
-        </div>
-      </div>
-      <div class="card pad">
-        <div class="row" style="justify-content:space-between;margin-bottom:10px"><b style="font-size:15px">Family update · drafted</b><span class="tag blue">Ready to edit</span></div>
-        <p style="font-size:13px;color:var(--ink2);line-height:1.6">"Hi Miguel · good week overall. Dad's refill is handled and his cardiology visit is Thursday. Mom's been sleeping a little less, so I'm calling her today…"</p>
-        <div class="row" style="margin-top:12px;gap:8px"><button class="btn sm primary">Edit &amp; send</button><button class="btn sm quiet">Regenerate</button></div>
-      </div>
-    </div>
-
-    <div class="grid quick">
-      <div class="card qa" onclick="go('scan')"><div class="ic" style="background:var(--blue-soft);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg></div><b>Scan a label</b><span>Add meds from a photo</span></div>
-      <div class="card qa" onclick="go('er')"><div class="ic" style="background:var(--red-soft);color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><b>ER sheet</b><span>Grab-and-go one-pager</span></div>
-      <div class="card qa" onclick="go('handoff')"><div class="ic" style="background:rgba(166,123,91,.15);color:#7A5434"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><b>Handoff Pack</b><span>For a substitute caregiver</span></div>
-      <div class="card qa" onclick="go('appts')"><div class="ic" style="background:rgba(0,0,0,.05);color:#4A4A4F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4"/></svg></div><b>Visit prep</b><span>Dr. Chen · Thursday</span></div>
-    </div>
-    <div style="margin-top:34px"><svg viewBox="0 0 1200 54" width="100%" preserveAspectRatio="none" style="display:block"><path d="M0 38 Q150 22 320 34 T680 32 T1040 36 L1200 34 V54 H0 Z" fill="#DCE3D2"/><path d="M0 46 Q220 34 480 43 T980 42 L1200 44 V54 H0 Z" fill="#C9D4BC"/><path d="M905 36 v-14" stroke="#7A8A6A" stroke-width="3"/><circle cx="905" cy="18" r="7" fill="#7A8A6A"/></svg></div>
-  </section>
-
-  <!-- ========== PATIENT: ROBERT ========== -->
-  <section class="view" id="v-robert">
-    <div class="phead">
-      <span class="av g2">RA</span>
+    <div class="cols c2">
       <div>
-        <h1>Robert Alvarez <span class="mini" style="font-size:15px;font-weight:500">· Dad · 81</span></h1>
-        <div class="chips"><span class="tag gray">Type 2 diabetes</span><span class="tag gray">Hypertension</span><span class="tag gray">AFib</span><span class="tag red">⚠ Penicillin allergy</span></div>
+        <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Who's on duty</span><span class="m">Shared with Dana &amp; Miguel</span></div>
+        <div class="duty">
+          <div class="d"><div class="dn">Sun</div><div class="num">5</div><span class="who">MA</span></div>
+          <div class="d"><div class="dn">Mon</div><div class="num">6</div><span class="who">MA</span></div>
+          <div class="d"><div class="dn">Tue</div><div class="num">7</div><span class="who">MG</span></div>
+          <div class="d"><div class="dn">Wed</div><div class="num">8</div><span class="who">MA</span></div>
+          <div class="d"><div class="dn">Thu</div><div class="num">9</div><span class="who">MA</span></div>
+          <div class="d"><div class="dn">Fri</div><div class="num">10</div><span class="who">DA</span></div>
+          <div class="d today"><div class="dn">Sat</div><div class="num">11</div><span class="who">DA</span></div>
+        </div>
       </div>
-      <div style="margin-left:auto" class="row"><button class="btn quiet sm" onclick="go('er')">ER sheet</button><button class="btn primary sm" onclick="go('appts')">Thursday's prep</button></div>
+      <div>
+        <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Family update · drafted</span></div>
+        <p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:14px">"Hi Miguel — good week overall. Dad's refill is handled and his cardiology visit is Thursday. Mom's been sleeping a little less, so I'm calling her today…"</p>
+        <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Edit &amp; send</button><button class="btn sm">Regenerate</button></div>
+      </div>
     </div>
 
+    <div class="seclabel"><span class="l">Quick actions</span></div>
+    <div class="quick">
+      <div class="qa" onclick="go('scan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg><b>Scan a label</b><span>Add meds from a photo</span></div>
+      <div class="qa" onclick="go('er')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><b>ER sheet</b><span>Grab-and-go one-pager</span></div>
+      <div class="qa" onclick="go('handoff')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><b>Handoff Pack</b><span>For a substitute caregiver</span></div>
+      <div class="qa" onclick="go('appts')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4"/></svg><b>Visit prep</b><span>Dr. Chen · Thursday</span></div>
+    </div>
+  </section>
+
+  <!-- ========== ROBERT ========== -->
+  <section class="view" id="v-robert">
+    <div class="phead"><h1>Robert Alvarez <span class="sub">· Dad · 81</span></h1>
+      <div class="chips"><span class="chip">Type 2 diabetes</span><span class="chip">Hypertension</span><span class="chip">AFib</span><span class="chip" style="border-color:#E6C4C1;color:var(--red)">Penicillin allergy</span></div>
+    </div>
     <div class="seg"><button class="on">Overview</button><button>Medications</button><button>Records</button><button>Visits</button></div>
-
-    <div class="grid vit" style="margin-bottom:16px">
-      <div class="card vcard"><div class="vh"><b>Resting heart rate</b><span class="delta up">▲ 6 bpm</span></div><div class="num">74 <small>bpm</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="ghr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9552F" stop-opacity=".25"/><stop offset="1" stop-color="#D9552F" stop-opacity="0"/></linearGradient></defs><path d="M0,26 20,25 40,27 60,24 80,25 100,22 120,21 140,19 160,17 180,15 200,13 V38 H0 Z" fill="url(#ghr)"/><path d="M0,26 20,25 40,27 60,24 80,25 100,22 120,21 140,19 160,17 180,15 200,13" fill="none" stroke="#D9552F" stroke-width="2" stroke-linecap="round"/></svg>
-        <div class="mini">14-day trend · Apple Watch</div></div>
-      <div class="card vcard"><div class="vh"><b>Sleep</b><span class="delta flat">- steady</span></div><div class="num">7.2 <small>h avg</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="gsl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E8E93" stop-opacity=".22"/><stop offset="1" stop-color="#8E8E93" stop-opacity="0"/></linearGradient></defs><path d="M0,18 25,20 50,15 75,19 100,16 125,20 150,17 175,18 200,16 V38 H0 Z" fill="url(#gsl)"/><path d="M0,18 25,20 50,15 75,19 100,16 125,20 150,17 175,18 200,16" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"/></svg>
-        <div class="mini">14-day trend</div></div>
-      <div class="card vcard"><div class="vh"><b>Steps</b><span class="delta down">▲ healthy</span></div><div class="num">3,240 <small>/day</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><g fill="#D6A254" opacity=".9"><rect x="2" y="20" width="10" height="18" rx="3"/><rect x="16" y="16" width="10" height="22" rx="3"/><rect x="30" y="22" width="10" height="16" rx="3"/><rect x="44" y="12" width="10" height="26" rx="3"/><rect x="58" y="18" width="10" height="20" rx="3"/><rect x="72" y="10" width="10" height="28" rx="3"/><rect x="86" y="14" width="10" height="24" rx="3"/><rect x="100" y="8" width="10" height="30" rx="3"/><rect x="114" y="16" width="10" height="22" rx="3"/><rect x="128" y="12" width="10" height="26" rx="3"/><rect x="142" y="18" width="10" height="20" rx="3"/><rect x="156" y="9" width="10" height="29" rx="3"/><rect x="170" y="13" width="10" height="25" rx="3"/><rect x="184" y="11" width="10" height="27" rx="3"/></g></svg>
-        <div class="mini">2-week daily steps</div></div>
-      <div class="card vcard"><div class="vh"><b>Weight</b><span class="delta flat">- stable</span></div><div class="num">182 <small>lb</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><path d="M0,20 30,20.5 60,19.8 90,20.2 120,19.6 150,20 180,19.7 200,19.9" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round"/></svg>
-        <div class="mini">Withings scale · weekly</div></div>
+    <div class="vitrow">
+      <div class="vit"><div class="vl">Resting heart rate</div><div class="vn">74 <small>bpm</small></div><div class="vd up">▲ 6 bpm · 2 wks</div></div>
+      <div class="vit"><div class="vl">Sleep</div><div class="vn">7.2 <small>h avg</small></div><div class="vd flat">— steady</div></div>
+      <div class="vit"><div class="vl">Steps</div><div class="vn">3,240 <small>/day</small></div><div class="vd down">▲ active</div></div>
+      <div class="vit"><div class="vl">Weight</div><div class="vn">182 <small>lb</small></div><div class="vd flat">— stable</div></div>
     </div>
 
-    <div class="grid" style="grid-template-columns:1.5fr 1fr">
-      <div class="card">
-        <div class="pad" style="padding-bottom:8px"><b style="font-size:15px">Medications · runway</b> <span class="mini">from pharmacy label facts · Dad logs nothing</span></div>
-        <table class="meds">
-          <tr>
-            <td><div class="row med-name"><span class="pill-ic" style="background:var(--red-soft)"><span class="cap" style="background:linear-gradient(90deg,#fff 50%,#FF9F0A 50%)"></span></span><div><b>Metformin 500 mg</b><span>1 tab, twice daily · CVS #2213</span></div></div></td>
-            <td><div class="runbar"><i style="width:13%;background:var(--red)"></i></div></td>
-            <td><span class="tag red">4 days</span></td>
-            <td><button class="btn sm primary">Refill</button></td>
-          </tr>
-          <tr>
-            <td><div class="row med-name"><span class="pill-ic" style="background:var(--orange-soft)"><span class="cap" style="background:linear-gradient(90deg,#FFD60A 50%,#fff 50%)"></span></span><div><b>Apixaban 5 mg <span class="tag red" style="margin-left:4px">high-alert</span></b><span>1 tab, twice daily · CVS #2213</span></div></div></td>
-            <td><div class="runbar"><i style="width:40%;background:var(--orange)"></i></div></td>
-            <td><span class="tag orange">12 days</span></td>
-            <td><button class="btn sm quiet">Remind</button></td>
-          </tr>
-          <tr>
-            <td><div class="row med-name"><span class="pill-ic" style="background:var(--green-soft)"><span class="cap" style="background:linear-gradient(90deg,#fff 50%,#0A84FF 50%)"></span></span><div><b>Lisinopril 10 mg</b><span>1 tab, daily · changed Jun 12</span></div></div></td>
-            <td><div class="runbar"><i style="width:60%;background:var(--green)"></i></div></td>
-            <td><span class="tag green">18 days</span></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><div class="row med-name"><span class="pill-ic" style="background:var(--green-soft)"><span class="cap" style="background:linear-gradient(90deg,#F2F2F7 50%,#8E8E93 50%)"></span></span><div><b>Atorvastatin 20 mg</b><span>1 tab, at bedtime</span></div></div></td>
-            <td><div class="runbar"><i style="width:83%;background:var(--green)"></i></div></td>
-            <td><span class="tag green">25 days</span></td>
-            <td></td>
-          </tr>
+    <div class="cols c2">
+      <div>
+        <div class="seclabel"><span class="l">Medications · runway</span><span class="m">from label facts — no logging</span></div>
+        <table class="tbl">
+          <tr><td class="mname"><b>Metformin 500 mg</b><span>1 tab, twice daily · CVS #2213</span></td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
+          <tr><td class="mname"><b>Apixaban 5 mg</b> <span style="color:var(--red)">· high-alert</span></td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td></td></tr>
+          <tr><td class="mname"><b>Lisinopril 10 mg</b><span>changed Jun 12</span></td><td><span class="rway"><i style="width:60%"></i></span></td><td><span class="days">18 days</span></td><td></td></tr>
+          <tr><td class="mname"><b>Atorvastatin 20 mg</b><span>at bedtime</span></td><td><span class="rway"><i style="width:83%"></i></span></td><td><span class="days">25 days</span></td><td></td></tr>
         </table>
-        <div class="pad" style="padding-top:10px"><div class="tag blue">💡 3 of Robert's meds can align to one pickup day · ask CVS about med-sync</div></div>
+        <div class="note"><b style="color:var(--ink)">Why Robert is flagged:</b> medication runway under 7 days with no pickup recorded. Metformin (filled Jun 29, 30-day supply) exhausts Thu Jul 16. You can override this if you've handled it.</div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="card pad">
-          <b style="font-size:15px">Recent records</b>
-          <div style="margin-top:8px">
-            <div class="doc"><span class="ic">PDF</span><div><b>Visit summary · Dr. Chen</b><div class="mini">Jun 12, 2026 · lisinopril 20→10 mg</div></div></div>
-            <div class="doc"><span class="ic">PDF</span><div><b>Discharge summary</b><div class="mini">May 3, 2026 · observation stay</div></div></div>
-            <div class="doc"><span class="ic">IMG</span><div><b>Insurance card</b><div class="mini">Medicare + supplemental</div></div></div>
-            <div class="doc"><span class="ic">DOC</span><div><b>Power of attorney</b><div class="mini">Maria Alvarez · kitchen drawer + vault</div></div></div>
-          </div>
-        </div>
-        <div class="card pad" style="background:linear-gradient(135deg,#FFF,#FFF6F5)">
-          <b style="font-size:15px">Why Robert is red</b>
-          <p class="mini" style="margin-top:6px;line-height:1.6">Rule: <b>medication runway &lt; 7 days with no pickup event.</b> Metformin fill (Jun 29, 30-day supply) exhausts Thu Jul 16. No CVS pickup recorded. <b>You can override this</b> if you've handled it.</p>
-          <div class="row" style="margin-top:10px;gap:8px"><button class="btn sm primary">Request refill</button><button class="btn sm quiet">Override · handled</button></div>
-        </div>
+      <div>
+        <div class="seclabel"><span class="l">Recent records</span></div>
+        <div class="doc"><span class="ic">PDF</span><div><b>Visit summary — Dr. Chen</b><div class="mini">Jun 12 · lisinopril 20→10 mg</div></div></div>
+        <div class="doc"><span class="ic">PDF</span><div><b>Discharge summary</b><div class="mini">May 3 · observation stay</div></div></div>
+        <div class="doc"><span class="ic">IMG</span><div><b>Insurance card</b><div class="mini">Medicare + supplemental</div></div></div>
+        <div class="doc"><span class="ic">DOC</span><div><b>Power of attorney</b><div class="mini">Maria Alvarez</div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ========== MEDS INVENTORY ========== -->
+  <!-- ========== MEDS ========== -->
   <section class="view" id="v-meds">
-    <h1 class="page">Medications</h1>
-    <p class="sub">Every runway across your care circle · computed from fill date + day-supply. Nobody has to log a dose.</p>
-    <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
-      <div class="card pad row" style="gap:14px"><div class="ring"><svg width="52" height="52"><circle cx="26" cy="26" r="21" stroke="rgba(0,0,0,.06)" stroke-width="6" fill="none"/><circle cx="26" cy="26" r="21" stroke="#FF3B30" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="115"/></svg><span class="num">1</span></div><div><b>Act now</b><div class="mini">Metformin · 4 days, no pickup</div></div></div>
-      <div class="card pad row" style="gap:14px"><div class="ring"><svg width="52" height="52"><circle cx="26" cy="26" r="21" stroke="rgba(0,0,0,.06)" stroke-width="6" fill="none"/><circle cx="26" cy="26" r="21" stroke="#FF9500" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="88"/></svg><span class="num">2</span></div><div><b>Refill soon</b><div class="mini">Apixaban 12d · Sertraline 12d</div></div></div>
-      <div class="card pad row" style="gap:14px"><div class="ring"><svg width="52" height="52"><circle cx="26" cy="26" r="21" stroke="rgba(0,0,0,.06)" stroke-width="6" fill="none"/><circle cx="26" cy="26" r="21" stroke="#34C759" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="22"/></svg><span class="num">5</span></div><div><b>On track</b><div class="mini">18–34 day runways</div></div></div>
-    </div>
-
-    <div class="card">
-      <table class="meds">
-        <tr><th>Person</th><th>Medication</th><th>Schedule</th><th>Runway</th><th></th><th style="text-align:right">Action</th></tr>
-        <tr><td><div class="row"><span class="av g2" style="width:26px;height:26px;font-size:9px">RA</span>Robert</div></td>
-          <td class="med-name"><b>Metformin 500 mg</b><span>filled Jun 29 · 30-day supply</span></td><td>2× daily</td>
-          <td><div class="runbar"><i style="width:13%;background:var(--red)"></i></div></td><td><span class="tag red">4 days</span></td>
-          <td style="text-align:right"><button class="btn sm primary">Refill</button></td></tr>
-        <tr><td><div class="row"><span class="av g2" style="width:26px;height:26px;font-size:9px">RA</span>Robert</div></td>
-          <td class="med-name"><b>Apixaban 5 mg</b> <span class="tag red">high-alert</span></td><td>2× daily</td>
-          <td><div class="runbar"><i style="width:40%;background:var(--orange)"></i></div></td><td><span class="tag orange">12 days</span></td>
-          <td style="text-align:right"><button class="btn sm quiet">Remind me</button></td></tr>
-        <tr><td><div class="row"><span class="av g1" style="width:26px;height:26px;font-size:9px">EA</span>Eleanor</div></td>
-          <td class="med-name"><b>Sertraline 50 mg</b><span>filled Jun 23 · 30-day supply</span></td><td>1× morning</td>
-          <td><div class="runbar"><i style="width:40%;background:var(--orange)"></i></div></td><td><span class="tag orange">12 days</span></td>
-          <td style="text-align:right"><button class="btn sm quiet">Remind me</button></td></tr>
-        <tr><td><div class="row"><span class="av g1" style="width:26px;height:26px;font-size:9px">EA</span>Eleanor</div></td>
-          <td class="med-name"><b>Donepezil 10 mg</b><span>filled Jul 2 · 30-day supply</span></td><td>1× bedtime</td>
-          <td><div class="runbar"><i style="width:70%;background:var(--green)"></i></div></td><td><span class="tag green">21 days</span></td><td></td></tr>
-        <tr><td><div class="row"><span class="av g2" style="width:26px;height:26px;font-size:9px">RA</span>Robert</div></td>
-          <td class="med-name"><b>Lisinopril 10 mg</b><span>dose changed Jun 12 → new fill record</span></td><td>1× daily</td>
-          <td><div class="runbar"><i style="width:60%;background:var(--green)"></i></div></td><td><span class="tag green">18 days</span></td><td></td></tr>
-        <tr><td><div class="row"><span class="av g2" style="width:26px;height:26px;font-size:9px">RA</span>Robert</div></td>
-          <td class="med-name"><b>Atorvastatin 20 mg</b></td><td>1× bedtime</td>
-          <td><div class="runbar"><i style="width:83%;background:var(--green)"></i></div></td><td><span class="tag green">25 days</span></td><td></td></tr>
-        <tr><td><div class="row"><span class="av g3" style="width:26px;height:26px;font-size:9px">RM</span>Rosa</div></td>
-          <td class="med-name"><b>Levothyroxine 75 mcg</b></td><td>1× fasting</td>
-          <td><div class="runbar"><i style="width:100%;background:var(--green)"></i></div></td><td><span class="tag green">32 days</span></td><td></td></tr>
-        <tr><td><div class="row"><span class="av g3" style="width:26px;height:26px;font-size:9px">RM</span>Rosa</div></td>
-          <td class="med-name"><b>Ibuprofen 200 mg</b><span>as-needed</span></td><td>PRN</td>
-          <td><span class="mini">no forecast · as-needed</span></td><td><span class="tag gray">PRN</span></td><td></td></tr>
-      </table>
-    </div>
-    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:16px">
-      <div class="card pad" style="background:linear-gradient(135deg,#FFF,#FFF6EF)">
-        <b style="font-size:15px">💊 Med-sync opportunity</b>
-        <p class="mini" style="margin-top:6px;line-height:1.6">Robert's apixaban, lisinopril &amp; atorvastatin can align to <b>one pickup day (the 28th)</b> at CVS #2213. One trip instead of three. Hearth drafted the ask.</p>
-        <button class="btn sm tint" style="margin-top:10px">View the drafted request</button>
-      </div>
-      <div class="card pad">
-        <b style="font-size:15px">How runways work</b>
-        <p class="mini" style="margin-top:6px;line-height:1.6">Runway = fill date + day-supply − days elapsed. It's printed on every label, so it works even if nobody ever logs a dose. Self-reported "taken" events are shown separately and labeled. <b>Every alert explains its rule, and you can override it.</b></p>
-      </div>
-    </div>
+    <h1 class="greet" style="font-size:34px">Medications</h1>
+    <p class="subline" style="font-size:15px">Every runway across your care circle — computed from fill date and day-supply. Nobody logs a dose.</p>
+    <table class="tbl" style="margin-top:26px">
+      <tr><th>Person</th><th>Medication</th><th>Schedule</th><th>Runway</th><th></th><th></th></tr>
+      <tr><td>Robert</td><td class="mname"><b>Metformin 500 mg</b><span>filled Jun 29 · 30-day supply</span></td><td>2× daily</td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
+      <tr><td>Robert</td><td class="mname"><b>Apixaban 5 mg</b> <span style="color:var(--red)">· high-alert</span></td><td>2× daily</td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td style="text-align:right"><button class="btn sm">Remind</button></td></tr>
+      <tr><td>Eleanor</td><td class="mname"><b>Sertraline 50 mg</b><span>filled Jun 23</span></td><td>morning</td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td style="text-align:right"><button class="btn sm">Remind</button></td></tr>
+      <tr><td>Eleanor</td><td class="mname"><b>Donepezil 10 mg</b><span>filled Jul 2</span></td><td>bedtime</td><td><span class="rway"><i style="width:70%"></i></span></td><td><span class="days">21 days</span></td><td></td></tr>
+      <tr><td>Robert</td><td class="mname"><b>Lisinopril 10 mg</b><span>dose changed Jun 12</span></td><td>daily</td><td><span class="rway"><i style="width:60%"></i></span></td><td><span class="days">18 days</span></td><td></td></tr>
+      <tr><td>Robert</td><td class="mname"><b>Atorvastatin 20 mg</b></td><td>bedtime</td><td><span class="rway"><i style="width:83%"></i></span></td><td><span class="days">25 days</span></td><td></td></tr>
+      <tr><td>Rosa</td><td class="mname"><b>Levothyroxine 75 mcg</b></td><td>fasting</td><td><span class="rway"><i class="green" style="width:100%"></i></span></td><td><span class="days green">32 days</span></td><td></td></tr>
+      <tr><td>Rosa</td><td class="mname"><b>Ibuprofen 200 mg</b><span>as-needed</span></td><td>PRN</td><td><span class="mini">no forecast</span></td><td><span class="mini">PRN</span></td><td></td></tr>
+    </table>
+    <div class="note"><b style="color:var(--ink)">Med-sync opportunity —</b> Robert's apixaban, lisinopril and atorvastatin can align to one pickup day (the 28th) at CVS #2213. One trip instead of three. Hearth drafted the request. <button class="btn sm" style="margin-left:8px">View draft</button></div>
   </section>
 
   <!-- ========== SCAN ========== -->
   <section class="view" id="v-scan">
-    <h1 class="page">Scan &amp; confirm</h1>
-    <p class="sub">Point the camera at the bottle. Hearth reads the label live · <b>you confirm every field beside the exact crop it was read from.</b> Nothing saves itself.</p>
-    <div class="grid scanwrap">
-      <div>
-        <div class="scene3">
-          <div class="vf"><i></i><i></i><i></i><i></i></div>
-          <div class="scanchip"><span class="pulse"></span>SCANNING LABEL…</div>
-          <div class="bwrap">
-            <div class="beam"></div>
-            <!-- detection overlays -->
-            <div class="detect" style="top:46.5%;left:27%;width:47%;height:4.6%"><span class="dtag">PATIENT ✓</span></div>
-            <div class="detect" style="top:52.5%;left:27%;width:50%;height:5.5%"><span class="dtag b">DRUG NAME ✓</span></div>
-            <div class="detect" style="top:68.5%;left:27%;width:24%;height:4.5%"><span class="dtag">FILL DATE ✓</span></div>
-            <div class="detect warn2" style="top:75%;left:27%;width:27%;height:4.5%"><span class="dtag b">DAY SUPPLY ⚠</span></div>
-            <!-- the bottle -->
-            <svg viewBox="0 0 320 430" width="300" style="display:block">
-              <defs>
-                <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="#B26E0F"/><stop offset=".18" stop-color="#E89A22"/>
-                  <stop offset=".5" stop-color="#F5B449"/><stop offset=".82" stop-color="#DE8F1B"/>
-                  <stop offset="1" stop-color="#A5650C"/>
-                </linearGradient>
-                <linearGradient id="capg" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="#C9C9CF"/><stop offset=".2" stop-color="#FAFAFC"/>
-                  <stop offset=".5" stop-color="#E8E8EC"/><stop offset=".8" stop-color="#F5F5F8"/>
-                  <stop offset="1" stop-color="#BFBFC6"/>
-                </linearGradient>
-                <linearGradient id="lshade" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset=".12" stop-color="#000" stop-opacity="0"/>
-                  <stop offset=".88" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/>
-                </linearGradient>
-              </defs>
-              <!-- ground shadow -->
-              <ellipse cx="160" cy="408" rx="112" ry="14" fill="#000" opacity=".35"/>
-              <!-- cap -->
-              <rect x="96" y="26" width="128" height="46" rx="10" fill="url(#capg)"/>
-              <g stroke="#A9A9B2" stroke-width="1.6" opacity=".7">
-                <line x1="108" y1="30" x2="108" y2="68"/><line x1="124" y1="28" x2="124" y2="70"/>
-                <line x1="140" y1="27" x2="140" y2="71"/><line x1="160" y1="26.5" x2="160" y2="71.5"/>
-                <line x1="180" y1="27" x2="180" y2="71"/><line x1="196" y1="28" x2="196" y2="70"/>
-                <line x1="212" y1="30" x2="212" y2="68"/>
-              </g>
-              <rect x="96" y="62" width="128" height="8" rx="4" fill="#9C9CA4" opacity=".55"/>
-              <!-- neck -->
-              <rect x="106" y="70" width="108" height="16" fill="#C58312"/>
-              <!-- body -->
-              <rect x="92" y="84" width="136" height="312" rx="16" fill="url(#amber)"/>
-              <!-- shoulder highlight -->
-              <rect x="102" y="90" width="18" height="296" rx="9" fill="#FFF" opacity=".28"/>
-              <rect x="204" y="92" width="8" height="292" rx="4" fill="#FFF" opacity=".14"/>
-              <!-- pills seen through plastic -->
-              <g fill="#FFFDF4" opacity=".5">
-                <ellipse cx="128" cy="118" rx="15" ry="9" transform="rotate(-18 128 118)"/>
-                <ellipse cx="162" cy="126" rx="15" ry="9" transform="rotate(12 162 126)"/>
-                <ellipse cx="192" cy="115" rx="14" ry="8.5" transform="rotate(-30 192 115)"/>
-                <ellipse cx="146" cy="140" rx="14" ry="8.5" transform="rotate(24 146 140)"/>
-              </g>
-              <!-- label -->
-              <g>
-                <rect x="86" y="160" width="148" height="200" rx="5" fill="#FDFDF8"/>
-                <rect x="86" y="160" width="148" height="200" rx="5" fill="url(#lshade)"/>
-                <rect x="86" y="160" width="148" height="26" rx="5" fill="#CC0000"/>
-                <text x="94" y="177" font-family="-apple-system,Helvetica" font-size="12" font-weight="800" fill="#FFF">CVS pharmacy</text>
-                <text x="185" y="177" font-family="-apple-system,Helvetica" font-size="7.5" fill="#FFD9D9">#2213</text>
-                <text x="94" y="199" font-family="Menlo,monospace" font-size="7.5" fill="#666">RX# 8841207-06 · DR. S. CHEN</text>
-                <text x="94" y="214" font-family="Menlo,monospace" font-size="9" font-weight="700" fill="#111">ALVAREZ, ROBERT M</text>
-                <text x="94" y="226" font-family="Menlo,monospace" font-size="7.5" fill="#444">DOB 02/14/1945</text>
-                <rect x="91" y="233" width="140" height="15" fill="#FFF3B8"/>
-                <text x="94" y="244" font-family="Menlo,monospace" font-size="9.5" font-weight="800" fill="#111">METFORMIN HCL 500MG</text>
-                <text x="94" y="262" font-family="Menlo,monospace" font-size="7.8" fill="#222">TAKE ONE TABLET BY MOUTH</text>
-                <text x="94" y="273" font-family="Menlo,monospace" font-size="7.8" fill="#222">TWICE DAILY WITH MEALS</text>
-                <line x1="94" y1="283" x2="226" y2="283" stroke="#DDD" stroke-width="1"/>
-                <text x="94" y="298" font-family="Menlo,monospace" font-size="7.6" fill="#333">QTY: 60      REFILLS: 2</text>
-                <text x="94" y="312" font-family="Menlo,monospace" font-size="7.6" fill="#333">FILLED: 06/29/26</text>
-                <text x="94" y="326" font-family="Menlo,monospace" font-size="7.6" fill="#333">DAY SUPPLY: 30</text>
-                <text x="94" y="343" font-family="Menlo,monospace" font-size="6.8" fill="#888">NDC 00093-1048-01 · USE BY 06/29/27</text>
-                <!-- refill sticker overlapping day-supply -->
-                <g transform="rotate(-4 205 322)">
-                  <rect x="178" y="312" width="58" height="24" fill="#FFFDF2" stroke="#E0A030" stroke-dasharray="3 2"/>
-                  <text x="184" y="322" font-family="Menlo,monospace" font-size="5.6" fill="#8A6210">REFILL STICKER</text>
-                  <text x="184" y="330" font-family="Menlo,monospace" font-size="5.6" fill="#8A6210">OVERLAP ⚠</text>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div class="scenecap">Live capture · 2:38 PM · processed on a private, zero-retention endpoint · photo never leaves your vault</div>
+    <h1 class="greet" style="font-size:34px">Scan &amp; confirm</h1>
+    <p class="subline" style="font-size:15px">Point the camera at the bottle. Hearth reads the label; you confirm every field beside the exact crop it was read from. Nothing saves itself.</p>
+    <div class="scanwrap">
+      <div class="viewer">
+        <div class="vf"><i></i><i></i><i></i><i></i></div>
+        <div class="scanchip"><span class="p"></span>SCANNING LABEL</div>
+        <div class="bwrap">
+          <div class="beam"></div>
+          <div class="det" style="top:46%;left:26%;width:48%;height:4.6%"><span class="t">PATIENT ✓</span></div>
+          <div class="det" style="top:52.5%;left:26%;width:50%;height:5.5%"><span class="t b">DRUG NAME ✓</span></div>
+          <div class="det" style="top:68.5%;left:26%;width:24%;height:4.5%"><span class="t">FILL DATE ✓</span></div>
+          <div class="det warn" style="top:75%;left:26%;width:27%;height:4.5%"><span class="t b">DAY SUPPLY ⚠</span></div>
+          <svg viewBox="0 0 320 430" width="250" style="display:block">
+            <defs><linearGradient id="am" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B98A3A"/><stop offset=".2" stop-color="#E0A94E"/><stop offset=".5" stop-color="#EDBE6A"/><stop offset=".82" stop-color="#DA9F42"/><stop offset="1" stop-color="#AE7E30"/></linearGradient>
+            <linearGradient id="cp" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D2D2D7"/><stop offset=".3" stop-color="#F7F7F9"/><stop offset=".7" stop-color="#E8E8EC"/><stop offset="1" stop-color="#C7C7CD"/></linearGradient></defs>
+            <ellipse cx="160" cy="410" rx="104" ry="12" fill="#000" opacity=".08"/>
+            <rect x="98" y="28" width="124" height="44" rx="9" fill="url(#cp)"/>
+            <rect x="106" y="70" width="108" height="16" fill="#C79A48"/>
+            <rect x="92" y="84" width="136" height="312" rx="15" fill="url(#am)"/>
+            <rect x="102" y="90" width="16" height="296" rx="8" fill="#FFF" opacity=".22"/>
+            <g fill="#FFFDF4" opacity=".45"><ellipse cx="128" cy="120" rx="14" ry="8" transform="rotate(-18 128 120)"/><ellipse cx="162" cy="128" rx="14" ry="8" transform="rotate(12 162 128)"/><ellipse cx="192" cy="116" rx="13" ry="8" transform="rotate(-30 192 116)"/></g>
+            <rect x="88" y="162" width="144" height="196" rx="5" fill="#FDFDFB"/>
+            <rect x="88" y="162" width="144" height="22" rx="5" fill="#1D1D1F"/>
+            <text x="96" y="177" font-family="-apple-system,Helvetica" font-size="11" font-weight="800" fill="#FFF">CVS pharmacy</text>
+            <text x="96" y="199" font-family="Menlo,monospace" font-size="7.5" fill="#666">RX# 8841207-06 · DR. S. CHEN</text>
+            <text x="96" y="213" font-family="Menlo,monospace" font-size="8.5" font-weight="700" fill="#111">ALVAREZ, ROBERT M</text>
+            <text x="96" y="224" font-family="Menlo,monospace" font-size="7" fill="#555">DOB 02/14/1945</text>
+            <rect x="93" y="231" width="138" height="14" fill="#F0EAD6"/>
+            <text x="96" y="242" font-family="Menlo,monospace" font-size="9" font-weight="800" fill="#111">METFORMIN HCL 500MG</text>
+            <text x="96" y="259" font-family="Menlo,monospace" font-size="7.4" fill="#222">TAKE ONE TABLET BY MOUTH</text>
+            <text x="96" y="270" font-family="Menlo,monospace" font-size="7.4" fill="#222">TWICE DAILY WITH MEALS</text>
+            <line x1="96" y1="280" x2="224" y2="280" stroke="#E5E5E5"/>
+            <text x="96" y="295" font-family="Menlo,monospace" font-size="7.2" fill="#333">FILLED: 06/29/26</text>
+            <text x="96" y="309" font-family="Menlo,monospace" font-size="7.2" fill="#333">DAY SUPPLY: 30</text>
+            <g transform="rotate(-4 200 318)"><rect x="176" y="308" width="56" height="22" fill="#FBF6EE" stroke="#C79A48" stroke-dasharray="3 2"/><text x="182" y="318" font-family="Menlo,monospace" font-size="5.4" fill="#8A6210">REFILL STICKER</text><text x="182" y="326" font-family="Menlo,monospace" font-size="5.4" fill="#8A6210">OVERLAP</text></g>
+          </svg>
         </div>
+        <div class="mini" style="text-align:center;margin-top:8px">Processed on a private, zero-retention endpoint · the photo never leaves your vault</div>
       </div>
       <div>
-        <div class="pipe">
-          <span class="pstep done">✓ Photo captured</span>
-          <span class="pstep done">✓ Label found</span>
-          <span class="pstep now"><span class="spin"></span>Extracting fields… 4 of 5</span>
-          <span class="pstep">RxNorm check</span>
-        </div>
-        <div class="field ok"><div class="crop">METFORMIN HCL 500MG</div><div class="fk"><b>Drug name</b><div class="val">Metformin HCl 500 mg</div><div class="chk" style="color:#248A3D">✓ RxNorm match · 860975</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-        <div class="field ok"><div class="crop">ALVAREZ, ROBERT M</div><div class="fk"><b>Patient</b><div class="val">Robert Alvarez</div><div class="chk" style="color:#248A3D">✓ Matches the open profile</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-        <div class="field ok"><div class="crop">FILLED: 06/29/26</div><div class="fk"><b>Fill date</b><div class="val">June 29, 2026</div><div class="chk" style="color:#248A3D">✓ Confirmed</div></div><span class="confirm-ic ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
-        <div class="field"><div class="crop skel">TAKE ONE TABLET…TW</div><div class="fk"><b>Schedule</b><div class="val skel" style="width:180px">1 tablet · 2× daily</div><div class="chk" style="color:var(--ink3)"><span class="spin" style="display:inline-block;vertical-align:-2px;margin-right:5px"></span>Reading sig…</div></div></div>
-        <div class="field warn"><div class="crop">DAY SUPPLY: 3<span style="background:#FFE9B8">0?</span></div><div class="fk"><b>Day supply</b><div class="val">30 days · <span style="color:#C93400">verify</span></div><div class="chk" style="color:#C93400">⚠ Refill sticker overlaps this field · please check the bottle</div></div><span class="confirm-ic warn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/></svg></span></div>
-
-        <div class="addrow">
-          <span class="pill-ic" style="background:var(--blue-soft)"><span class="cap" style="background:linear-gradient(90deg,#fff 50%,#FF9F0A 50%)"></span></span>
-          <div style="flex:1"><b style="font-size:13.5px">Joining Robert's medication list…</b>
-            <div class="runmath">runway = Jun 29 fill + 30-day supply − 26 days elapsed = <b style="color:#D70015">4 days left</b></div></div>
-          <span class="spin"></span>
-        </div>
-        <div class="row" style="margin-top:14px;gap:10px">
-          <button class="btn primary" disabled style="opacity:.45">Save medication · 2 fields pending</button>
-          <button class="btn quiet">Retake photo</button>
-        </div>
-        <p class="mini" style="margin-top:12px">High-alert medications (insulin, blood thinners, opioids) always require field-by-field confirmation. A name mismatch blocks saving entirely. Nothing is ever auto-saved.</p>
+        <div class="pipe"><span class="pstep done">✓ Photo captured</span><span class="pstep done">✓ Label found</span><span class="pstep now"><span class="spin"></span>Extracting · 4 of 5</span><span class="pstep">RxNorm check</span></div>
+        <div class="field"><div class="crop">METFORMIN HCL 500MG</div><div class="fk"><div class="k">Drug name</div><div class="val">Metformin HCl 500 mg</div><div class="chk" style="color:var(--green)">✓ RxNorm match · 860975</div></div><span class="st ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+        <div class="field"><div class="crop">ALVAREZ, ROBERT M</div><div class="fk"><div class="k">Patient</div><div class="val">Robert Alvarez</div><div class="chk" style="color:var(--green)">✓ Matches the open profile</div></div><span class="st ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+        <div class="field"><div class="crop">FILLED: 06/29/26</div><div class="fk"><div class="k">Fill date</div><div class="val">June 29, 2026</div><div class="chk" style="color:var(--green)">✓ Confirmed</div></div><span class="st ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+        <div class="field"><div class="crop skel">TAKE ONE TABLET…</div><div class="fk"><div class="k">Schedule</div><div class="val skel" style="width:170px">1 tablet · twice daily</div><div class="chk mini"><span class="spin" style="display:inline-block;vertical-align:-2px;margin-right:5px"></span>Reading sig…</div></div></div>
+        <div class="field"><div class="crop">DAY SUPPLY: 30?</div><div class="fk"><div class="k">Day supply</div><div class="val">30 days — <span style="color:var(--amber)">verify</span></div><div class="chk" style="color:var(--amber)">⚠ Refill sticker overlaps this field — check the bottle</div></div><span class="st warn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/></svg></span></div>
+        <div style="margin-top:16px;display:flex;gap:10px"><button class="btn dark" disabled style="opacity:.4">Save medication — 2 fields pending</button><button class="btn">Retake photo</button></div>
+        <p class="mini" style="margin-top:12px">High-alert medications always require field-by-field confirmation. A name mismatch blocks saving entirely.</p>
       </div>
     </div>
   </section>
 
-  <!-- ========== ER SHEET ========== -->
+  <!-- ========== ER ========== -->
   <section class="view" id="v-er">
-    <h1 class="page">ER sheet</h1>
-    <p class="sub">The grab-and-go one-pager · a résumé for Robert's care. Always generated fresh from live data, never stale.</p>
+    <h1 class="greet" style="font-size:34px">ER sheet</h1>
+    <p class="subline" style="font-size:15px">The grab-and-go one-pager — a résumé for Robert's care. Generated fresh from live data, never stale.</p>
     <div class="ersheet">
-      <div class="erhead">
-        <div class="cross"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div style="flex:1"><h2>Robert Alvarez</h2><p>DOB Feb 14, 1945 (81) · 182 lb · Medicare #●●●–4417 + supplemental</p></div>
-        <button class="btn sm" style="background:rgba(255,255,255,.22);color:#fff">Print</button>
-      </div>
+      <div class="erhead"><div><h2>Robert Alvarez</h2><div class="sub">DOB Feb 14, 1945 (81) · 182 lb · Medicare + supplemental</div></div><button class="btn sm">Print</button></div>
       <div class="erbody">
-        <div class="alert-band"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D70015" stroke-width="2.4" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/><path d="M10.3 3.8 2.6 17a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z" stroke-linejoin="round"/></svg>ALLERGY: Penicillin (anaphylaxis) &nbsp;·&nbsp; ON BLOOD THINNER: apixaban</div>
+        <div class="erband"><span class="dot red"></span>ALLERGY: Penicillin (anaphylaxis) · ON BLOOD THINNER: apixaban</div>
         <div class="ergrid">
-          <div class="erblock"><h5>Current medications</h5>
-            <li><b>Metformin 500 mg</b><span>2× daily</span></li>
-            <li><b>Apixaban 5 mg ⚠</b><span>2× daily</span></li>
-            <li><b>Lisinopril 10 mg</b><span>1× daily · changed Jun 12</span></li>
-            <li><b>Atorvastatin 20 mg</b><span>bedtime</span></li>
-          </div>
-          <div class="erblock"><h5>Conditions</h5>
-            <li>Type 2 diabetes <span>2011</span></li>
-            <li>Atrial fibrillation <span>2022</span></li>
-            <li>Hypertension <span>2008</span></li>
-          </div>
-          <div class="erblock"><h5>Emergency contacts</h5>
-            <li><b>Maria Alvarez</b> · daughter, POA <span>(415) 555-0182</span></li>
-            <li><b>Miguel Alvarez</b> · son <span>(628) 555-0136</span></li>
-            <li><b>Dr. S. Chen</b> · cardiology <span>(415) 555-0224</span></li>
-          </div>
-          <div class="erblock"><h5>Key facts</h5>
-            <li>POA &amp; advance directive <span>with Maria + Hearth vault</span></li>
-            <li>Pharmacy <span>CVS #2213 · (415) 555-0119</span></li>
-            <li>Primary care <span>Dr. N. Okafor · SF Health</span></li>
-            <li>Preferred hospital <span>UCSF Medical Center</span></li>
-          </div>
+          <div class="erb"><h5>Current medications</h5><li><b>Metformin 500 mg</b><span>2× daily</span></li><li><b>Apixaban 5 mg</b><span>2× daily</span></li><li><b>Lisinopril 10 mg</b><span>daily</span></li><li><b>Atorvastatin 20 mg</b><span>bedtime</span></li></div>
+          <div class="erb"><h5>Conditions</h5><li>Type 2 diabetes<span>2011</span></li><li>Atrial fibrillation<span>2022</span></li><li>Hypertension<span>2008</span></li></div>
+          <div class="erb"><h5>Emergency contacts</h5><li><b>Maria Alvarez</b> · daughter, POA<span>(415) 555-0182</span></li><li><b>Miguel Alvarez</b> · son<span>(628) 555-0136</span></li><li><b>Dr. S. Chen</b> · cardiology<span>(415) 555-0224</span></li></div>
+          <div class="erb"><h5>Key facts</h5><li>POA &amp; directive<span>with Maria + vault</span></li><li>Pharmacy<span>CVS #2213</span></li><li>Primary care<span>Dr. N. Okafor</span></li><li>Preferred hospital<span>UCSF Medical</span></li></div>
         </div>
       </div>
-      <div class="erfoot"><span>Generated by <b>Hearth</b> · always current from live data</span><span>Sat, Jul 11, 2026 · 2:41 PM</span></div>
+      <div class="erfoot"><span>Generated by Hearth · always current</span><span>Sat, Jul 11, 2026 · 2:41 PM</span></div>
     </div>
   </section>
 
   <!-- ========== HANDOFF ========== -->
   <section class="view" id="v-handoff">
-    <h1 class="page">Handoff Pack · Eleanor</h1>
-    <p class="sub">Everything a substitute caregiver needs to step in tomorrow. <b>The binder writes itself</b> · generated live, never stale.</p>
-    <div class="grid" style="grid-template-columns:1.5fr 1fr">
-      <div class="card pad">
-        <div class="hsec"><h5>🌅 Daily rhythm</h5>
-          <div class="hitem"><span class="em">☕</span><div><b>7:30 · wakes early, tea before pills.</b><span class="mini">Won't take morning meds before her tea. Two sugars.</span></div></div>
-          <div class="hitem"><span class="em">😴</span><div><b>2:00 · short nap in the sunroom chair.</b><span class="mini">Not the bedroom; she likes the light.</span></div></div>
-          <div class="hitem"><span class="em">🌆</span><div><b>After 6 PM · can get anxious (sundowning).</b><span class="mini">Old Tamil songs help. Playlist is on the kitchen iPad, called "Amma."</span></div></div>
-        </div>
-        <div class="hsec"><h5>💊 Medications</h5>
-          <div class="hitem"><span class="em pillrow"><span class="cap" style="background:linear-gradient(90deg,#fff 50%,#AF52DE 50%)"></span></span><div><b>Donepezil 10 mg · the purple-white one, bedtime.</b><span class="mini">With a full glass of water.</span></div></div>
-          <div class="hitem"><span class="em pillrow"><span class="cap" style="background:linear-gradient(90deg,#0A84FF 50%,#fff 50%)"></span></span><div><b>Sertraline 50 mg · the blue one, with breakfast.</b><span class="mini">After tea, or she'll refuse it.</span></div></div>
-        </div>
-        <div class="hsec"><h5>🚨 If something happens</h5>
-          <div class="hitem"><span class="em">😟</span><div><b>If agitated:</b> dim the lights, put on the playlist, sit with her. <span class="mini">Do not correct or argue · redirect to the photo album.</span></div></div>
-          <div class="hitem"><span class="em">🚪</span><div><b>If she wanders:</b> check the garden first, then Joan's porch next door.</div></div>
-          <div class="hitem"><span class="em">📞</span><div><b>Emergencies: 911, then Maria</b> (415) 555-0182. Dr. Patel (neurology): (415) 555-0287.</div></div>
-        </div>
-        <div class="hsec"><h5>🗝️ Where things are</h5>
-          <div class="hitem"><span class="em">📁</span><div><b>POA + insurance folder:</b> kitchen drawer, left of stove (also in Hearth vault).</div></div>
-          <div class="hitem"><span class="em">🔑</span><div><b>Spare key:</b> Joan next door (blue house) has one.</div></div>
-        </div>
+    <h1 class="greet" style="font-size:34px">Handoff Pack — Eleanor</h1>
+    <p class="subline" style="font-size:15px">Everything a substitute caregiver needs to step in tomorrow. The binder writes itself — generated live, never stale.</p>
+    <div class="cols c2">
+      <div>
+        <div class="seclabel"><span class="l">Daily rhythm</span></div>
+        <div class="hitem"><span class="em">Morning</span><div><b>7:30 — wakes early, tea before pills.</b><div class="mini">Won't take morning meds before her tea. Two sugars.</div></div></div>
+        <div class="hitem"><span class="em">Afternoon</span><div><b>2:00 — short nap in the sunroom chair.</b><div class="mini">Not the bedroom; she likes the light.</div></div></div>
+        <div class="hitem"><span class="em">Evening</span><div><b>After 6 PM — can get anxious (sundowning).</b><div class="mini">Old Tamil songs help. Playlist "Amma" is on the kitchen iPad.</div></div></div>
+        <div class="seclabel"><span class="l">Medications</span></div>
+        <div class="hitem"><span class="em">Bedtime</span><div><b>Donepezil 10 mg — the purple-white one.</b><div class="mini">With a full glass of water.</div></div></div>
+        <div class="hitem"><span class="em">Breakfast</span><div><b>Sertraline 50 mg — the blue one.</b><div class="mini">After tea, or she'll refuse it.</div></div></div>
+        <div class="seclabel"><span class="l">If something happens</span></div>
+        <div class="hitem"><span class="em">Agitated</span><div>Dim the lights, put on the playlist, sit with her. <span class="mini">Don't correct — redirect to the photo album.</span></div></div>
+        <div class="hitem"><span class="em">Wanders</span><div>Check the garden first, then Joan's porch next door.</div></div>
+        <div class="hitem"><span class="em">Emergency</span><div>911, then Maria (415) 555-0182. Dr. Patel (neurology) (415) 555-0287.</div></div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="card pad respite">
-          <div class="row" style="justify-content:space-between"><b style="font-size:15px">Respite mode</b><span class="switch"></span></div>
-          <div class="hr"></div>
-          <div class="row" style="gap:12px"><span class="av g1" style="width:38px;height:38px;font-size:13px">DA</span><div><b>Dana Alvarez</b> has read-only access<div class="mini">Handoff Pack · schedule · this week's duty calendar</div></div></div>
-          <div class="tag purple" style="margin-top:12px">⏳ Expires automatically Mon 8:00 AM</div>
-          <p class="mini" style="margin-top:10px">Eleanor was notified. Every view Dana makes is in the access log.</p>
-        </div>
-        <div class="card pad">
-          <b style="font-size:15px">Export</b>
-          <p class="mini" style="margin:6px 0 12px">A clean PDF for a paper person, or a link that expires.</p>
-          <div class="row" style="gap:8px"><button class="btn sm primary">Download PDF</button><button class="btn sm quiet">Share expiring link</button></div>
-        </div>
-        <div class="card pad">
-          <b style="font-size:15px">Eleanor can see all of this</b>
-          <p class="mini" style="margin-top:6px;line-height:1.6">She has a printed page of what's shared and a phone number to change or stop it. Her "don't share my weight" choice is honored everywhere · including here.</p>
-        </div>
+      <div>
+        <div class="seclabel"><span class="l">Respite mode</span></div>
+        <div class="toggle" style="margin-top:14px"><div><b>Dana Alvarez</b> has read-only access<div class="mini">Handoff Pack · schedule · duty calendar</div></div><span class="sw"></span></div>
+        <div class="note" style="border:none;padding-top:12px;margin-top:12px"><b style="color:var(--ink)">Expires automatically Mon 8:00 AM.</b> Eleanor was notified. Every view Dana makes is in the access log.</div>
+        <div class="seclabel"><span class="l">Export</span></div>
+        <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Download PDF</button><button class="btn sm">Share expiring link</button></div>
+        <div class="note"><b style="color:var(--ink)">Eleanor controls all of this.</b> She has a printed page of what's shared and a phone number to change or stop it. Her "don't share my weight" choice is honored everywhere.</div>
       </div>
     </div>
   </section>
 
-  <!-- ========== APPOINTMENTS ========== -->
+  <!-- ========== APPTS ========== -->
   <section class="view" id="v-appts">
-    <h1 class="page">Appointments</h1>
-    <p class="sub">The Appointment Kit · tracked visits, an auto-drafted prep sheet, a call script, and 30-second post-visit capture.</p>
-    <div class="grid" style="grid-template-columns:1fr 1.4fr">
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="card">
-          <div class="pad" style="padding-bottom:6px"><b style="font-size:15px">Upcoming</b></div>
-          <div class="appt"><div class="datebox"><span>Jul</span><b>16</b></div><div style="flex:1"><b>Dr. Chen · cardiology</b><div class="mini">Robert · Thu 9:30 AM · UCSF · Maria driving</div></div><span class="tag green">Prep ready</span></div>
-          <div class="appt"><div class="datebox"><span>Jul</span><b>24</b></div><div style="flex:1"><b>Dr. Patel · neurology</b><div class="mini">Eleanor · Fri 11:00 AM · bring sleep log</div></div><span class="tag gray">In 13 days</span></div>
-          <div class="appt"><div class="datebox"><span>Aug</span><b>3</b></div><div style="flex:1"><b>Dental cleaning</b><div class="mini">Rosa · Mon 2:00 PM · Miguel driving</div></div><span class="tag gray">Scheduled</span></div>
-        </div>
-        <div class="card pad">
-          <b style="font-size:15px">📞 Booking call, scripted</b>
-          <div class="script" style="margin-top:10px">You're calling <b>Dr. Okafor's office</b> (415) 555-0301.<br><br>"Hi · I'm calling to book a <b>follow-up for Robert Alvarez</b>, date of birth <b>February 14, 1945</b>. His cardiologist asked for a primary-care visit within a month. Afternoons work best."</div>
-          <button class="btn sm tint" style="margin-top:12px">Call now</button>
-        </div>
-        <div class="card pad">
-          <b style="font-size:15px">🎙️ After the visit</b>
-          <p class="mini" style="margin:6px 0 10px">Dictate 30 seconds in the parking lot · Hearth files a structured summary.</p>
-          <button class="btn sm quiet">● Record post-visit note</button>
-        </div>
+    <h1 class="greet" style="font-size:34px">Appointments</h1>
+    <p class="subline" style="font-size:15px">The Appointment Kit — tracked visits, an auto-drafted prep sheet, a call script, and 30-second post-visit capture.</p>
+    <div class="cols c2b">
+      <div>
+        <div class="seclabel"><span class="l">Upcoming</span></div>
+        <div class="appt"><div class="datebox"><span>Jul</span><b>16</b></div><div style="flex:1"><b>Dr. Chen — cardiology</b><div class="mini">Robert · Thu 9:30 · UCSF · Maria driving</div></div><span class="status green"><span class="dot green"></span>Prep ready</span></div>
+        <div class="appt"><div class="datebox"><span>Jul</span><b>24</b></div><div style="flex:1"><b>Dr. Patel — neurology</b><div class="mini">Eleanor · Fri 11:00 · bring sleep log</div></div><span class="mini">In 13 days</span></div>
+        <div class="appt"><div class="datebox"><span>Aug</span><b>3</b></div><div style="flex:1"><b>Dental cleaning</b><div class="mini">Rosa · Mon 2:00 · Miguel driving</div></div><span class="mini">Scheduled</span></div>
+        <div class="seclabel"><span class="l">Booking call, scripted</span></div>
+        <div class="script" style="margin-top:14px">You're calling <b>Dr. Okafor's office</b> (415) 555-0301.<br><br>"Hi — I'm booking a <b>follow-up for Robert Alvarez</b>, DOB <b>February 14, 1945</b>. His cardiologist asked for a primary-care visit within a month. Afternoons work best."</div>
+        <div style="margin-top:12px;display:flex;gap:9px"><button class="btn sm">Call now</button><button class="btn sm">Record post-visit note</button></div>
       </div>
-      <div class="card pad">
-        <div class="row" style="justify-content:space-between"><b style="font-size:15px">Prep sheet · Dr. Chen, Thursday</b><span class="tag blue">Auto-drafted from this week</span></div>
-        <div class="hr"></div>
-        <div class="kv" style="margin-bottom:12px"><b>Current medications</b>Metformin 500 · Apixaban 5 ⚠ · Lisinopril 10 · Atorvastatin 20</div>
-        <div class="kv" style="margin-bottom:12px"><b>Changes since last visit</b>Lisinopril reduced 20 → 10 mg (Jun 12, Dr. Chen)</div>
-        <div class="kv" style="margin-bottom:6px"><b>Questions Hearth drafted from your observations</b></div>
-        <ul class="prep">
-          <li><span class="n">1</span>Resting heart rate has drifted <b>up ~6 bpm over two weeks</b> · is that meaningful with his AFib?</li>
-          <li><span class="n">2</span>Maria noted <b>dizziness on Jul 7</b>, the morning after a missed dinner · medication-related?</li>
-          <li><span class="n">3</span>Refills are scattered · could we move to <b>90-day fills</b>, and is med-sync okay?</li>
-          <li><span class="n">4</span>Metformin refill was nearly missed this week · anything to simplify the regimen?</li>
+      <div>
+        <div class="seclabel"><span class="l">Prep sheet — Dr. Chen, Thursday</span></div>
+        <div style="margin-top:14px;font-size:13.5px"><b>Current medications</b><div class="muted" style="margin-top:3px">Metformin 500 · Apixaban 5 · Lisinopril 10 · Atorvastatin 20</div></div>
+        <div style="margin-top:12px;font-size:13.5px"><b>Changes since last visit</b><div class="muted" style="margin-top:3px">Lisinopril reduced 20 → 10 mg (Jun 12)</div></div>
+        <div style="margin-top:14px;font-size:13.5px"><b>Questions drafted from your observations</b></div>
+        <ul class="prep" style="margin-top:6px">
+          <li><span class="n">1</span>Resting heart rate has drifted up ~6 bpm over two weeks — meaningful with his AFib?</li>
+          <li><span class="n">2</span>Dizziness on Jul 7, the morning after a missed dinner — medication-related?</li>
+          <li><span class="n">3</span>Could we move to 90-day fills, and is med-sync okay?</li>
+          <li><span class="n">4</span>Metformin refill was nearly missed — anything to simplify?</li>
         </ul>
-        <div class="kv" style="margin:12px 0 6px"><b>Bring</b>Insurance card (in vault) · this sheet · the ER one-pager just in case</div>
-        <div class="row" style="margin-top:12px;gap:8px"><button class="btn sm primary">Print prep sheet</button><button class="btn sm quiet">Edit questions</button></div>
+        <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Print prep sheet</button><button class="btn sm">Edit questions</button></div>
       </div>
     </div>
   </section>
 
   <!-- ========== ASSISTANT ========== -->
   <section class="view" id="v-assistant">
-    <h1 class="page">Assistant</h1>
-    <p class="sub">Answers only from your people's records · with the receipt shown. Never medical advice.</p>
+    <h1 class="greet" style="font-size:34px">Assistant</h1>
+    <p class="subline" style="font-size:15px">Answers only from your people's records — with the receipt shown. Never medical advice.</p>
     <div class="chatwrap">
-      <div class="msg user"><span class="av g4">MA</span><div class="bubble">When did Dad's lisinopril dose change?</div></div>
-      <div class="msg ai"><span class="av" style="background:linear-gradient(135deg,#FF9500,#FF3B30)">H</span><div class="bubble">Robert's lisinopril changed from <b>20 mg to 10 mg on June 12, 2026</b>, after his follow-up with Dr. Chen.<br><span class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z" stroke-linejoin="round"/><path d="M14 3v6h6"/></svg>Visit summary · Dr. Chen · Jun 12, 2026</span></div></div>
-      <div class="msg user"><span class="av g4">MA</span><div class="bubble">How did Mom sleep this week?</div></div>
-      <div class="msg ai"><span class="av" style="background:linear-gradient(135deg,#FF9500,#FF3B30)">H</span><div class="bubble">Eleanor averaged <b>6.1 hours</b> this week · about <b>48 minutes less</b> than her 8-week baseline. Wednesday was the shortest night (5.2 h), and her hard evening followed it.<br><span class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 12h4l2-6 4 12 2-6h6" stroke-linejoin="round"/></svg>Sleep data · Jul 5–11 · aggregate computed in code</span></div></div>
-      <div class="msg user"><span class="av g4">MA</span><div class="bubble">Should I increase her sertraline if she keeps sleeping badly?</div></div>
-      <div class="msg ai"><span class="av" style="background:linear-gradient(135deg,#FF9500,#FF3B30)">H</span><div class="bubble refusal">That's a medication decision I don't make · <b>only Dr. Patel or her pharmacist should adjust a dose.</b> I can get you ready for that conversation: her neurology visit is <b>Jul 24</b>, and I've added the sleep trend to the prep sheet. Want me to draft the question?</div></div>
-      <div class="chatinput"><input placeholder="Ask about your people · answers cite their records"><button class="send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>
+      <div class="msg user"><span class="av">MA</span><div class="bubble">When did Dad's lisinopril dose change?</div></div>
+      <div class="msg ai"><span class="av">H</span><div class="bubble">Robert's lisinopril changed from <b>20 mg to 10 mg on June 12, 2026</b>, after his follow-up with Dr. Chen.<div class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6"/></svg>Visit summary — Dr. Chen · Jun 12, 2026</div></div></div>
+      <div class="msg user"><span class="av">MA</span><div class="bubble">How did Mom sleep this week?</div></div>
+      <div class="msg ai"><span class="av">H</span><div class="bubble">Eleanor averaged <b>6.1 hours</b> — about <b>48 minutes less</b> than her 8-week baseline. Wednesday was shortest (5.2 h), and her hard evening followed it.<div class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>Sleep data · Jul 5–11 · aggregate computed in code</div></div></div>
+      <div class="msg user"><span class="av">MA</span><div class="bubble">Should I increase her sertraline if she keeps sleeping badly?</div></div>
+      <div class="msg ai"><span class="av">H</span><div class="bubble refuse">That's a medication decision I don't make — <b>only Dr. Patel or her pharmacist should adjust a dose.</b> I can get you ready for that conversation: her neurology visit is Jul 24, and I've added the sleep trend to the prep sheet.</div></div>
+      <div class="chatin"><input placeholder="Ask about your people — answers cite their records"><button class="send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>
     </div>
   </section>
 
-  <!-- ========== GUIDES ========== -->
-  <section class="view" id="v-guides">
-    <h1 class="page">Emergency guides</h1>
-    <p class="sub">Like the safety card in an airplane seat pocket: vetted, illustrated, step-by-step. Ready before you need it, personalized to each person, and it works offline.</p>
-    <div class="card pad" style="background:var(--red-soft);border-color:rgba(255,59,48,.3);margin-bottom:16px;display:flex;gap:10px;align-items:center">
-      <b style="color:#D70015;font-size:14px">In any emergency, call 911 first.</b>
-      <span class="mini">These guides are for the minutes around that call. They never replace it.</span>
-    </div>
-    <div class="card pad" style="margin-bottom:16px">
-      <div class="row" style="justify-content:space-between;margin-bottom:14px">
-        <div><b style="font-size:16px">If Robert falls</b><div class="mini">The most likely emergency for him, based on his profile</div></div>
-        <div class="row" style="gap:8px"><button class="btn sm quiet">Print card</button><button class="btn sm quiet">Send to Dana</button><a class="btn sm primary" style="text-decoration:none" href="guides.html">Open the full Guide Book →</a></div>
-      </div>
-      <div style="display:flex;gap:14px"><div style="flex:1;min-width:0"><div style="background:#DCEBFC;border-radius:14px;height:130px;display:grid;place-items:center;overflow:hidden"><svg viewBox="0 0 200 130" width="100%" height="130"><rect x="18" y="100" width="164" height="7" rx="3.5" fill="#A9CBEE"/><circle cx="56" cy="88" r="13" fill="#FFF" stroke="#2D5F8A" stroke-width="5"/><rect x="70" y="80" width="62" height="19" rx="9.5" fill="#FFF" stroke="#2D5F8A" stroke-width="5"/><circle cx="152" cy="42" r="12" fill="#FFF" stroke="#2D5F8A" stroke-width="5"/><path d="M152 55 q-2 16 -16 24" fill="none" stroke="#2D5F8A" stroke-width="9" stroke-linecap="round"/><path d="M148 68 L120 84" stroke="#2D5F8A" stroke-width="8" stroke-linecap="round"/><path d="M172 20 q6 6 0 12" fill="none" stroke="#5B8FC9" stroke-width="4" stroke-linecap="round"/></svg></div><div style="display:flex;gap:8px;margin-top:10px;align-items:flex-start"><span style="flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center">1</span><div><b style="font-size:13px;letter-spacing:-.01em">Stay with them. Keep everyone calm.</b><div class="mini" style="margin-top:2px">Do not rush to lift. Look before you move anything.</div></div></div></div><div style="flex:1;min-width:0"><div style="background:#DFF3E7;border-radius:14px;height:130px;display:grid;place-items:center;overflow:hidden"><svg viewBox="0 0 200 130" width="100%" height="130"><rect x="20" y="96" width="160" height="7" rx="3.5" fill="#B4DFC6"/><circle cx="52" cy="84" r="12" fill="#FFF" stroke="#1F7A4D" stroke-width="5"/><rect x="65" y="77" width="58" height="17" rx="8.5" fill="#FFF" stroke="#1F7A4D" stroke-width="5"/><circle cx="126" cy="52" r="20" fill="rgba(255,255,255,.65)" stroke="#1F7A4D" stroke-width="6"/><path d="M141 67 L158 84" stroke="#1F7A4D" stroke-width="9" stroke-linecap="round"/><circle cx="52" cy="70" r="5" fill="#FF9F0A"/><circle cx="96" cy="72" r="5" fill="#FF9F0A"/></svg></div><div style="display:flex;gap:8px;margin-top:10px;align-items:flex-start"><span style="flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center">2</span><div><b style="font-size:13px;letter-spacing:-.01em">Check gently: head, hips, any bleeding.</b><div class="mini" style="margin-top:2px">Ask simple questions. Confusion is a warning sign.</div></div></div></div><div style="flex:1;min-width:0"><div style="background:#FFE3DF;border-radius:14px;height:130px;display:grid;place-items:center;overflow:hidden"><svg viewBox="0 0 200 130" width="100%" height="130"><rect x="70" y="14" width="60" height="102" rx="14" fill="#FFF" stroke="#C42B1C" stroke-width="5"/><rect x="80" y="30" width="40" height="52" rx="6" fill="#FFD9D4"/><text x="100" y="66" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="24" font-weight="800" fill="#C42B1C">911</text><circle cx="100" cy="100" r="6" fill="#C42B1C"/><path d="M140 32 q10 10 0 20 M150 24 q16 16 0 32" fill="none" stroke="#C42B1C" stroke-width="4.5" stroke-linecap="round"/></svg></div><div style="display:flex;gap:8px;margin-top:10px;align-items:flex-start"><span style="flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center">3</span><div><b style="font-size:13px;letter-spacing:-.01em">Hurt, dizzy, or unsure? Call 911 now.</b><div class="mini" style="margin-top:2px">Do not help them up. Keep them warm and still.</div></div></div></div><div style="flex:1;min-width:0"><div style="background:#FFF1D6;border-radius:14px;height:130px;display:grid;place-items:center;overflow:hidden"><svg viewBox="0 0 200 130" width="100%" height="130"><rect x="20" y="102" width="160" height="6" rx="3" fill="#EBD2A0"/><path d="M132 60 v42 M162 60 v42 M132 62 h30 M128 84 h38" stroke="#8A6210" stroke-width="6" stroke-linecap="round"/><circle cx="70" cy="40" r="12" fill="#FFF" stroke="#8A6210" stroke-width="5"/><path d="M70 53 q4 18 16 26" fill="none" stroke="#8A6210" stroke-width="9" stroke-linecap="round"/><path d="M76 66 L112 72" stroke="#8A6210" stroke-width="8" stroke-linecap="round"/><path d="M38 74 v-34 M38 40 l-10 12 M38 40 l10 12" stroke="#248A3D" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="display:flex;gap:8px;margin-top:10px;align-items:flex-start"><span style="flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center">4</span><div><b style="font-size:13px;letter-spacing:-.01em">Feeling fine? Help up slowly, with a chair.</b><div class="mini" style="margin-top:2px">Roll to the side, kneel, hands on the chair, rest after.</div></div></div></div></div>
-      <div style="margin-top:14px;background:#FFF6EF;border:1px solid rgba(196,81,45,.25);border-radius:12px;padding:11px 14px;font-size:13px">
-        <b style="color:#B2451F">Personalized:</b> Robert takes a blood thinner (apixaban), so any head bump needs medical attention even if he feels fine. This card knows that. It also shows his ER sheet button right here.
-        <button class="btn sm quiet" style="margin-left:8px">Open Robert's ER sheet</button>
-      </div>
-    </div>
-    <div class="grid" style="grid-template-columns:repeat(3,1fr)"><div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:center"><span style="font-size:20px">🫁</span><div style="flex:1"><b style="font-size:13.5px">Choking</b><div class="mini">Back blows, abdominal thrusts</div></div><span class="tag blue">▶ 2-min guide</span></div><div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:center"><span style="font-size:20px">🧠</span><div style="flex:1"><b style="font-size:13.5px">Stroke</b><div class="mini">F.A.S.T. check, call 911</div></div><span class="tag blue">▶ 2-min guide</span></div><div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:center"><span style="font-size:20px">🩸</span><div style="flex:1"><b style="font-size:13.5px">Severe bleeding</b><div class="mini">Pressure, elevate, call 911</div></div><span class="tag blue">▶ 2-min guide</span></div><div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:center"><span style="font-size:20px">⚡</span><div style="flex:1"><b style="font-size:13.5px">Seizure</b><div class="mini">Clear space, time it, side position</div></div><span class="tag blue">▶ 2-min guide</span></div><div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:center"><span style="font-size:20px">❤️</span><div style="flex:1"><b style="font-size:13.5px">Chest pain</b><div class="mini">Call 911, sit, loosen clothing</div></div><span class="tag blue">▶ 2-min guide</span></div><div class="card" style="padding:14px 16px;display:flex;gap:11px;align-items:center"><span style="font-size:20px">🌡️</span><div style="flex:1"><b style="font-size:13.5px">Sudden confusion</b><div class="mini">Check sugar, meds, hydration</div></div><span class="tag blue">▶ 2-min guide</span></div></div>
-    <p class="mini" style="margin-top:14px">Adapted from American Red Cross and American Heart Association first-aid guidance. Reviewed by a clinician before every release. Static and vetted: no AI writes emergency steps, ever. Available offline and in Spanish.</p>
-  </section>
-
-  <!-- ========== ELEANOR / ROSA (light) ========== -->
+  <!-- ========== ELEANOR ========== -->
   <section class="view" id="v-eleanor">
-    <div class="phead">
-      <span class="av g1">EA</span>
-      <div><h1>Eleanor Alvarez <span class="mini" style="font-size:15px;font-weight:500">· Mom · 78</span></h1>
-      <div class="chips"><span class="tag gray">Early-stage Alzheimer's</span><span class="tag gray">Hypertension</span><span class="tag purple">Respite: Dana until Mon</span></div></div>
-      <div style="margin-left:auto"><button class="btn primary sm" onclick="go('handoff')">Handoff Pack</button></div>
+    <div class="phead"><h1>Eleanor Alvarez <span class="sub">· Mom · 78</span></h1>
+      <div class="chips"><span class="chip">Early-stage Alzheimer's</span><span class="chip">Hypertension</span><span class="chip">Respite: Dana until Mon</span></div>
     </div>
-    <div class="grid vit" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
-      <div class="card vcard"><div class="vh"><b>Sleep</b><span class="delta up">▼ 48 min</span></div><div class="num">6.1 <small>h avg</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><defs><linearGradient id="ge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9500" stop-opacity=".25"/><stop offset="1" stop-color="#FF9500" stop-opacity="0"/></linearGradient></defs><path d="M0,12 30,14 60,13 90,17 120,20 150,19 175,24 200,23 V38 H0 Z" fill="url(#ge1)"/><path d="M0,12 30,14 60,13 90,17 120,20 150,19 175,24 200,23" fill="none" stroke="#FF9500" stroke-width="2" stroke-linecap="round"/></svg>
-        <div class="mini">Trending shorter · worth a call</div></div>
-      <div class="card vcard"><div class="vh"><b>Evening mood (ABC log)</b><span class="delta flat">3 entries</span></div><div class="num">2 <small>hard evenings</small></div>
-        <svg class="spark" viewBox="0 0 200 38"><g fill="#C97B4B" opacity=".85"><rect x="10" y="24" width="16" height="14" rx="4"/><rect x="36" y="28" width="16" height="10" rx="4"/><rect x="62" y="12" width="16" height="26" rx="4"/><rect x="88" y="26" width="16" height="12" rx="4"/><rect x="114" y="28" width="16" height="10" rx="4"/><rect x="140" y="8" width="16" height="30" rx="4"/><rect x="166" y="24" width="16" height="14" rx="4"/></g></svg>
-        <div class="mini">Hard evenings follow short-sleep nights</div></div>
-      <div class="card vcard"><div class="vh"><b>Med runway</b><span class="delta flat">2 meds</span></div><div class="num">12 <small>days · sertraline</small></div>
-        <div style="margin-top:8px"><div class="runbar" style="width:100%"><i style="width:40%;background:var(--orange)"></i></div><div class="mini" style="margin-top:8px">Donepezil: 21 days · on track</div></div></div>
+    <div class="vitrow" style="grid-template-columns:repeat(3,1fr)">
+      <div class="vit"><div class="vl">Sleep</div><div class="vn">6.1 <small>h avg</small></div><div class="vd up">▼ 48 min · worth a call</div></div>
+      <div class="vit"><div class="vl">Hard evenings (ABC log)</div><div class="vn">2 <small>this wk</small></div><div class="vd flat">follow short-sleep nights</div></div>
+      <div class="vit"><div class="vl">Sertraline runway</div><div class="vn">12 <small>days</small></div><div class="vd" style="color:var(--amber)">refill soon</div></div>
     </div>
-    <div class="card pad" style="background:linear-gradient(135deg,#FFF,#FDF6EF)">
-      <b style="font-size:15px">Pattern the quick-logs found</b>
-      <p style="font-size:13.5px;color:var(--ink2);margin-top:6px;line-height:1.65">Across 6 weeks of 20-second ABC logs: <b>hard evenings follow nights under 6.5 h of sleep</b> (5 of 6 times). Shared to Dr. Patel's prep sheet for Jul 24 · <i>a hypothesis to discuss, not a diagnosis.</i></p>
+    <div class="note"><b style="color:var(--ink)">Pattern the quick-logs found:</b> across 6 weeks of 20-second ABC logs, hard evenings follow nights under 6.5 h of sleep (5 of 6 times). Shared to Dr. Patel's prep sheet for Jul 24 — a hypothesis to discuss, not a diagnosis.</div>
+  </section>
+
+  <!-- ========== ROSA ========== -->
+  <section class="view" id="v-rosa">
+    <div class="phead"><h1>Rosa Marquez <span class="sub">· Aunt · 74</span></h1>
+      <div class="chips"><span class="chip">Hypothyroidism</span><span class="chip">Arthritis</span><span class="status green" style="margin-left:4px"><span class="dot green"></span>All good</span></div>
+    </div>
+    <div class="cols" style="grid-template-columns:repeat(3,1fr);gap:30px;margin-top:24px">
+      <div><b style="font-size:14px">Medications</b><p class="muted" style="font-size:13px;margin-top:6px">Levothyroxine — 32-day runway. Ibuprofen as-needed (no forecast, honestly).</p></div>
+      <div><b style="font-size:14px">This week</b><p class="muted" style="font-size:13px;margin-top:6px">Granddaughter visits Sunday. Dental cleaning Aug 3 — Miguel driving.</p></div>
+      <div><b style="font-size:14px">Her choice, honored</b><p class="muted" style="font-size:13px;margin-top:6px">Rosa shares meds and appointments with Maria — not her weight. That stream is off, everywhere.</p></div>
     </div>
   </section>
 
-  <section class="view" id="v-rosa">
-    <div class="phead">
-      <span class="av g3">RM</span>
-      <div><h1>Rosa Marquez <span class="mini" style="font-size:15px;font-weight:500">· Aunt · 74</span></h1>
-      <div class="chips"><span class="tag gray">Hypothyroidism</span><span class="tag gray">Arthritis</span><span class="tag green">All good</span></div></div>
+  <!-- ========== GUIDES teaser ========== -->
+  <section class="view" id="v-guides">
+    <h1 class="greet" style="font-size:34px">Emergency Guides</h1>
+    <p class="subline" style="font-size:15px">Like an airplane safety card: vetted, illustrated, offline. One tap from every screen via the red Emergency button. In any emergency, call 911 first.</p>
+    <div class="gcards">
+      <div class="gc"><b>A fall</b><span>Stay · check · 911 · assisted rise</span></div>
+      <div class="gc"><b>Choking</b><span>Back blows · abdominal thrusts</span></div>
+      <div class="gc"><b>Stroke</b><span>F.A.S.T. check · call 911</span></div>
+      <div class="gc"><b>Severe bleeding</b><span>Press · don't peek · elevate</span></div>
+      <div class="gc"><b>Seizure</b><span>Clear space · time it · side</span></div>
+      <div class="gc"><b>Chest pain</b><span>911 · sit · aspirin if safe</span></div>
     </div>
-    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="card pad"><b>Meds</b><p class="mini" style="margin-top:6px">Levothyroxine · 32-day runway. Ibuprofen as-needed (no forecast, honestly).</p></div>
-      <div class="card pad"><b>This week</b><p class="mini" style="margin-top:6px">Granddaughter visits Sunday. Dental cleaning Aug 3 · Miguel driving.</p></div>
-      <div class="card pad"><b>Her choice, honored</b><p class="mini" style="margin-top:6px">Rosa shares meds &amp; appointments with Maria · <b>not her weight.</b> That stream is off, everywhere, at her request.</p></div>
-    </div>
+    <div style="margin-top:20px"><a class="btn dark" href="guides.html">Open the full animated Guide Book →</a></div>
+    <div class="note">Adapted from American Red Cross and American Heart Association guidance, clinician-reviewed. Static and vetted — no AI writes emergency steps. Personalized from profile facts (Robert's blood thinner adds a head-injury note). Available offline and in Spanish.</div>
   </section>
 
   </div>
@@ -916,14 +587,18 @@ aside{background:#FDFCF8;border-right:1px solid var(--line)}
 <script>
 function go(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
-  const el=document.getElementById('v-'+v); if(el) el.classList.add('on');
+  var el=document.getElementById('v-'+v); if(el) el.classList.add('on');
   document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on', n.dataset.v===v));
   document.querySelector('main').scrollTop=0;
   if(history.replaceState) history.replaceState(null,'','#'+v);
 }
-document.querySelectorAll('.nav').forEach(n=>n.addEventListener('click',()=>go(n.dataset.v)));
-const h=(location.hash||'').replace('#','');
-if(h && document.getElementById('v-'+h)) go(h);
+document.querySelectorAll('.nav[data-v]').forEach(n=>n.addEventListener('click',()=>go(n.dataset.v)));
+document.querySelectorAll('.seg').forEach(function(seg){
+  seg.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+    seg.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  })});
+});
+var h=(location.hash||'').replace('#',''); if(h && document.getElementById('v-'+h)) go(h);
 </script>
 </body>
 </html>
