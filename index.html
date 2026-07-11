@@ -57,10 +57,13 @@ main{overflow-y:auto;position:relative}
 
 /* PRIMITIVES */
 h1.greet{font-size:clamp(38px,5vw,52px);font-weight:600;letter-spacing:-.032em;line-height:1.02}
-.subline{font-size:16px;color:var(--ink2);margin-top:12px}
-.seclabel{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-top:18px;margin-top:44px;border-top:1px solid var(--ink)}
-.seclabel .l{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
-.seclabel .m{font-size:12.5px;color:var(--ink3)}
+.subline{font-size:16px;color:var(--ink2);margin-top:13px}
+/* editorial section header: uppercase label + a hairline that fills the row + meta */
+.seclabel{display:flex;align-items:center;gap:16px;margin-top:46px;margin-bottom:2px}
+.seclabel .l{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;flex:0 0 auto;color:var(--ink)}
+.seclabel .l::after{content:"";display:inline-block}
+.seclabel .line{flex:1;height:1px;background:var(--line)}
+.seclabel .m{font-size:12.5px;color:var(--ink3);flex:0 0 auto}
 .btn{border:1px solid var(--line-strong);background:#fff;color:var(--ink);font-weight:600;font-size:13px;border-radius:980px;padding:9px 17px;cursor:pointer;transition:.15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
 .btn:hover{background:var(--hover)}
 .btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -277,14 +280,14 @@ table.tbl tr:last-child td{border-bottom:none}
     <h1 class="greet">Good afternoon, Maria</h1>
     <p class="subline">Saturday, July 11 · Here's the one thing that needs you, and the calm around it.</p>
 
-    <div class="seclabel"><span class="l">Today's digest</span><span class="m">Composed 7:00 AM from 14 quiet events · 1 needs action</span></div>
+    <div class="seclabel"><span class="l">Today's digest</span><span class="line"></span><span class="m">Composed 7:00 AM from 14 quiet events · 1 needs action</span></div>
     <div class="digest">
       <div class="ditem"><span class="dot red"></span><div class="tx"><b>Robert's metformin runs out Thursday.</b> <span class="muted">Refill not yet picked up at CVS.</span></div><button class="btn dark sm">Request refill</button></div>
       <div class="ditem"><span class="dot amber"></span><div class="tx"><b>Eleanor's sleep is trending shorter.</b> <span class="muted">6.1 h average this week, 48 min under her norm. Worth a call?</span></div><button class="btn sm">Call Mom</button></div>
       <div class="ditem"><span class="dot green"></span><div class="tx">Dr. Chen (cardiology) is <b>Thursday 9:30</b>. Robert's prep sheet is ready. Rosa's granddaughter visits Sunday.</div><button class="btn sm">Prep sheet</button></div>
     </div>
 
-    <div class="seclabel"><span class="l">Care circle</span><span class="m">3 people · updated moments ago</span></div>
+    <div class="seclabel"><span class="l">Care circle</span><span class="line"></span><span class="m">3 people · updated moments ago</span></div>
     <div class="circle">
       <div class="person" onclick="go('eleanor')">
         <span class="status amber"><span class="dot amber"></span>Worth a look</span>
@@ -314,7 +317,7 @@ table.tbl tr:last-child td{border-bottom:none}
 
     <div class="cols c2">
       <div>
-        <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Who's on duty</span><span class="m">Shared with Dana &amp; Miguel</span></div>
+        <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Who's on duty</span><span class="line"></span><span class="m">Shared with Dana &amp; Miguel</span></div>
         <div class="duty">
           <div class="d"><div class="dn">Sun</div><div class="num">5</div><span class="who">MA</span></div>
           <div class="d"><div class="dn">Mon</div><div class="num">6</div><span class="who">MA</span></div>
@@ -326,13 +329,13 @@ table.tbl tr:last-child td{border-bottom:none}
         </div>
       </div>
       <div>
-        <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Family update · drafted</span></div>
+        <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Family update · drafted</span><span class="line"></span></div>
         <p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:14px">"Hi Miguel — good week overall. Dad's refill is handled and his cardiology visit is Thursday. Mom's been sleeping a little less, so I'm calling her today…"</p>
         <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Edit &amp; send</button><button class="btn sm">Regenerate</button></div>
       </div>
     </div>
 
-    <div class="seclabel"><span class="l">Quick actions</span></div>
+    <div class="seclabel"><span class="l">Quick actions</span><span class="line"></span></div>
     <div class="quick">
       <div class="qa" onclick="go('scan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M4 12h16"/></svg><b>Scan a label</b><span>Add meds from a photo</span></div>
       <div class="qa" onclick="go('er')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><b>ER sheet</b><span>Grab-and-go one-pager</span></div>
@@ -356,7 +359,7 @@ table.tbl tr:last-child td{border-bottom:none}
 
     <div class="cols c2">
       <div>
-        <div class="seclabel"><span class="l">Medications · runway</span><span class="m">from label facts — no logging</span></div>
+        <div class="seclabel"><span class="l">Medications · runway</span><span class="line"></span><span class="m">from label facts — no logging</span></div>
         <table class="tbl">
           <tr><td class="mname"><b>Metformin 500 mg</b><span>1 tab, twice daily · CVS #2213</span></td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
           <tr><td class="mname"><b>Apixaban 5 mg</b> <span style="color:var(--red)">· high-alert</span></td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td></td></tr>
@@ -366,7 +369,7 @@ table.tbl tr:last-child td{border-bottom:none}
         <div class="note"><b style="color:var(--ink)">Why Robert is flagged:</b> medication runway under 7 days with no pickup recorded. Metformin (filled Jun 29, 30-day supply) exhausts Thu Jul 16. You can override this if you've handled it.</div>
       </div>
       <div>
-        <div class="seclabel"><span class="l">Recent records</span></div>
+        <div class="seclabel"><span class="l">Recent records</span><span class="line"></span></div>
         <div class="doc"><span class="ic">PDF</span><div><b>Visit summary — Dr. Chen</b><div class="mini">Jun 12 · lisinopril 20→10 mg</div></div></div>
         <div class="doc"><span class="ic">PDF</span><div><b>Discharge summary</b><div class="mini">May 3 · observation stay</div></div></div>
         <div class="doc"><span class="ic">IMG</span><div><b>Insurance card</b><div class="mini">Medicare + supplemental</div></div></div>
@@ -472,23 +475,23 @@ table.tbl tr:last-child td{border-bottom:none}
     <p class="subline" style="font-size:15px">Everything a substitute caregiver needs to step in tomorrow. The binder writes itself — generated live, never stale.</p>
     <div class="cols c2">
       <div>
-        <div class="seclabel"><span class="l">Daily rhythm</span></div>
+        <div class="seclabel"><span class="l">Daily rhythm</span><span class="line"></span></div>
         <div class="hitem"><span class="em">Morning</span><div><b>7:30 — wakes early, tea before pills.</b><div class="mini">Won't take morning meds before her tea. Two sugars.</div></div></div>
         <div class="hitem"><span class="em">Afternoon</span><div><b>2:00 — short nap in the sunroom chair.</b><div class="mini">Not the bedroom; she likes the light.</div></div></div>
         <div class="hitem"><span class="em">Evening</span><div><b>After 6 PM — can get anxious (sundowning).</b><div class="mini">Old Tamil songs help. Playlist "Amma" is on the kitchen iPad.</div></div></div>
-        <div class="seclabel"><span class="l">Medications</span></div>
+        <div class="seclabel"><span class="l">Medications</span><span class="line"></span></div>
         <div class="hitem"><span class="em">Bedtime</span><div><b>Donepezil 10 mg — the purple-white one.</b><div class="mini">With a full glass of water.</div></div></div>
         <div class="hitem"><span class="em">Breakfast</span><div><b>Sertraline 50 mg — the blue one.</b><div class="mini">After tea, or she'll refuse it.</div></div></div>
-        <div class="seclabel"><span class="l">If something happens</span></div>
+        <div class="seclabel"><span class="l">If something happens</span><span class="line"></span></div>
         <div class="hitem"><span class="em">Agitated</span><div>Dim the lights, put on the playlist, sit with her. <span class="mini">Don't correct — redirect to the photo album.</span></div></div>
         <div class="hitem"><span class="em">Wanders</span><div>Check the garden first, then Joan's porch next door.</div></div>
         <div class="hitem"><span class="em">Emergency</span><div>911, then Maria (415) 555-0182. Dr. Patel (neurology) (415) 555-0287.</div></div>
       </div>
       <div>
-        <div class="seclabel"><span class="l">Respite mode</span></div>
+        <div class="seclabel"><span class="l">Respite mode</span><span class="line"></span></div>
         <div class="toggle" style="margin-top:14px"><div><b>Dana Alvarez</b> has read-only access<div class="mini">Handoff Pack · schedule · duty calendar</div></div><span class="sw"></span></div>
         <div class="note" style="border:none;padding-top:12px;margin-top:12px"><b style="color:var(--ink)">Expires automatically Mon 8:00 AM.</b> Eleanor was notified. Every view Dana makes is in the access log.</div>
-        <div class="seclabel"><span class="l">Export</span></div>
+        <div class="seclabel"><span class="l">Export</span><span class="line"></span></div>
         <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Download PDF</button><button class="btn sm">Share expiring link</button></div>
         <div class="note"><b style="color:var(--ink)">Eleanor controls all of this.</b> She has a printed page of what's shared and a phone number to change or stop it. Her "don't share my weight" choice is honored everywhere.</div>
       </div>
@@ -501,16 +504,16 @@ table.tbl tr:last-child td{border-bottom:none}
     <p class="subline" style="font-size:15px">The Appointment Kit — tracked visits, an auto-drafted prep sheet, a call script, and 30-second post-visit capture.</p>
     <div class="cols c2b">
       <div>
-        <div class="seclabel"><span class="l">Upcoming</span></div>
+        <div class="seclabel"><span class="l">Upcoming</span><span class="line"></span></div>
         <div class="appt"><div class="datebox"><span>Jul</span><b>16</b></div><div style="flex:1"><b>Dr. Chen — cardiology</b><div class="mini">Robert · Thu 9:30 · UCSF · Maria driving</div></div><span class="status green"><span class="dot green"></span>Prep ready</span></div>
         <div class="appt"><div class="datebox"><span>Jul</span><b>24</b></div><div style="flex:1"><b>Dr. Patel — neurology</b><div class="mini">Eleanor · Fri 11:00 · bring sleep log</div></div><span class="mini">In 13 days</span></div>
         <div class="appt"><div class="datebox"><span>Aug</span><b>3</b></div><div style="flex:1"><b>Dental cleaning</b><div class="mini">Rosa · Mon 2:00 · Miguel driving</div></div><span class="mini">Scheduled</span></div>
-        <div class="seclabel"><span class="l">Booking call, scripted</span></div>
+        <div class="seclabel"><span class="l">Booking call, scripted</span><span class="line"></span></div>
         <div class="script" style="margin-top:14px">You're calling <b>Dr. Okafor's office</b> (415) 555-0301.<br><br>"Hi — I'm booking a <b>follow-up for Robert Alvarez</b>, DOB <b>February 14, 1945</b>. His cardiologist asked for a primary-care visit within a month. Afternoons work best."</div>
         <div style="margin-top:12px;display:flex;gap:9px"><button class="btn sm">Call now</button><button class="btn sm">Record post-visit note</button></div>
       </div>
       <div>
-        <div class="seclabel"><span class="l">Prep sheet — Dr. Chen, Thursday</span></div>
+        <div class="seclabel"><span class="l">Prep sheet — Dr. Chen, Thursday</span><span class="line"></span></div>
         <div style="margin-top:14px;font-size:13.5px"><b>Current medications</b><div class="muted" style="margin-top:3px">Metformin 500 · Apixaban 5 · Lisinopril 10 · Atorvastatin 20</div></div>
         <div style="margin-top:12px;font-size:13.5px"><b>Changes since last visit</b><div class="muted" style="margin-top:3px">Lisinopril reduced 20 → 10 mg (Jun 12)</div></div>
         <div style="margin-top:14px;font-size:13.5px"><b>Questions drafted from your observations</b></div>
