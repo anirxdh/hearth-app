@@ -6,15 +6,15 @@
 <title>Hearth</title>
 <style>
 :root{
-  --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#6E6E73; --ink3:#86868B;
-  --line:rgba(0,0,0,.07); --line2:rgba(0,0,0,.05);
-  --blue:#C4512D; --blue-soft:rgba(196,81,45,.10);
+  --bg:#FDFCF8; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#6E6E73; --ink3:#86868B;
+  --line:#E8E4DC; --line2:#EFECE4;
+  --blue:#1D1D1F; --blue-soft:rgba(29,29,31,.06);
   --green:#34C759; --green-soft:rgba(52,199,89,.12);
   --orange:#FF9500; --orange-soft:rgba(255,149,0,.13);
   --red:#FF3B30; --red-soft:rgba(255,59,48,.10);
   --purple:#8A5A36; --pink:#D9552F; --teal:#8E8E93;
-  --shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.06);
-  --shadow-lg:0 2px 6px rgba(0,0,0,.05),0 24px 60px rgba(0,0,0,.10);
+  --shadow:0 1px 2px rgba(50,40,20,.04);
+  --shadow-lg:0 2px 10px rgba(50,40,20,.07);
   --r:18px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,7 +28,7 @@ body{
 
 /* ============ SIDEBAR ============ */
 aside{
-  background:rgba(250,250,252,.86);backdrop-filter:blur(30px);
+  background:rgba(253,252,248,.88);backdrop-filter:blur(30px);
   border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;
 }
 .logo{display:flex;align-items:center;gap:10px;padding:4px 10px 18px}
@@ -38,7 +38,7 @@ aside{
 .navlabel{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;padding:14px 12px 6px}
 .nav{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;cursor:pointer;color:#3a3a3c;font-weight:500;font-size:13.5px;border:none;background:none;width:100%;text-align:left;transition:background .15s}
 .nav:hover{background:rgba(0,0,0,.045)}
-.nav.on{background:var(--blue-soft);color:var(--blue);font-weight:600}
+.nav.on{background:rgba(29,29,31,.07);color:var(--ink);font-weight:700}
 .nav svg{width:17px;height:17px;flex:0 0 auto;opacity:.85}
 .nav .dotb{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--red)}
 .nav .av{width:22px;height:22px;border-radius:50%;font-size:9px}
@@ -49,14 +49,14 @@ aside{
 main{overflow-y:auto;position:relative}
 .topbar{
   position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
-  padding:14px 34px;background:rgba(245,245,247,.8);backdrop-filter:blur(28px);border-bottom:1px solid var(--line2);
+  padding:14px 34px;background:rgba(253,252,248,.85);backdrop-filter:blur(28px);border-bottom:1px solid var(--line2);
 }
 .search{flex:0 0 320px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.05);border-radius:10px;padding:7px 12px;color:var(--ink3);font-size:13px}
 .search svg{width:13px;height:13px}
 .topbar .spacer{flex:1}
 .chip-user{display:flex;align-items:center;gap:9px;font-weight:600;font-size:13px}
 .pagewrap{padding:30px 34px 60px;max-width:1180px}
-h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
+h1.page{font-size:34px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
 .sub{color:var(--ink2);font-size:14.5px;margin-bottom:26px}
 .view{display:none}.view.on{display:block;animation:vin .35s cubic-bezier(.2,.7,.3,1)}
 @keyframes vin{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
@@ -68,7 +68,7 @@ h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .row{display:flex;align-items:center;gap:10px}
 .btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13.5px;border-radius:980px;padding:9px 18px;transition:.15s;letter-spacing:-.01em}
 .btn.primary{background:var(--blue);color:#fff}
-.btn.primary:hover{background:#B2451F;transform:scale(1.02)}
+.btn.primary:hover{background:#000;transform:scale(1.02)}
 .btn.quiet{background:rgba(0,0,0,.05);color:var(--ink)}
 .btn.quiet:hover{background:rgba(0,0,0,.08)}
 .btn.tint{background:var(--blue-soft);color:var(--blue)}
@@ -92,7 +92,7 @@ h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .kv{font-size:13px}.kv b{display:block;font-size:12px;color:var(--ink3);font-weight:600;margin-bottom:1px}
 
 /* ============ DASHBOARD ============ */
-.digest{background:linear-gradient(135deg,#FFFFFF, #FFF6EF 92%);border:1px solid rgba(196,81,45,.16)}
+.digest{background:transparent;border:none;border-top:1px solid #1D1D1F;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
 .digest .dhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .digest .dhead .ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#FF9500,#FF3B30);display:grid;place-items:center;box-shadow:0 6px 16px rgba(255,90,40,.32)}
 .digest .dhead .ic svg{width:17px;height:17px}
@@ -121,7 +121,7 @@ h1.page{font-size:30px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .qa span{font-size:11.5px;color:var(--ink3);margin-top:-6px}
 .duty{display:flex;gap:8px}
 .duty .day{flex:1;text-align:center;padding:10px 4px;border-radius:12px;background:rgba(0,0,0,.03)}
-.duty .day.today{background:var(--blue-soft);outline:1.5px solid rgba(0,113,227,.35)}
+.duty .day.today{background:var(--blue-soft);outline:1.5px solid rgba(29,29,31,.3)}
 .duty .d{font-size:10.5px;font-weight:600;color:var(--ink3);text-transform:uppercase}
 .duty .n{font-size:15px;font-weight:700;margin:2px 0 6px}
 .duty .av{width:22px;height:22px;font-size:8.5px;margin:0 auto}
@@ -338,6 +338,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 
     <div class="grid roster" style="margin-bottom:16px">
       <div class="card pcard" onclick="go('eleanor')">
+        <svg viewBox="0 0 400 54" width="100%" height="54" style="display:block;border-radius:10px;margin-bottom:12px" preserveAspectRatio="none"><rect width="400" height="54" fill="#EAE3EE"/><rect y="26" width="400" height="28" fill="#C7B6D6"/><path d="M0 54 L170 30 M60 54 L185 30 M130 54 L200 30 M270 54 L215 30 M340 54 L230 30 M400 50 L240 30" stroke="#A98FC2" stroke-width="2.5"/><circle cx="330" cy="14" r="8" fill="#E6D4EE"/></svg>
         <span class="status dot orange"></span>
         <div class="top"><span class="av g1">EA</span><div><h4>Eleanor Alvarez</h4><div class="rel">Mom · 78 · early-stage Alzheimer's</div></div></div>
         <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-6 4 12 2-6h6" stroke-linecap="round" stroke-linejoin="round"/></svg>Sleep 6.1 h · trending down</div>
@@ -345,6 +346,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
         <div class="foot"><span class="tag orange">Worth a look</span><span class="tag purple">Respite: Dana</span></div>
       </div>
       <div class="card pcard" onclick="go('robert')">
+        <svg viewBox="0 0 400 54" width="100%" height="54" style="display:block;border-radius:10px;margin-bottom:12px" preserveAspectRatio="none"><rect width="400" height="54" fill="#EDEBE2"/><circle cx="96" cy="22" r="11" fill="#F2D9A0"/><rect y="30" width="400" height="24" fill="#CAD8DC"/><path d="M40 34 h44 M300 38 h56 M150 44 h64" stroke="#E5EEF0" stroke-width="3" stroke-linecap="round"/><path d="M330 30 v-16 M344 30 v-12 M356 30 v-18" stroke="#6E7B6A" stroke-width="2.5"/></svg>
         <span class="status dot red"></span>
         <div class="top"><span class="av g2">RA</span><div><h4>Robert Alvarez</h4><div class="rel">Dad · 81 · T2 diabetes · AFib</div></div></div>
         <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="8" width="16" height="5" rx="2.5" transform="rotate(-30 12 12)"/></svg><b style="color:#D70015">Metformin: 4 days left</b></div>
@@ -352,6 +354,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
         <div class="foot"><span class="tag red">Act now</span><span class="tag gray">Cardiology Thu</span></div>
       </div>
       <div class="card pcard" onclick="go('rosa')">
+        <svg viewBox="0 0 400 54" width="100%" height="54" style="display:block;border-radius:10px;margin-bottom:12px" preserveAspectRatio="none"><rect width="400" height="54" fill="#F2EFDF"/><path d="M0 40 Q100 22 200 34 T400 30 V54 H0 Z" fill="#C9CFA8"/><path d="M0 48 Q140 34 280 44 T400 44 V54 H0 Z" fill="#A8B584"/><circle cx="70" cy="44" r="2.4" fill="#FFF"/><circle cx="150" cy="41" r="2.4" fill="#F2D9A0"/><circle cx="240" cy="46" r="2.4" fill="#FFF"/><circle cx="320" cy="43" r="2.4" fill="#F2D9A0"/></svg>
         <span class="status dot green"></span>
         <div class="top"><span class="av g3">RM</span><div><h4>Rosa Marquez</h4><div class="rel">Aunt · 74 · hypothyroid</div></div></div>
         <div class="stat-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5" stroke-linejoin="round"/></svg>All meds on track · 32 days runway</div>
@@ -386,6 +389,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
       <div class="card qa" onclick="go('handoff')"><div class="ic" style="background:rgba(166,123,91,.15);color:#7A5434"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><b>Handoff Pack</b><span>For a substitute caregiver</span></div>
       <div class="card qa" onclick="go('appts')"><div class="ic" style="background:rgba(0,0,0,.05);color:#4A4A4F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4"/></svg></div><b>Visit prep</b><span>Dr. Chen · Thursday</span></div>
     </div>
+    <div style="margin-top:34px"><svg viewBox="0 0 1200 54" width="100%" preserveAspectRatio="none" style="display:block"><path d="M0 38 Q150 22 320 34 T680 32 T1040 36 L1200 34 V54 H0 Z" fill="#DCE3D2"/><path d="M0 46 Q220 34 480 43 T980 42 L1200 44 V54 H0 Z" fill="#C9D4BC"/><path d="M905 36 v-14" stroke="#7A8A6A" stroke-width="3"/><circle cx="905" cy="18" r="7" fill="#7A8A6A"/></svg></div>
   </section>
 
   <!-- ========== PATIENT: ROBERT ========== -->
