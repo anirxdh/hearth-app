@@ -76,23 +76,32 @@ h1.greet{font-size:clamp(38px,5vw,52px);font-weight:600;letter-spacing:-.032em;l
 .chip{display:inline-block;font-size:12px;color:var(--ink2);border:1px solid var(--line-strong);border-radius:99px;padding:3px 10px}
 .muted{color:var(--ink2)} .mini{font-size:12px;color:var(--ink3)} .mono{font-family:var(--mono)}
 
-.digest .ditem{display:flex;align-items:flex-start;gap:14px;padding:17px 2px;border-bottom:1px solid var(--line)}
-.digest .ditem:last-child{border-bottom:none}
-.digest .ditem .dot{margin-top:6px}
-.digest .ditem .tx{flex:1;font-size:15px}
-.digest .ditem .btn{margin-left:auto}
+/* digest: one prominent action + quiet rows */
+.digest{margin-top:10px}
+.dprimary{display:flex;align-items:center;gap:22px;border:1px solid var(--line-strong);border-radius:16px;padding:22px 24px;box-shadow:0 1px 2px rgba(40,30,10,.04)}
+.dprimary .dl{flex:1}
+.dbadge{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--red)}
+.dp-title{font-size:19px;font-weight:600;letter-spacing:-.015em;margin:10px 0 4px}
+.dp-desc{font-size:14px;color:var(--ink2)}
+.dprimary .btn{flex:0 0 auto}
+.dquiet{margin-top:2px}
+.qi{display:flex;align-items:center;gap:13px;padding:16px 4px;border-bottom:1px solid var(--line)}
+.qi:last-child{border-bottom:none}
+.qi .dot{flex:0 0 auto}
+.qi .qt{flex:1;font-size:14.5px}
+.qi .btn{flex:0 0 auto;margin-left:auto}
 
-.circle{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px}
-.person{padding:0 26px;border-left:1px solid var(--line);cursor:pointer}
-.person:first-child{padding-left:0;border-left:none}
-.person:hover .pname{text-decoration:underline}
-.person .pname{font-size:20px;font-weight:600;letter-spacing:-.02em;margin:10px 0 3px}
-.person .pmeta{font-size:13px;color:var(--ink2)}
-.person .pstat{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:9px 0;border-top:1px solid var(--line2)}
-.person .pstat:nth-of-type(1){margin-top:14px}
+/* care circle: cards */
+.circle{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.person{padding:22px 22px 20px;border:1px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
+.person:hover{transform:translateY(-2px);box-shadow:0 2px 10px rgba(40,30,10,.05),0 16px 38px rgba(40,30,10,.07);border-color:var(--line-strong)}
+.person .pname{font-size:19px;font-weight:600;letter-spacing:-.02em;margin:11px 0 3px}
+.person .pmeta{font-size:13px;color:var(--ink2);padding-bottom:14px;border-bottom:1px solid var(--line2)}
+.person .pstat{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:10px 0;border-top:1px solid var(--line2)}
+.person .pstat:first-of-type{border-top:none;padding-top:12px}
 .person .pstat .v{color:var(--ink2)}
 .person .pstat .v.red{color:var(--red);font-weight:600}
-.person .pfoot{margin-top:12px;font-size:12.5px;color:var(--ink3)}
+.person .pfoot{margin-top:12px;padding-top:12px;border-top:1px solid var(--line2);font-size:12.5px;color:var(--ink3)}
 
 .cols{display:grid;gap:44px;margin-top:22px}
 .cols.c2{grid-template-columns:1.3fr 1fr}
@@ -282,9 +291,18 @@ table.tbl tr:last-child td{border-bottom:none}
 
     <div class="seclabel"><span class="l">Today's digest</span><span class="line"></span><span class="m">Composed 7:00 AM from 14 quiet events · 1 needs action</span></div>
     <div class="digest">
-      <div class="ditem"><span class="dot red"></span><div class="tx"><b>Robert's metformin runs out Thursday.</b> <span class="muted">Refill not yet picked up at CVS.</span></div><button class="btn dark sm">Request refill</button></div>
-      <div class="ditem"><span class="dot amber"></span><div class="tx"><b>Eleanor's sleep is trending shorter.</b> <span class="muted">6.1 h average this week, 48 min under her norm. Worth a call?</span></div><button class="btn sm">Call Mom</button></div>
-      <div class="ditem"><span class="dot green"></span><div class="tx">Dr. Chen (cardiology) is <b>Thursday 9:30</b>. Robert's prep sheet is ready. Rosa's granddaughter visits Sunday.</div><button class="btn sm">Prep sheet</button></div>
+      <div class="dprimary">
+        <div class="dl">
+          <span class="dbadge"><span class="dot red"></span>Needs action</span>
+          <div class="dp-title">Robert's metformin runs out Thursday</div>
+          <div class="dp-desc">Refill not yet picked up at CVS. Filled Jun 29, a 30-day supply.</div>
+        </div>
+        <button class="btn dark">Request refill</button>
+      </div>
+      <div class="dquiet">
+        <div class="qi"><span class="dot amber"></span><div class="qt"><b>Eleanor's sleep is trending shorter.</b> <span class="muted">6.1 h this week, 48 min under her norm.</span></div><button class="btn sm">Call Mom</button></div>
+        <div class="qi"><span class="dot green"></span><div class="qt">Dr. Chen (cardiology) is <b>Thursday 9:30</b> · prep sheet ready. Rosa's granddaughter visits Sunday.</div><button class="btn sm">Prep sheet</button></div>
+      </div>
     </div>
 
     <div class="seclabel"><span class="l">Care circle</span><span class="line"></span><span class="m">3 people · updated moments ago</span></div>
