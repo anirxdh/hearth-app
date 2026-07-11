@@ -282,6 +282,71 @@ table.tbl tr:last-child td{border-bottom:none}
 .lab .lv.high{color:var(--amber)} .lab .lv.watch{color:var(--red)}
 .subhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:26px 0 4px}
 .privacy{font-size:12px;color:var(--ink3);border-top:1px solid var(--line);padding-top:14px;margin-top:26px}
+
+/* ===== TRANSPORT (Get there) ===== */
+.back{background:none;border:none;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink2);cursor:pointer;padding:0;margin-bottom:4px}
+.back:hover{color:var(--ink)}
+.picker{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 4px}
+.pchip{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:9px 15px 9px 10px;cursor:pointer;background:#fff;transition:.15s}
+.pchip:hover{border-color:var(--line-strong)}
+.pchip.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.pchip .av{width:26px;height:26px;font-size:11px}
+.pchip b{font-size:14px}
+.pchip .sm{font-size:12px;color:var(--ink3)}
+.mapwrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#F7F7F5;position:relative;min-height:390px}
+.mapwrap svg{width:100%;height:100%;display:block}
+.maptag{position:absolute;left:16px;bottom:14px;font-size:12px;color:var(--ink);background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:9px;padding:7px 11px;backdrop-filter:blur(4px)}
+.ropt{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px;transition:.15s}
+.ropt:hover{border-color:var(--line-strong);transform:translateY(-1px);box-shadow:0 8px 22px rgba(40,30,10,.05)}
+.ropt .ic{width:42px;height:42px;border-radius:12px;background:var(--hover);display:grid;place-items:center;font-size:20px;flex:0 0 auto}
+.ropt .mid{flex:1;min-width:0}
+.ropt .mid b{font-size:14.5px}
+.ropt .mid .mini{margin-top:2px}
+.ropt .eta{text-align:right;flex:0 0 auto}
+.ropt .eta b{font-size:16px}
+.ropt .eta .mini{margin-top:1px}
+.rtag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:20px;border:1px solid var(--line-strong);color:var(--ink2);margin-left:8px;vertical-align:middle}
+.rtag.fast{border-color:#B9D8C6;color:var(--green)}
+.rtag.safe{border-color:#C4D2E8;color:#3A5C8A}
+.rtag.access{border-color:#E6D3A8;color:var(--amber)}
+.rtag.cheap{border-color:#D2D2D7;color:var(--ink2)}
+.emcard{border:1px solid #E6C4C1;background:#FBF4F3;border-radius:14px;padding:16px 18px;margin-top:20px;font-size:13.5px}
+.emcard b{color:var(--red)}
+.emcard ol{margin:9px 0 0;padding-left:18px;font-size:13px;color:var(--ink2)}
+.emcard ol li{margin:3px 0}
+
+/* ===== ADMIN WORKFLOWS ===== */
+.wfgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:22px}
+.wfcard{border:1px solid var(--line);border-radius:16px;padding:20px;cursor:pointer;transition:transform .16s,box-shadow .16s,border-color .16s;background:#fff}
+.wfcard:hover{transform:translateY(-2px);box-shadow:0 2px 10px rgba(40,30,10,.05),0 16px 38px rgba(40,30,10,.07);border-color:var(--line-strong)}
+.wfcard .cat{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.wfcard h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin:8px 0 5px}
+.wfcard p{font-size:13.5px;color:var(--ink2);line-height:1.5}
+.wfcard .wfmeta{display:flex;gap:16px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line2);font-size:12px;color:var(--ink3)}
+.wfcard .wfmeta b{color:var(--ink);font-weight:600}
+.flow{display:flex;align-items:stretch;overflow-x:auto;padding:10px 2px 18px;margin-top:4px}
+.node{flex:0 0 200px;border:1px solid var(--line);border-radius:13px;padding:14px;background:#fff;position:relative;transition:.25s}
+.node .kind{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3)}
+.node .kb{width:22px;height:22px;border-radius:7px;background:var(--hover);display:grid;place-items:center;font-size:12px}
+.node b{display:block;font-size:14px;margin:9px 0 4px}
+.node .does{font-size:12px;color:var(--ink2);line-height:1.45}
+.node.active{border-color:var(--ink);box-shadow:0 0 0 3px rgba(29,29,31,.07)}
+.node.done{border-color:#B9D8C6;background:#FAFDFB}
+.node .tick{position:absolute;top:11px;right:11px;width:18px;height:18px;border-radius:50%;background:var(--green);color:#fff;place-items:center;font-size:11px;display:none}
+.node.done .tick{display:grid}
+.connector{flex:0 0 32px;display:grid;place-items:center;color:var(--ink3);font-size:15px}
+.piibadge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--red);border:1px solid #E6C4C1;border-radius:20px;padding:1px 7px;margin-left:8px;vertical-align:middle}
+.drop{border:1.5px dashed var(--line-strong);border-radius:14px;padding:22px;text-align:center;color:var(--ink3);font-size:13.5px;margin-top:14px}
+.inrow{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
+.inrow:last-child{border:none}
+.inrow .t{color:var(--ink3);font-size:12px}
+.wfrun{display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.runline{font-size:12.5px;color:var(--ink2);display:none}
+.runline.on{display:inline}
+.wfout{border:1px solid #B9D8C6;background:#FAFDFB;border-radius:14px;padding:18px 20px;margin-top:18px;display:none}
+.wfout.on{display:block;animation:fade .3s}
+.wfout .oh{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}
+
 </style>
 </head>
 <body>
@@ -296,20 +361,22 @@ table.tbl tr:last-child td{border-bottom:none}
   <button class="nav" data-v="assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.9A8 8 0 1 1 21 12Z"/></svg>Assistant</button>
 
   <div class="navlabel">Care circle</div>
-  <button class="nav" data-v="eleanor"><span class="av">E</span>Eleanor · Mom</button>
-  <button class="nav" data-v="robert"><span class="av">R</span>Robert · Dad <span class="dotb"></span></button>
-  <button class="nav" data-v="rosa"><span class="av">R</span>Aunt Rosa</button>
+  <button class="nav" data-v="eleanor"><span class="av">EA</span>Eleanor · Mom</button>
+  <button class="nav" data-v="robert"><span class="av">RA</span>Robert · Dad <span class="dotb"></span></button>
+  <button class="nav" data-v="rosa"><span class="av">RM</span>Rosa · Aunt</button>
 
   <div class="navlabel">Tools</div>
   <button class="nav" data-v="er"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>ER Sheet</button>
   <button class="nav" data-v="handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v13H4z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M4 12h16"/></svg>Handoff Pack</button>
+  <button class="nav" data-v="transport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>Get there</button>
+  <button class="nav" data-v="workflows"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="6" height="5" rx="1.5"/><rect x="15" y="4" width="6" height="5" rx="1.5"/><rect x="9" y="15" width="6" height="5" rx="1.5"/><path d="M6 9v2.5a2 2 0 0 0 2 2h4M18 9v2.5a2 2 0 0 1-2 2h-4"/></svg>Admin workflows</button>
   <a class="nav em" href="guides.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 10v5M12 18v.5"/></svg>Emergency Guides</a>
 
   <div class="navlabel">More</div>
   <a class="nav" href="variants.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.3"/><circle cx="18" cy="13" r="1.8"/><circle cx="6" cy="12" r="2.6"/><circle cx="13" cy="18.5" r="2.3"/></svg>Design Lab</a>
   <a class="nav" href="https://acl-caretaker.vercel.app" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H4z"/><path d="M9 21h6M12 17v4"/></svg>ACL challenge brief</a>
 
-  <div class="side-foot"><b>Maria Alvarez</b><br>Caring for 3 people · private &amp; audited<br><span style="opacity:.7">Demo — every person, record and number is fictional.</span></div>
+  <div class="side-foot"><b>Maria Alvarez</b><br>Caring for 3 people · private &amp; audited<br><span style="opacity:.7">Demo · every person, record and number is fictional.</span></div>
 </aside>
 
 <!-- ================= MAIN ================= -->
@@ -388,7 +455,7 @@ table.tbl tr:last-child td{border-bottom:none}
       </div>
       <div>
         <div class="seclabel" style="margin-top:0;border-top:none;padding-top:0"><span class="l">Family update · drafted</span><span class="line"></span></div>
-        <p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:14px">"Hi Miguel — good week overall. Dad's refill is handled and his cardiology visit is Thursday. Mom's been sleeping a little less, so I'm calling her today…"</p>
+        <p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:14px">"Hi Miguel · good week overall. Dad's refill is handled and his cardiology visit is Thursday. Mom's been sleeping a little less, so I'm calling her today…"</p>
         <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Edit &amp; send</button><button class="btn sm">Regenerate</button></div>
       </div>
     </div>
@@ -508,7 +575,7 @@ table.tbl tr:last-child td{border-bottom:none}
   <!-- ========== MEDS ========== -->
   <section class="view" id="v-meds">
     <h1 class="greet" style="font-size:34px">Medications</h1>
-    <p class="subline" style="font-size:15px">Every runway across your care circle — computed from fill date and day-supply. Nobody logs a dose.</p>
+    <p class="subline" style="font-size:15px">Every runway across your care circle · computed from fill date and day-supply. Nobody logs a dose.</p>
     <table class="tbl" style="margin-top:26px">
       <tr><th>Person</th><th>Medication</th><th>Schedule</th><th>Runway</th><th></th><th></th></tr>
       <tr><td>Robert</td><td class="mname"><b>Metformin 500 mg</b><span>filled Jun 29 · 30-day supply</span></td><td>2× daily</td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
@@ -520,7 +587,7 @@ table.tbl tr:last-child td{border-bottom:none}
       <tr><td>Rosa</td><td class="mname"><b>Levothyroxine 75 mcg</b></td><td>fasting</td><td><span class="rway"><i class="green" style="width:100%"></i></span></td><td><span class="days green">32 days</span></td><td></td></tr>
       <tr><td>Rosa</td><td class="mname"><b>Ibuprofen 200 mg</b><span>as-needed</span></td><td>PRN</td><td><span class="mini">no forecast</span></td><td><span class="mini">PRN</span></td><td></td></tr>
     </table>
-    <div class="note"><b style="color:var(--ink)">Med-sync opportunity —</b> Robert's apixaban, lisinopril and atorvastatin can align to one pickup day (the 28th) at CVS #2213. One trip instead of three. Hearth drafted the request. <button class="btn sm" style="margin-left:8px">View draft</button></div>
+    <div class="note"><b style="color:var(--ink)">Med-sync opportunity  · </b> Robert's apixaban, lisinopril and atorvastatin can align to one pickup day (the 28th) at CVS #2213. One trip instead of three. Hearth drafted the request. <button class="btn sm" style="margin-left:8px">View draft</button></div>
   </section>
 
   <!-- ========== SCAN ========== -->
@@ -570,8 +637,8 @@ table.tbl tr:last-child td{border-bottom:none}
         <div class="field"><div class="crop">ALVAREZ, ROBERT M</div><div class="fk"><div class="k">Patient</div><div class="val">Robert Alvarez</div><div class="chk" style="color:var(--green)">✓ Matches the open profile</div></div><span class="st ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
         <div class="field"><div class="crop">FILLED: 06/29/26</div><div class="fk"><div class="k">Fill date</div><div class="val">June 29, 2026</div><div class="chk" style="color:var(--green)">✓ Confirmed</div></div><span class="st ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>
         <div class="field"><div class="crop skel">TAKE ONE TABLET…</div><div class="fk"><div class="k">Schedule</div><div class="val skel" style="width:170px">1 tablet · twice daily</div><div class="chk mini"><span class="spin" style="display:inline-block;vertical-align:-2px;margin-right:5px"></span>Reading sig…</div></div></div>
-        <div class="field"><div class="crop">DAY SUPPLY: 30?</div><div class="fk"><div class="k">Day supply</div><div class="val">30 days — <span style="color:var(--amber)">verify</span></div><div class="chk" style="color:var(--amber)">⚠ Refill sticker overlaps this field — check the bottle</div></div><span class="st warn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/></svg></span></div>
-        <div style="margin-top:16px;display:flex;gap:10px"><button class="btn dark" disabled style="opacity:.4">Save medication — 2 fields pending</button><button class="btn">Retake photo</button></div>
+        <div class="field"><div class="crop">DAY SUPPLY: 30?</div><div class="fk"><div class="k">Day supply</div><div class="val">30 days · <span style="color:var(--amber)">verify</span></div><div class="chk" style="color:var(--amber)">⚠ Refill sticker overlaps this field · check the bottle</div></div><span class="st warn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v7M12 17.5v.5"/></svg></span></div>
+        <div style="margin-top:16px;display:flex;gap:10px"><button class="btn dark" disabled style="opacity:.4">Save medication · 2 fields pending</button><button class="btn">Retake photo</button></div>
         <p class="mini" style="margin-top:12px">High-alert medications always require field-by-field confirmation. A name mismatch blocks saving entirely.</p>
       </div>
     </div>
@@ -580,7 +647,7 @@ table.tbl tr:last-child td{border-bottom:none}
   <!-- ========== ER ========== -->
   <section class="view" id="v-er">
     <h1 class="greet" style="font-size:34px">ER sheet</h1>
-    <p class="subline" style="font-size:15px">The grab-and-go one-pager — a résumé for Robert's care. Generated fresh from live data, never stale.</p>
+    <p class="subline" style="font-size:15px">The grab-and-go one-pager · a résumé for Robert's care. Generated fresh from live data, never stale.</p>
     <div class="ersheet">
       <div class="erhead"><div><h2>Robert Alvarez</h2><div class="sub">DOB Feb 14, 1945 (81) · 182 lb · Medicare + supplemental</div></div><button class="btn sm">Print</button></div>
       <div class="erbody">
@@ -598,19 +665,19 @@ table.tbl tr:last-child td{border-bottom:none}
 
   <!-- ========== HANDOFF ========== -->
   <section class="view" id="v-handoff">
-    <h1 class="greet" style="font-size:34px">Handoff Pack — Eleanor</h1>
-    <p class="subline" style="font-size:15px">Everything a substitute caregiver needs to step in tomorrow. The binder writes itself — generated live, never stale.</p>
+    <h1 class="greet" style="font-size:34px">Handoff Pack · Eleanor</h1>
+    <p class="subline" style="font-size:15px">Everything a substitute caregiver needs to step in tomorrow. The binder writes itself · generated live, never stale.</p>
     <div class="cols c2">
       <div>
         <div class="seclabel"><span class="l">Daily rhythm</span><span class="line"></span></div>
-        <div class="hitem"><span class="em">Morning</span><div><b>7:30 — wakes early, tea before pills.</b><div class="mini">Won't take morning meds before her tea. Two sugars.</div></div></div>
-        <div class="hitem"><span class="em">Afternoon</span><div><b>2:00 — short nap in the sunroom chair.</b><div class="mini">Not the bedroom; she likes the light.</div></div></div>
-        <div class="hitem"><span class="em">Evening</span><div><b>After 6 PM — can get anxious (sundowning).</b><div class="mini">Old Tamil songs help. Playlist "Amma" is on the kitchen iPad.</div></div></div>
+        <div class="hitem"><span class="em">Morning</span><div><b>7:30 · wakes early, tea before pills.</b><div class="mini">Won't take morning meds before her tea. Two sugars.</div></div></div>
+        <div class="hitem"><span class="em">Afternoon</span><div><b>2:00 · short nap in the sunroom chair.</b><div class="mini">Not the bedroom; she likes the light.</div></div></div>
+        <div class="hitem"><span class="em">Evening</span><div><b>After 6 PM · can get anxious (sundowning).</b><div class="mini">Old Tamil songs help. Playlist "Amma" is on the kitchen iPad.</div></div></div>
         <div class="seclabel"><span class="l">Medications</span><span class="line"></span></div>
-        <div class="hitem"><span class="em">Bedtime</span><div><b>Donepezil 10 mg — the purple-white one.</b><div class="mini">With a full glass of water.</div></div></div>
-        <div class="hitem"><span class="em">Breakfast</span><div><b>Sertraline 50 mg — the blue one.</b><div class="mini">After tea, or she'll refuse it.</div></div></div>
+        <div class="hitem"><span class="em">Bedtime</span><div><b>Donepezil 10 mg · the purple-white one.</b><div class="mini">With a full glass of water.</div></div></div>
+        <div class="hitem"><span class="em">Breakfast</span><div><b>Sertraline 50 mg · the blue one.</b><div class="mini">After tea, or she'll refuse it.</div></div></div>
         <div class="seclabel"><span class="l">If something happens</span><span class="line"></span></div>
-        <div class="hitem"><span class="em">Agitated</span><div>Dim the lights, put on the playlist, sit with her. <span class="mini">Don't correct — redirect to the photo album.</span></div></div>
+        <div class="hitem"><span class="em">Agitated</span><div>Dim the lights, put on the playlist, sit with her. <span class="mini">Don't correct · redirect to the photo album.</span></div></div>
         <div class="hitem"><span class="em">Wanders</span><div>Check the garden first, then Joan's porch next door.</div></div>
         <div class="hitem"><span class="em">Emergency</span><div>911, then Maria (415) 555-0182. Dr. Patel (neurology) (415) 555-0287.</div></div>
       </div>
@@ -628,27 +695,27 @@ table.tbl tr:last-child td{border-bottom:none}
   <!-- ========== APPTS ========== -->
   <section class="view" id="v-appts">
     <h1 class="greet" style="font-size:34px">Appointments</h1>
-    <p class="subline" style="font-size:15px">The Appointment Kit — tracked visits, an auto-drafted prep sheet, a call script, and 30-second post-visit capture.</p>
+    <p class="subline" style="font-size:15px">The Appointment Kit · tracked visits, an auto-drafted prep sheet, a call script, and 30-second post-visit capture.</p>
     <div class="cols c2b">
       <div>
         <div class="seclabel"><span class="l">Upcoming</span><span class="line"></span></div>
-        <div class="appt"><div class="datebox"><span>Jul</span><b>16</b></div><div style="flex:1"><b>Dr. Chen — cardiology</b><div class="mini">Robert · Thu 9:30 · UCSF · Maria driving</div></div><span class="status green"><span class="dot green"></span>Prep ready</span></div>
-        <div class="appt"><div class="datebox"><span>Jul</span><b>24</b></div><div style="flex:1"><b>Dr. Patel — neurology</b><div class="mini">Eleanor · Fri 11:00 · bring sleep log</div></div><span class="mini">In 13 days</span></div>
-        <div class="appt"><div class="datebox"><span>Aug</span><b>3</b></div><div style="flex:1"><b>Dental cleaning</b><div class="mini">Rosa · Mon 2:00 · Miguel driving</div></div><span class="mini">Scheduled</span></div>
+        <div class="appt"><div class="datebox"><span>Jul</span><b>16</b></div><div style="flex:1"><b>Robert Alvarez</b><div class="mini">Dr. Chen · cardiology · Thu 9:30 · UCSF · Maria driving</div></div><span class="status green"><span class="dot green"></span>Prep ready</span></div>
+        <div class="appt"><div class="datebox"><span>Jul</span><b>24</b></div><div style="flex:1"><b>Eleanor Alvarez</b><div class="mini">Dr. Patel · neurology · Fri 11:00 · bring sleep log</div></div><span class="mini">In 13 days</span></div>
+        <div class="appt"><div class="datebox"><span>Aug</span><b>3</b></div><div style="flex:1"><b>Rosa Marquez</b><div class="mini">Dental cleaning · Mon 2:00 · Miguel driving</div></div><span class="mini">Scheduled</span></div>
         <div class="seclabel"><span class="l">Booking call, scripted</span><span class="line"></span></div>
-        <div class="script" style="margin-top:14px">You're calling <b>Dr. Okafor's office</b> (415) 555-0301.<br><br>"Hi — I'm booking a <b>follow-up for Robert Alvarez</b>, DOB <b>February 14, 1945</b>. His cardiologist asked for a primary-care visit within a month. Afternoons work best."</div>
+        <div class="script" style="margin-top:14px">You're calling <b>Dr. Okafor's office</b> (415) 555-0301.<br><br>"Hi · I'm booking a <b>follow-up for Robert Alvarez</b>, DOB <b>February 14, 1945</b>. His cardiologist asked for a primary-care visit within a month. Afternoons work best."</div>
         <div style="margin-top:12px;display:flex;gap:9px"><button class="btn sm">Call now</button><button class="btn sm">Record post-visit note</button></div>
       </div>
       <div>
-        <div class="seclabel"><span class="l">Prep sheet — Dr. Chen, Thursday</span><span class="line"></span></div>
+        <div class="seclabel"><span class="l">Prep sheet · Dr. Chen, Thursday</span><span class="line"></span></div>
         <div style="margin-top:14px;font-size:13.5px"><b>Current medications</b><div class="muted" style="margin-top:3px">Metformin 500 · Apixaban 5 · Lisinopril 10 · Atorvastatin 20</div></div>
         <div style="margin-top:12px;font-size:13.5px"><b>Changes since last visit</b><div class="muted" style="margin-top:3px">Lisinopril reduced 20 → 10 mg (Jun 12)</div></div>
         <div style="margin-top:14px;font-size:13.5px"><b>Questions drafted from your observations</b></div>
         <ul class="prep" style="margin-top:6px">
-          <li><span class="n">1</span>Resting heart rate has drifted up ~6 bpm over two weeks — meaningful with his AFib?</li>
-          <li><span class="n">2</span>Dizziness on Jul 7, the morning after a missed dinner — medication-related?</li>
+          <li><span class="n">1</span>Resting heart rate has drifted up ~6 bpm over two weeks · meaningful with his AFib?</li>
+          <li><span class="n">2</span>Dizziness on Jul 7, the morning after a missed dinner · medication-related?</li>
           <li><span class="n">3</span>Could we move to 90-day fills, and is med-sync okay?</li>
-          <li><span class="n">4</span>Metformin refill was nearly missed — anything to simplify?</li>
+          <li><span class="n">4</span>Metformin refill was nearly missed · anything to simplify?</li>
         </ul>
         <div style="margin-top:14px;display:flex;gap:9px"><button class="btn dark sm">Print prep sheet</button><button class="btn sm">Edit questions</button></div>
       </div>
@@ -658,15 +725,15 @@ table.tbl tr:last-child td{border-bottom:none}
   <!-- ========== ASSISTANT ========== -->
   <section class="view" id="v-assistant">
     <h1 class="greet" style="font-size:34px">Assistant</h1>
-    <p class="subline" style="font-size:15px">Answers only from your people's records — with the receipt shown. Never medical advice.</p>
+    <p class="subline" style="font-size:15px">Answers only from your people's records · with the receipt shown. Never medical advice.</p>
     <div class="chatwrap">
       <div class="msg user"><span class="av">MA</span><div class="bubble">When did Dad's lisinopril dose change?</div></div>
-      <div class="msg ai"><span class="av">H</span><div class="bubble">Robert's lisinopril changed from <b>20 mg to 10 mg on June 12, 2026</b>, after his follow-up with Dr. Chen.<div class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6"/></svg>Visit summary — Dr. Chen · Jun 12, 2026</div></div></div>
+      <div class="msg ai"><span class="av">H</span><div class="bubble">Robert's lisinopril changed from <b>20 mg to 10 mg on June 12, 2026</b>, after his follow-up with Dr. Chen.<div class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6"/></svg>Visit summary · Dr. Chen · Jun 12, 2026</div></div></div>
       <div class="msg user"><span class="av">MA</span><div class="bubble">How did Mom sleep this week?</div></div>
-      <div class="msg ai"><span class="av">H</span><div class="bubble">Eleanor averaged <b>6.1 hours</b> — about <b>48 minutes less</b> than her 8-week baseline. Wednesday was shortest (5.2 h), and her hard evening followed it.<div class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>Sleep data · Jul 5–11 · aggregate computed in code</div></div></div>
+      <div class="msg ai"><span class="av">H</span><div class="bubble">Eleanor averaged <b>6.1 hours</b> · about <b>48 minutes less</b> than her 8-week baseline. Wednesday was shortest (5.2 h), and her hard evening followed it.<div class="cite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>Sleep data · Jul 5–11 · aggregate computed in code</div></div></div>
       <div class="msg user"><span class="av">MA</span><div class="bubble">Should I increase her sertraline if she keeps sleeping badly?</div></div>
-      <div class="msg ai"><span class="av">H</span><div class="bubble refuse">That's a medication decision I don't make — <b>only Dr. Patel or her pharmacist should adjust a dose.</b> I can get you ready for that conversation: her neurology visit is Jul 24, and I've added the sleep trend to the prep sheet.</div></div>
-      <div class="chatin"><input placeholder="Ask about your people — answers cite their records"><button class="send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>
+      <div class="msg ai"><span class="av">H</span><div class="bubble refuse">That's a medication decision I don't make · <b>only Dr. Patel or her pharmacist should adjust a dose.</b> I can get you ready for that conversation: her neurology visit is Jul 24, and I've added the sleep trend to the prep sheet.</div></div>
+      <div class="chatin"><input placeholder="Ask about your people · answers cite their records"><button class="send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div>
     </div>
   </section>
 
@@ -762,10 +829,37 @@ table.tbl tr:last-child td{border-bottom:none}
       <div class="chips"><span class="chip">Hypothyroidism</span><span class="chip">Arthritis</span><span class="status green" style="margin-left:4px"><span class="dot green"></span>All good</span></div>
     </div>
     <div class="cols" style="grid-template-columns:repeat(3,1fr);gap:30px;margin-top:24px">
-      <div><b style="font-size:14px">Medications</b><p class="muted" style="font-size:13px;margin-top:6px">Levothyroxine — 32-day runway. Ibuprofen as-needed (no forecast, honestly).</p></div>
-      <div><b style="font-size:14px">This week</b><p class="muted" style="font-size:13px;margin-top:6px">Granddaughter visits Sunday. Dental cleaning Aug 3 — Miguel driving.</p></div>
-      <div><b style="font-size:14px">Her choice, honored</b><p class="muted" style="font-size:13px;margin-top:6px">Rosa shares meds and appointments with Maria — not her weight. That stream is off, everywhere.</p></div>
+      <div><b style="font-size:14px">Medications</b><p class="muted" style="font-size:13px;margin-top:6px">Levothyroxine · 32-day runway. Ibuprofen as-needed (no forecast, honestly).</p></div>
+      <div><b style="font-size:14px">This week</b><p class="muted" style="font-size:13px;margin-top:6px">Granddaughter visits Sunday. Dental cleaning Aug 3 · Miguel driving.</p></div>
+      <div><b style="font-size:14px">Her choice, honored</b><p class="muted" style="font-size:13px;margin-top:6px">Rosa shares meds and appointments with Maria · not her weight. That stream is off, everywhere.</p></div>
     </div>
+  </section>
+
+  <!-- ========== TRANSPORT ========== -->
+  <section class="view" id="v-transport">
+    <h1 class="greet" style="font-size:34px">Get there</h1>
+    <p class="subline" style="font-size:15px" id="tIntro">The fastest, safest way to reach someone you care for, from wherever you are right now.</p>
+    <div class="picker" id="tPicker"></div>
+    <div class="cols c2b" style="margin-top:10px">
+      <div class="mapwrap" id="tMap"></div>
+      <div>
+        <div class="seclabel"><span class="l">Ways to get there</span><span class="line"></span><span class="m" id="tMeta"></span></div>
+        <div id="tRoutes"></div>
+        <div class="emcard" id="tEmergency"></div>
+      </div>
+    </div>
+    <p class="privacy" id="tPrivacy">Home addresses are shared only within the care circle and never placed in a URL or sent to third parties. Location is used only to draw a route; it is not stored. This is an MVP concept.</p>
+  </section>
+
+  <!-- ========== WORKFLOWS ========== -->
+  <section class="view" id="v-workflows">
+    <div id="wfLibrary">
+      <h1 class="greet" style="font-size:34px">Admin workflows</h1>
+      <p class="subline" style="font-size:15px">No-code automations for the paperwork that eats your week. Pick one, upload what it asks for, and let it run through each step to a finished document. Edit any workflow, or request a new one.</p>
+      <div class="wfgrid" id="wfGrid"></div>
+      <p class="privacy">Prebuilt, clinician- and caregiver-informed workflows. Inputs marked PII are processed in place and never stored in plain text; passwords and payment details are requested through your password manager, not typed here. Every run is logged. This is an MVP preview with fictional data.</p>
+    </div>
+    <div id="wfDetail" style="display:none"></div>
   </section>
 
   <!-- ========== GUIDES teaser ========== -->
@@ -781,7 +875,7 @@ table.tbl tr:last-child td{border-bottom:none}
       <div class="gc"><b>Chest pain</b><span>911 · sit · aspirin if safe</span></div>
     </div>
     <div style="margin-top:20px"><a class="btn dark" href="guides.html">Open the full animated Guide Book →</a></div>
-    <div class="note">Adapted from American Red Cross and American Heart Association guidance, clinician-reviewed. Static and vetted — no AI writes emergency steps. Personalized from profile facts (Robert's blood thinner adds a head-injury note). Available offline and in Spanish.</div>
+    <div class="note">Adapted from American Red Cross and American Heart Association guidance, clinician-reviewed. Static and vetted · no AI writes emergency steps. Personalized from profile facts (Robert's blood thinner adds a head-injury note). Available offline and in Spanish.</div>
   </section>
 
   </div>
@@ -835,6 +929,112 @@ document.querySelectorAll('.rangebar[data-chart]').forEach(function(rb){var key=
 var _lt=0;setInterval(function(){_lt+=3;var t=_lt<60?_lt+'s ago':Math.floor(_lt/60)+'m ago';['liveAgo','liveAgo2'].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=t});},3000);
 setInterval(function(){var h=document.getElementById('hrVal');if(h)h.textContent=72+Math.floor(Math.random()*5);},4000);
 drawChart('robert');drawChart('eleanor');
+
+/* ===== data (injected after research) ===== */
+var WFDATA = [{"id":"claim-denial-appeal","title":"Claim Denial Appeal Builder","category":"Insurance & benefits","description":"Turns a denied EOB into a ready-to-file appeal packet with a medical-necessity letter and the correct payer form.","estTime":"12 min, replaces ~3.5 hrs","frequency":"Every denial - a few times a year per person","whoItHelps":"Maria when Robert's cardiology claim or Eliquis pharmacy claim is denied by his Medicare Advantage plan.","painPoint":"Denials arrive as dense EOBs with cryptic reason codes and short deadlines, so caregivers often just pay a winnable bill instead of fighting it.","inputs":[{"label":"Patient","type":"select","pii":false,"note":"Robert / Eleanor / Rosa"},{"label":"Denial letter / EOB","type":"pdf","pii":true,"note":"Member ID, claim number, diagnosis, denial reason code"},{"label":"Insurance card","type":"photo","pii":true,"note":"Member ID, group number, payer"},{"label":"Related clinical note / visit summary","type":"pdf","pii":true,"note":"Supports the medical-necessity argument"},{"label":"Why you disagree","type":"text","pii":false,"note":"Plain-English reason in the caregiver's words"}],"nodes":[{"id":"n1","label":"Upload denial","kind":"trigger","does":"Caregiver selects the patient and uploads the denied EOB or denial letter."},{"id":"n2","label":"Read the denial","kind":"extract","does":"Reads the EOB to pull the member ID, claim number, date of service, billed CPT/HCPCS codes, denied amount, and the CARC/RARC reason code."},{"id":"n3","label":"Decode code + rules","kind":"lookup","does":"Takes that reason code and translates it to plain English, then looks up the payer's appeal address, appeal level, and filing deadline."},{"id":"n4","label":"Pick appeal path","kind":"decision","does":"Uses the decoded reason and payer to choose the correct appeal type and required form (MA reconsideration, commercial internal appeal, or peer-to-peer)."},{"id":"n5","label":"Draft the appeal","kind":"generate","does":"Fills the chosen form and writes a medical-necessity letter citing the diagnosis, denied codes, and clinical note, ready for the prescriber's signature."},{"id":"n6","label":"Caregiver review","kind":"review","does":"Shows the drafted packet for Maria to edit and surfaces the exact filing deadline before anything is finalized."},{"id":"n7","label":"Assemble + track","kind":"output","does":"Bundles the cover letter, form, medical-necessity letter, and records into one fax/mail-ready PDF and sets a deadline reminder."}],"output":{"label":"Appeal packet","format":"packet","description":"Cover letter + appeal form + medical-necessity letter + records, fax/mail-ready, with a filing-deadline reminder."}},{"id":"prior-auth-packet","title":"Prior Authorization Packet","category":"Insurance & benefits","description":"Builds a payer-specific prior-auth packet with the right form, matched clinical criteria, and supporting labs.","estTime":"10 min, replaces ~2.5 hrs","frequency":"Every new specialty/brand med plus annual renewals","whoItHelps":"Maria when Eleanor's neurologist prescribes a brand Alzheimer's drug, or Robert's Eliquis, that the plan won't cover without prior authorization.","painPoint":"Every payer has its own PA form and clinical criteria, and one missing field - a step-therapy trial or lab value - means denial and a full re-submission.","inputs":[{"label":"Patient","type":"select","pii":false,"note":"Whose prescription this is"},{"label":"Prescription / order","type":"photo","pii":true,"note":"Drug, dose, prescriber NPI, diagnosis"},{"label":"Insurance card","type":"photo","pii":true,"note":"Plan / PBM identification"},{"label":"Recent labs","type":"pdf","pii":true,"note":"A1c, eGFR, and other criteria values"},{"label":"Medication history","type":"text","pii":true,"note":"Prior drug trials for step-therapy; can pull from the app med list"}],"nodes":[{"id":"n1","label":"New Rx needs PA","kind":"trigger","does":"Caregiver selects the patient and uploads the prescription, or the med-runway feature flags a drug that requires prior authorization."},{"id":"n2","label":"Read Rx + labs","kind":"extract","does":"Pulls the drug name, strength, NDC, prescriber NPI, and ICD-10 diagnosis from the order plus criteria values like A1c and eGFR from the labs."},{"id":"n3","label":"Find form + criteria","kind":"lookup","does":"Uses the plan and drug to retrieve that payer's specific PA form and its clinical criteria (step-therapy, required labs, allowed diagnoses)."},{"id":"n4","label":"Check criteria met","kind":"decision","does":"Compares the extracted med history and lab values against those criteria and lists what is satisfied versus missing, e.g. needs a documented metformin trial."},{"id":"n5","label":"Fill the PA form","kind":"generate","does":"Populates the payer's PA form with the patient, prescriber, drug, diagnosis, and the supporting evidence that cleared the criteria check."},{"id":"n6","label":"Prescriber sign-off","kind":"review","does":"Routes the completed form to Maria to hand to the prescriber for signature, highlighting any remaining gaps."},{"id":"n7","label":"Fax-ready packet","kind":"output","does":"Produces a fax-ready packet (form + labs + med history) addressed to the plan's PA line, with a follow-up tracking reminder."}],"output":{"label":"Prior-auth packet","format":"packet","description":"Completed payer PA form + supporting labs and med history, addressed to the plan's PA fax line, with a status reminder."}},{"id":"medicaid-redetermination","title":"Medicaid Renewal Assembler","category":"Insurance & benefits","description":"Reads the state renewal notice, re-gathers income and asset proofs, and fills the redetermination form before the deadline.","estTime":"15 min, replaces ~4.5 hrs","frequency":"Annually per Medicaid enrollee (twice a year in some states)","whoItHelps":"Maria renewing Eleanor's or Rosa's Medicaid, a Medicare Savings Program, or a long-term-care waiver each year.","painPoint":"The state mails a renewal packet with a short deadline that forces you to re-gather the same bank, Social Security, and pension proofs and re-copy them into a long form - miss it and coverage lapses.","inputs":[{"label":"Patient","type":"select","pii":false,"note":"Which enrollee this renewal is for"},{"label":"State renewal / redetermination notice","type":"pdf","pii":true,"note":"Case number, deadline, required-document checklist"},{"label":"Social Security award letter","type":"pdf","pii":true,"note":"SSN, monthly benefit amount"},{"label":"Bank statements","type":"pdf","pii":true,"note":"Account numbers and balances for the asset test"},{"label":"Pension / other income","type":"pdf","pii":true,"note":"Additional income proof"}],"nodes":[{"id":"n1","label":"Notice arrives","kind":"trigger","does":"Caregiver selects the patient and uploads the state Medicaid renewal notice plus the income and asset proofs."},{"id":"n2","label":"Read notice + proofs","kind":"extract","does":"Pulls the case number, deadline, and required-document checklist from the notice and the income and account balances from the proofs."},{"id":"n3","label":"State rules + limits","kind":"lookup","does":"Uses the patient's state and category (aged/disabled, MSP, or LTC waiver) to look up current Medicaid income and asset limits and the correct renewal form."},{"id":"n4","label":"Eligibility check","kind":"decision","does":"Compares the extracted income and assets against those limits and flags any figure that risks disqualification, such as a balance over the asset cap needing a spend-down note."},{"id":"n5","label":"Fill renewal form","kind":"generate","does":"Fills the state renewal form and a cover sheet listing each required proof and whether it is attached."},{"id":"n6","label":"Caregiver review","kind":"review","does":"Presents the completed form and document checklist for Maria to review, highlighting any missing proof before submission."},{"id":"n7","label":"Packet + reminders","kind":"output","does":"Bundles the signed form and all proofs into a submission-ready packet and schedules reminders ahead of the renewal deadline."}],"output":{"label":"Renewal packet","format":"packet","description":"Filled state renewal form + document cover sheet + attached income/asset proofs, plus scheduled deadline reminders."}},{"id":"hipaa-records-release-transfer","title":"Records Release to a New Provider","category":"Records","description":"Auto-fills the signed HIPAA release form and cover sheet to pull a care recipient's records from an old provider to a new one.","estTime":"9 min, replaces ~2.5 hrs of phone tag","frequency":"Every new provider added - several times a year across three care recipients","whoItHelps":"Maria the moment she adds a new specialist for Robert and needs his cardiology and lab history sent over before the first visit.","painPoint":"Every new specialist means hand-copying the same identifiers onto a different release form, faxing the right records department, then chasing them for weeks.","inputs":[{"label":"Care recipient","type":"select","pii":false,"note":"Robert, Eleanor, or Rosa - determines whose legal name, DOB, and MRN are pulled"},{"label":"Releasing provider / facility","type":"text","pii":false,"note":"Old provider whose records department gets the request; auto-suggested from the care team"},{"label":"Receiving provider name, fax, or portal","type":"text","pii":false,"note":"The new provider records go to"},{"label":"Records date range and types","type":"date","pii":false,"note":"e.g. last 2 years of visit notes, labs, imaging"},{"label":"Signed patient / POA authorization","type":"photo","pii":true,"note":"Patient or POA signature on the release itself"},{"label":"POA / legal authority document","type":"pdf","pii":true,"note":"Proof the caregiver may authorize release on the patient's behalf"}],"nodes":[{"id":"n1","label":"New provider added","kind":"trigger","does":"Maria selects the care recipient and the new specialist she wants to bring records over to."},{"id":"n2","label":"Pull identity + records dept","kind":"lookup","does":"Pulls that recipient's legal name, DOB, address, and MRN from Patient 360 and looks up the releasing provider's records fax or portal."},{"id":"n3","label":"Fill HIPAA release","kind":"generate","does":"Populates the state-appropriate HIPAA release form with those identifiers, the selected date range and record types, and the receiving provider's delivery details."},{"id":"n4","label":"Review + attach signature","kind":"review","does":"Shows Maria the completed release to confirm scope, then attaches the patient or POA signature and the legal-authority document."},{"id":"n5","label":"Assemble release packet","kind":"output","does":"Produces a signed PDF release plus an addressed cover sheet routed to the releasing provider's records department."},{"id":"n6","label":"Send + track request","kind":"notify","does":"Delivers the packet to the fax or portal, logs the submission, and sets follow-up reminders until the records arrive."}],"output":{"label":"Signed release packet + tracking","format":"packet","description":"A signed, provider-ready release form with cover sheet, delivered to the old provider and tracked to completion."}},{"id":"discharge-to-home-setup","title":"Hospital Discharge-to-Home Setup","category":"Care transitions","description":"Turns a hospital discharge packet into a reconciled medication list, booked follow-ups, a home-health referral, and a watch-for-symptoms sheet.","estTime":"12 min, replaces ~3 hrs in the risky 48 hours after discharge","frequency":"Every hospital or ER discharge and every rehab/SNF transition","whoItHelps":"Maria driving Robert home from a 3-day AFib admission with a new prescription list and four follow-up orders she has to make sense of tonight.","painPoint":"The discharge packet is a wall of paper the caregiver must reconcile against current meds, translate into appointments, and act on within days - the top driver of avoidable readmissions.","inputs":[{"label":"Care recipient","type":"select","pii":false,"note":"Whose discharge this is"},{"label":"Discharge / after-visit summary","type":"pdf","pii":true,"note":"Diagnoses, discharge instructions, follow-up orders, warning signs"},{"label":"Discharge medication list","type":"photo","pii":true,"note":"The new/changed/stopped meds handed over at discharge"},{"label":"Follow-up and referral orders","type":"text","pii":false,"note":"Which specialists, timeframes, and home-health services were ordered"}],"nodes":[{"id":"n1","label":"Upload discharge packet","kind":"trigger","does":"Maria selects the care recipient and photographs or uploads the discharge summary and new medication list."},{"id":"n2","label":"Parse packet","kind":"extract","does":"Reads the summary and med list into structured data: diagnoses, new/changed/stopped meds, follow-up orders, home-health referral, and warning signs."},{"id":"n3","label":"Reconcile against current meds","kind":"lookup","does":"Compares those discharge meds to the recipient's existing Hearth regimen, flagging duplicates, discontinued drugs still in the cabinet, and interactions such as a new NSAID against apixaban."},{"id":"n4","label":"Flag conflicts + red flags","kind":"decision","does":"Routes any dangerous interaction or allergy hit like penicillin to an urgent alert while passing clean items forward to scheduling."},{"id":"n5","label":"Build follow-ups + referral","kind":"generate","does":"Drafts an appointment request for each ordered follow-up, a home-health referral, and a day-by-day recovery checklist."},{"id":"n6","label":"Caregiver confirmation","kind":"review","does":"Maria reviews the reconciled medication changes and proposed appointment times before anything is booked."},{"id":"n7","label":"Discharge-to-home plan","kind":"output","does":"Outputs one consolidated plan: updated med list, appointment calendar, home-health packet, and a watch-for-symptoms sheet."}],"output":{"label":"Discharge-to-home care plan","format":"packet","description":"A single reconciled plan combining the corrected medication list, booked follow-ups, home-health referral, and red-flag symptom guide."}},{"id":"new-patient-360-intake","title":"New Patient 360 Intake","category":"Onboarding","description":"Builds a complete Patient 360 from an insurance card, medication bottles, and prior records in minutes instead of an evening of typing.","estTime":"10 min, replaces ~2 hrs of manual transcription","frequency":"Once per new care recipient - a repeatable onboarding run worth automating end to end","whoItHelps":"Maria taking over care for Aunt Rosa and setting her up in Hearth from scratch using a shoebox of cards, bottles, and printouts.","painPoint":"Onboarding a new care recipient means keying in insurance, allergies, conditions, and a dozen bottle labels by hand - slow and easy to fat-finger a member ID or drop a drug.","inputs":[{"label":"Name and relationship","type":"text","pii":true,"note":"Legal name, DOB, relationship to caregiver"},{"label":"Insurance card (front and back)","type":"photo","pii":true,"note":"Payer, member ID, group number"},{"label":"Medicare / Medicaid card","type":"photo","pii":true,"note":"Government ID numbers"},{"label":"Medication bottle photos","type":"photo","pii":true,"note":"One per Rx label: drug, dose, prescriber, Rx number"},{"label":"Prior records and recent labs","type":"pdf","pii":true,"note":"Diagnoses, allergies, recent lab values"},{"label":"Known allergies and conditions","type":"text","pii":true,"note":"Anything not captured on the printouts"}],"nodes":[{"id":"n1","label":"Start intake","kind":"trigger","does":"Maria begins onboarding a new care recipient such as Aunt Rosa and enters her name and relationship."},{"id":"n2","label":"Read cards, bottles, records","kind":"extract","does":"Reads the insurance and Medicare cards, every prescription bottle label, and the prior records into structured fields for payer, member ID, drug/dose/prescriber, diagnoses, and labs."},{"id":"n3","label":"Normalize meds + verify payer","kind":"lookup","does":"Matches each parsed drug to a standard drug reference, computes refill runway, and validates the insurance payer and plan."},{"id":"n4","label":"Flag allergy + interaction conflicts","kind":"decision","does":"Cross-checks every normalized medication against the stated allergies and against each other, routing any conflict to review."},{"id":"n5","label":"Assemble Patient 360","kind":"generate","does":"Builds the full record: demographics, insurance, allergies, conditions, active medication list with refill runway, and care team."},{"id":"n6","label":"Caregiver verify + correct","kind":"review","does":"Maria confirms the extracted values, especially the member ID and doses, and fixes any misread field."},{"id":"n7","label":"Publish Patient 360","kind":"output","does":"Publishes the new recipient's dashboard, records, and medication runway, ready to use across the app."}],"output":{"label":"Complete Patient 360 profile","format":"profile","description":"A ready-to-use care recipient record with verified insurance, normalized medications, allergies, conditions, and refill runway."}}];
+var TPDATA = {"intro":"\"Get there\" turns each patient's saved home into a live destination: from the caregiver's current GPS location it compares every realistic way to physically reach them · drive, transit, rideshare, paratransit, walk · plus non-emergency medical transport to get the patient to appointments, each tagged with ETA, rough cost, and a fastest / safest / most accessible label.","modes":[{"emoji":"🚗","name":"Drive yourself","whenBest":"You have a car and want flexibility · carrying a walker, groceries, or the patient's meds. Fastest for short hops; you own the parking hassle.","note":"ETA uses live traffic (Google/Apple/511). Adds toll + rough parking estimate at the destination."},{"emoji":"🚕","name":"Rideshare (Uber / Lyft / Uber Health)","whenBest":"No car handy, or you want door-to-door with zero parking. Uber Health can be billed to the care account instead of a personal app.","note":"Shows surge-aware price range. Uber Health rides can be dispatched for the patient without them needing a smartphone."},{"emoji":"🚈","name":"Public transit (Muni / BART / AC Transit)","whenBest":"Cheapest option, parking is brutal, or you're crossing the bay and want to skip bridge traffic.","note":"Pulls live GTFS arrivals; names the exact line and stop and flags level-boarding / elevator status."},{"emoji":"♿","name":"Paratransit / ADA accessible","whenBest":"The patient (or caregiver) uses a wheelchair, walker, or can't manage stairs/transfers. SF Paratransit or East Bay Paratransit, booked ahead.","note":"Curb-to-curb ADA service. Must usually be reserved 1–3 days out; the tool tracks the eligibility ID and booking window."},{"emoji":"🚐","name":"Non-emergency medical transport (NEMT)","whenBest":"Getting the PATIENT to a scheduled appointment · dialysis, cardiology, memory clinic · when regular rides won't work. Wheelchair van or gurney.","note":"Checks Medi-Cal / Medicare Advantage NEMT benefit and books a covered ride to the appointment address, not just caregiver travel."},{"emoji":"🚶","name":"Walk","whenBest":"The patient lives within ~1 mile and weather and mobility allow. Free, no parking, good for a quick check-in.","note":"Suppressed automatically when distance or an urgent flag makes it impractical; shown greyed with the real duration so you know why."}],"dataNeeded":[{"label":"Caregiver live GPS location (origin)","note":"Read only while the tool is open, used to compute ETAs, never written to the patient record or shared with the care circle.","pii":true},{"label":"Patient home address (destination)","note":"Already stored per patient in Hearth; reused here as the fixed destination. Never placed in a URL or query string.","pii":true},{"label":"Patient mobility & accessibility profile","note":"Wheelchair / walker, transfer help, stairs-at-home, cognitive wandering risk · drives the 'most accessible' tag and paratransit/NEMT filtering. Health data.","pii":true},{"label":"Care-circle contacts + opt-in live location","note":"Other caregivers' phone/email and, only if each one opts in, their live ETA · used solely for emergency escalation ranking. Sensitive.","pii":true},{"label":"Appointment address & time (for NEMT)","note":"Where and when the patient needs to be · pulled from the Appointments tool to book covered medical transport.","pii":true},{"label":"NEMT eligibility (Medi-Cal / Medicare Advantage plan + member ID)","note":"Determines whether a covered ride exists. Highly sensitive insurance identifiers · stored encrypted, shown masked.","pii":true},{"label":"Rideshare / Uber Health payment method","note":"Tokenized card or care-account billing handle; the tool never displays or handles the raw card number.","pii":true},{"label":"Travel preferences","note":"Avoid highways, avoid stairs/escalators, preferred modes, max walk distance. Non-sensitive personalization.","pii":false},{"label":"Live traffic & transit feeds (Google/Apple, 511 Bay Area, agency GTFS)","note":"Public real-time data for ETAs and line status. Not personal.","pii":false}],"routes":[{"patient":"Robert (Dad, 81)","fromLabel":"Maria · live location: Financial District, San Francisco (her office)","toLabel":"Robert's home · Outer Sunset, San Francisco (~7 mi)","distance":"~7 miles, within the city","options":[{"emoji":"🚗","mode":"Drive yourself","eta":"20–25 min","detail":"Fell St → Lincoln Way along Golden Gate Park; free street parking near 46th Ave.","cost":"~$3 gas, free parking","safety":"fastest"},{"emoji":"🚈","mode":"Public transit · Muni Metro","eta":"40–45 min","detail":"N Judah from Montgomery St Station to Judah St & 46th Ave, then 3-min walk. Low-floor cars, level boarding at underground stations.","cost":"$2.50","safety":"cheapest"},{"emoji":"🚕","mode":"Rideshare · Lyft","eta":"18–24 min","detail":"Door-to-door; request 'extra comfort' if you're bringing Robert's supplies. No parking to find.","cost":"$27–34"},{"emoji":"🚶","mode":"Walk","eta":"~2 hr 10 min","detail":"7 mi through Golden Gate Park · shown greyed out; not recommended for a same-day check-in.","cost":"Free"}]},{"patient":"Eleanor (Mom, 78)","fromLabel":"Maria · live location: Financial District, San Francisco (her office)","toLabel":"Eleanor's home · Lake Merritt, Oakland (~12 mi, cross-bay)","distance":"~12 miles, across the Bay Bridge","options":[{"emoji":"🚉","mode":"Public transit · BART","eta":"30–35 min","detail":"BART Antioch line from Embarcadero to Lake Merritt Station, then 8-min walk. Avoids bridge traffic; tap the elevator-status check before you leave if carrying anything.","cost":"$4.60","safety":"safest"},{"emoji":"🚗","mode":"Drive yourself","eta":"30–45 min (60+ at commute peak)","detail":"I-80 E over the Bay Bridge → I-580; metered parking near Lakeshore Ave.","cost":"$8 bridge toll + ~$3 parking + gas","safety":"fastest off-peak"},{"emoji":"🚕","mode":"Rideshare · UberX","eta":"35–45 min","detail":"Door-to-door across the bridge; surge likely at rush hour. Bridge toll included in fare.","cost":"$44–58"},{"emoji":"🚌","mode":"Public transit · AC Transit Transbay","eta":"50–60 min","detail":"Transbay F line from Salesforce Transit Center to Grand Ave, Oakland. Wheelchair-accessible low-floor bus, easiest boarding of the transit options.","cost":"$6.00","safety":"most accessible"}]}],"emergency":{"description":"Emergency mode arms when a patient triggers a help/fall alert or a monitored vital breaches a threshold. Hearth computes Maria's live ETA to that patient; if it exceeds the response target (e.g. >20 min for Eleanor across the bay), the tool doesn't wait · it ranks the care circle by real-time ETA, alerts the closest opted-in member, and offers one-tap dispatch of the single quickest option (usually Uber Health or a Lyft to the patient's door). For a true medical emergency it surfaces a 911 shortcut with the patient's address and one-line medical summary (Robert: AFib, on apixaban blood thinner, penicillin allergy) ready to read to the dispatcher. Everyone in the circle sees who is en route and their ETA, so two people don't both scramble.","escalation":["Detect: patient help-alert or vital breach fires; pull patient location and the ER/medical summary.","Measure: compute the active caregiver's live ETA to the patient.","Rank: if that ETA is over the response target, sort opted-in care-circle members by current ETA to the patient.","Notify: push to the nearest available member ('Robert needs help · you're 6 min away, can you go?') with accept/decline.","Dispatch: one tap sends the fastest ride (Uber Health / Lyft) to the patient's door, or opens the 911 shortcut with address + medical summary for a medical emergency.","Coordinate: broadcast who is responding and their ETA so the whole circle sees a single source of truth and stands down duplicates."]},"privacy":["Optional and off by default · the tool is only active when the caregiver opens it, and live GPS is read in the moment, not logged to the patient's timeline.","Home and appointment addresses are treated as PII: passed to routing over encrypted requests, never embedded in URLs, query strings, or shared links.","Care-circle live location is strictly opt-in per person and used only for emergency ETA ranking; members can leave location sharing off and still receive alerts.","Insurance / Medi-Cal member IDs for NEMT are stored encrypted and shown masked; raw rideshare card numbers are never handled · only tokenized payment handles.","No location or travel history is sold, used for ads, or compiled across patients; caregivers can clear trip history and revoke location access at any time.","MVP concept: routing, NEMT eligibility, and paratransit booking would run through licensed provider APIs (511, transit GTFS, Uber Health, SF/East Bay Paratransit) · ETAs and prices shown here are realistic estimates, not live quotes."]};
+
+/* ===== Transport ===== */
+function tIcon(mode){var m=(mode||'').toLowerCase();
+  if(/drive|car|self/.test(m))return '\u{1F697}';
+  if(/paratransit|access|wheel|ada/.test(m))return '♿';
+  if(/nemt|medical\s*transport|van/.test(m))return '\u{1F690}';
+  if(/ride|uber|lyft|taxi|health/.test(m))return '\u{1F695}';
+  if(/transit|bus|train|bart|muni|rail|subway/.test(m))return '\u{1F686}';
+  if(/walk/.test(m))return '\u{1F6B6}';
+  return '\u{1F4CD}';}
+function tTag(s){s=(s||'').toLowerCase();
+  if(s.indexOf('fast')>=0)return 'fast'; if(s.indexOf('safe')>=0)return 'safe';
+  if(s.indexOf('access')>=0)return 'access'; if(s.indexOf('cheap')>=0||s.indexOf('afford')>=0)return 'cheap'; return '';}
+function tGrid(){var s='';var x,y;for(x=42;x<600;x+=70)s+='<line x1="'+x+'" y1="0" x2="'+x+'" y2="390" stroke="#ECECEA" stroke-width="7"/>';for(y=46;y<390;y+=60)s+='<line x1="0" y1="'+y+'" x2="600" y2="'+y+'" stroke="#ECECEA" stroke-width="7"/>';return s;}
+function tMapSVG(){
+  return '<svg viewBox="0 0 600 390" preserveAspectRatio="xMidYMid slice">'
+   +'<rect width="600" height="390" fill="#F7F7F5"/>'+tGrid()
+   +'<path d="M-20 118 C120 150 180 86 320 128 C450 165 520 118 620 150 L620 196 C520 172 450 218 320 182 C180 142 120 202 -20 172 Z" fill="#DEE8F0"/>'
+   +'<path d="M108 312 C210 276 214 214 300 196 C388 178 424 128 486 86" fill="none" stroke="#1D1D1F" stroke-width="3.2" stroke-dasharray="1.5 9" stroke-linecap="round"/>'
+   +'<circle cx="108" cy="312" r="17" fill="#3A5C8A" opacity=".16"/><circle cx="108" cy="312" r="8.5" fill="#3A5C8A" stroke="#fff" stroke-width="2.5"/>'
+   +'<g transform="translate(486,86)"><path d="M0 4 C9 4 15 -3 15 -11 A15 15 0 1 0 -15 -11 C-15 -3 -9 4 0 4 Z" fill="#C4362F"/><circle cx="0" cy="-13" r="4.6" fill="#fff"/></g>'
+   +'</svg>';
+}
+function renderTransport(i){
+  if(!TPDATA||!TPDATA.routes||!TPDATA.routes.length)return;
+  var picker=document.getElementById('tPicker'); if(!picker)return;
+  if(TPDATA.intro){var ti=document.getElementById('tIntro');if(ti)ti.textContent=TPDATA.intro;}
+  picker.innerHTML=TPDATA.routes.map(function(r,idx){
+    return '<div class="pchip'+(idx===i?' on':'')+'" data-tpi="'+idx+'"><span class="av">'+(r.patient||'?').charAt(0)+'</span><b>'+(r.patient||'')+'</b><span class="sm">'+(r.toLabel||'')+'</span></div>';
+  }).join('');
+  var r=TPDATA.routes[i];
+  document.getElementById('tMeta').textContent=[r.distance,'from '+(r.fromLabel||'your location')].filter(Boolean).join(' · ');
+  document.getElementById('tMap').innerHTML=tMapSVG()+'<div class="maptag"><b>'+(r.fromLabel||'You')+'</b> → <b>'+(r.toLabel||r.patient)+'</b></div>';
+  document.getElementById('tRoutes').innerHTML=(r.options||[]).map(function(o){
+    var tag=o.safety?'<span class="rtag '+tTag(o.safety)+'">'+o.safety+'</span>':'';
+    return '<div class="ropt"><div class="ic">'+(o.emoji||tIcon(o.mode))+'</div><div class="mid"><b>'+o.mode+tag+'</b><div class="mini">'+(o.detail||'')+'</div></div><div class="eta"><b>'+(o.eta||'')+'</b><div class="mini">'+(o.cost||'')+'</div></div></div>';
+  }).join('');
+  var em=document.getElementById('tEmergency');
+  if(TPDATA.emergency){em.style.display='block';em.innerHTML='<b>If you cannot get there in time.</b> '+(TPDATA.emergency.description||'')+(TPDATA.emergency.escalation&&TPDATA.emergency.escalation.length?'<ol><li>'+TPDATA.emergency.escalation.join('</li><li>')+'</li></ol>':'');}
+  else em.style.display='none';
+}
+
+/* ===== Workflows ===== */
+function wfKindIcon(k){var m={trigger:'▶',extract:'✂',lookup:'\u{1F50E}',decision:'⑂',generate:'✎',review:'✓',output:'\u{1F4C4}',notify:'\u{1F514}'};return m[(k||'').toLowerCase()]||'●';}
+function renderWfLibrary(){
+  var g=document.getElementById('wfGrid'); if(!g)return;
+  g.innerHTML=WFDATA.map(function(w){
+    return '<div class="wfcard" data-wf="'+w.id+'"><div class="cat">'+(w.category||'')+'</div><h3>'+w.title+'</h3><p>'+w.description+'</p><div class="wfmeta"><span><b>'+(w.nodes?w.nodes.length:0)+'</b> steps</span><span><b>'+(w.estTime||'')+'</b></span></div></div>';
+  }).join('');
+}
+function openWf(id){
+  var w=WFDATA.filter(function(x){return x.id===id})[0]; if(!w)return;
+  document.getElementById('wfLibrary').style.display='none';
+  var d=document.getElementById('wfDetail'); d.style.display='block';
+  var flow=w.nodes.map(function(n,idx){
+    return (idx?'<div class="connector">→</div>':'')+'<div class="node" id="node-'+idx+'"><div class="kind"><span class="kb">'+wfKindIcon(n.kind)+'</span>'+n.kind+'</div><b>'+n.label+'</b><div class="does">'+n.does+'</div><div class="tick">✓</div></div>';
+  }).join('');
+  var inputs=w.inputs.map(function(inp){
+    return '<div class="inrow"><div><b>'+inp.label+'</b>'+(inp.pii?'<span class="piibadge">PII</span>':'')+(inp.note?'<div class="t">'+inp.note+'</div>':'')+'</div><span class="t">'+(inp.type||'')+'</span></div>';
+  }).join('');
+  d.innerHTML='<button class="back" data-wfback>← All workflows</button>'
+   +'<div class="phead" style="margin-top:8px"><h1 style="font-size:29px">'+w.title+'</h1><div class="chips"><span class="chip">'+(w.category||'')+'</span><span class="chip">'+(w.estTime||'')+'</span>'+(w.frequency?'<span class="chip">'+w.frequency+'</span>':'')+'</div></div>'
+   +'<p class="subline" style="font-size:14.5px">'+(w.painPoint||w.description)+'</p>'
+   +'<div class="seclabel"><span class="l">How it works</span><span class="line"></span><span class="m">each step feeds the next</span></div>'
+   +'<div class="flow">'+flow+'</div>'
+   +'<div class="cols c2b" style="margin-top:10px">'
+     +'<div><div class="seclabel"><span class="l">What you upload</span><span class="line"></span></div>'+inputs+'<div class="drop">Drop files here, or browse. Nothing leaves your device in this demo.</div></div>'
+     +'<div><div class="seclabel"><span class="l">Run it</span><span class="line"></span></div>'
+       +'<div class="drop" style="text-align:left;border-style:solid;border-color:var(--line);color:var(--ink)">Produces: <b>'+w.output.label+'</b> <span class="t">('+w.output.format+')</span>'+(w.output.description?'<div class="t" style="margin-top:6px">'+w.output.description+'</div>':'')+'</div>'
+       +'<div class="wfrun"><button class="btn dark" data-wfrun="'+w.id+'" id="runBtn">Run workflow</button><span class="runline" id="runLine"></span></div>'
+       +'<div class="wfout" id="wfOut"><div class="oh"><span class="dot green"></span>Done · '+w.output.label+'</div><div class="t" style="margin-top:8px">'+(w.output.description||'')+'</div><div style="margin-top:13px;display:flex;gap:9px"><button class="btn sm">Download '+w.output.format+'</button><button class="btn sm">Send to vault</button></div></div>'
+     +'</div>'
+   +'</div>'
+   +'<p class="privacy">Inputs marked PII are processed in place and never stored in plain text. Caregivers can edit any step of this workflow, or request a new one from the care team.</p>';
+  window.scrollTo(0,0);
+}
+function closeWf(){var d=document.getElementById('wfDetail');if(d)d.style.display='none';var l=document.getElementById('wfLibrary');if(l)l.style.display='block';window.scrollTo(0,0);}
+function runWf(id){
+  var w=WFDATA.filter(function(x){return x.id===id})[0]; if(!w)return;
+  var btn=document.getElementById('runBtn'); var line=document.getElementById('runLine');
+  var out=document.getElementById('wfOut'); if(out)out.classList.remove('on');
+  btn.disabled=true; btn.textContent='Running…'; line.classList.add('on');
+  w.nodes.forEach(function(n,idx){var el=document.getElementById('node-'+idx);if(el){el.classList.remove('active','done');}});
+  var i=0;
+  (function step(){
+    if(i>0){var prev=document.getElementById('node-'+(i-1));if(prev){prev.classList.remove('active');prev.classList.add('done');}}
+    if(i>=w.nodes.length){line.textContent='Complete.';btn.disabled=false;btn.textContent='Run again';if(out)out.classList.add('on');return;}
+    var el=document.getElementById('node-'+i);
+    if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
+    line.textContent='Step '+(i+1)+' of '+w.nodes.length+': '+w.nodes[i].label+'…';
+    i++; setTimeout(step,820);
+  })();
+}
+document.addEventListener('click',function(e){
+  var t=e.target;
+  var c=t.closest&&t.closest('[data-wf]'); if(c){openWf(c.getAttribute('data-wf'));return;}
+  var p=t.closest&&t.closest('[data-tpi]'); if(p){renderTransport(+p.getAttribute('data-tpi'));return;}
+  if(t.closest&&t.closest('[data-wfback]')){closeWf();return;}
+  var rb=t.closest&&t.closest('[data-wfrun]'); if(rb){runWf(rb.getAttribute('data-wfrun'));return;}
+});
+renderWfLibrary(); renderTransport(0);
+
 var h=(location.hash||'').replace('#',''); if(h && document.getElementById('v-'+h)) go(h);
 </script>
 </body>
