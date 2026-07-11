@@ -3,283 +3,304 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hearth · Emergency Guide Book</title>
+<title>Hearth &#183; Emergency Guide Book</title>
 <style>
-:root{--paper:#FDFCF8;--ink:#1D1D1F;--ink2:#6E6E73;--ink3:#86868B;--line:#E8E4DC;
- --blue:#DCEBFC;--blueink:#2D5F8A;--green:#DFF3E7;--greenink:#1F7A4D;
- --red:#FFE3DF;--redink:#C42B1C;--amber:#FFF1D6;--amberink:#8A6210}
+:root{--paper:#FFFFFF;--ink:#1D1D1F;--ink2:#6E6E73;--ink3:#98989D;--line:#E8E8ED;--line-strong:#D2D2D7;--hover:#F5F5F7;
+--red:#C4362F;--amber:#9A7213;--green:#2F7D53;--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.006em}
 a{color:inherit}
-/* 911 band */
-.band{position:sticky;top:0;z-index:50;background:#C42B1C;color:#fff;display:flex;align-items:center;gap:12px;padding:11px clamp(18px,4vw,48px)}
-.band .pulse{width:10px;height:10px;border-radius:50%;background:#fff;animation:pl 1.2s ease-in-out infinite;flex:0 0 auto}
-@keyframes pl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.7)}}
-.band b{font-size:14.5px;letter-spacing:-.01em}
-.band span{font-size:12.5px;opacity:.85}
-.band .call{margin-left:auto;background:#fff;color:#C42B1C;font-weight:800;font-size:13.5px;border-radius:99px;padding:8px 18px;text-decoration:none;animation:breathe 2.4s ease-in-out infinite}
-@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.wrap{max-width:1180px;margin:0 auto;padding:44px clamp(18px,4vw,48px) 40px}
-.crumb{font-size:13px;color:var(--ink2);margin-bottom:16px}
-.crumb a{color:#C4512D;text-decoration:none;font-weight:600}
-h1{font-size:clamp(34px,5vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1.02}
-.lede{font-size:16.5px;color:var(--ink2);max-width:640px;margin:12px 0 4px}
-/* picker */
-.picker{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 8px}
-.pick{display:flex;align-items:center;gap:8px;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:-.01em;
- background:#fff;border:1px solid var(--line);border-radius:99px;padding:10px 18px;cursor:pointer;transition:.18s;color:var(--ink)}
-.pick:hover{transform:translateY(-1px);border-color:#CFC9BE}
-.pick.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.pick svg{width:16px;height:16px;flex:0 0 auto}
-/* guide area */
-.guide{display:none}
-.guide.on{display:block}
-.ghead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:18px;padding-top:20px;flex-wrap:wrap}
-.ghead h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.025em}
-.ghead .acts{display:flex;gap:8px}
-.btn{font-family:inherit;font-size:13px;font-weight:700;border-radius:99px;padding:9px 17px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:34px clamp(20px,4vw,48px) 90px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.crumb{font-size:13px;color:var(--ink2)}
+.crumb a{color:var(--ink);font-weight:600;text-decoration:none}
+.call911{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:700;font-size:13.5px;text-decoration:none;border-radius:99px;padding:9px 18px}
+.call911 .d{width:7px;height:7px;border-radius:50%;background:#fff}
+h1{font-size:clamp(34px,5vw,50px);font-weight:600;letter-spacing:-.03em;line-height:1.03;margin-top:30px}
+.sub{font-size:16px;color:var(--ink2);margin-top:12px;max-width:620px}
+.reminder{display:flex;align-items:center;gap:10px;border:1px solid #E6C4C1;border-radius:12px;padding:12px 16px;margin-top:24px;font-size:13.5px;color:var(--ink)}
+.reminder b{color:var(--red)} .reminder .d{width:8px;height:8px;border-radius:50%;background:var(--red);flex:0 0 auto}
+/* index cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.gcard{display:flex;flex-direction:column;text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;font-family:inherit;transition:.18s;padding:0}
+.gcard:hover{transform:translateY(-3px);box-shadow:0 2px 10px rgba(40,30,10,.06),0 18px 40px rgba(40,30,10,.08);border-color:var(--line-strong)}
+.thumb{height:132px;display:grid;place-items:center;overflow:hidden}
+.thumb svg{width:100%;max-width:200px;height:110px}
+.gc-body{padding:16px 18px 18px}
+.gc-title{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.gc-desc{font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.45}
+.gc-open{font-size:12.5px;font-weight:600;color:var(--ink);margin-top:12px}
+.gcard:hover .gc-open{text-decoration:underline}
+/* detail */
+.index{display:block}.detail{display:none}
+body.reading .index{display:none}body.reading .detail.on{display:block}
+.back{border:none;background:none;font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink2);cursor:pointer;padding:6px 0;margin-top:26px}
+.back:hover{color:var(--ink)}
+.dhead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:18px;margin-top:6px}
+.dhead h2{font-size:clamp(26px,3.5vw,36px);font-weight:600;letter-spacing:-.025em}
+.acts{display:flex;gap:8px}
+.btn{border:1px solid var(--line-strong);background:#fff;color:var(--ink);font-family:inherit;font-weight:600;font-size:13px;border-radius:99px;padding:9px 16px;cursor:pointer}
+.btn:hover{background:var(--hover)}
 .btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
-.persona{margin:14px 0 4px;background:#FFF6EC;border:1px solid #EDD9BC;border-radius:12px;padding:11px 15px;font-size:13.5px}
-.persona b{color:#8A6210}
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
-@media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.steps{grid-template-columns:1fr}}
-.step{opacity:0}
-.guide.on .step{animation:pop .55s cubic-bezier(.2,.9,.3,1) both}
-.guide.on .step:nth-child(1){animation-delay:.05s}.guide.on .step:nth-child(2){animation-delay:.16s}
-.guide.on .step:nth-child(3){animation-delay:.27s}.guide.on .step:nth-child(4){animation-delay:.38s}
-@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
-.art{border-radius:18px;height:212px;display:grid;place-items:center;overflow:hidden;position:relative}
-.art svg{width:100%;max-width:250px;height:190px}
-.cap{display:flex;gap:10px;margin-top:12px;align-items:flex-start}
-.cap .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center}
-.cap b{font-size:15px;letter-spacing:-.015em;display:block;line-height:1.3}
+.persona{border:1px solid #E7D9BC;background:#FCF6EA;border-radius:12px;padding:12px 16px;margin-top:18px;font-size:13.5px}
+.persona b{color:var(--amber)}
+.persona .btn{margin-left:6px;padding:6px 13px;font-size:12.5px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:24px}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.steps,.grid{grid-template-columns:1fr}}
+.step{opacity:0;animation:pop .5s cubic-bezier(.2,.9,.3,1) both}
+.step:nth-child(1){animation-delay:.04s}.step:nth-child(2){animation-delay:.14s}.step:nth-child(3){animation-delay:.24s}.step:nth-child(4){animation-delay:.34s}
+@keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1}}
+.art{border:1px solid var(--line);border-radius:16px;height:196px;display:grid;place-items:center;overflow:hidden}
+.art svg{width:100%;max-width:230px;height:176px}
+.cap{display:flex;gap:11px;margin-top:12px;align-items:flex-start}
+.cap .n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center}
+.cap b{font-size:14.5px;letter-spacing:-.01em;display:block;line-height:1.3}
 .cap span{font-size:12.5px;color:var(--ink2);display:block;margin-top:3px;line-height:1.45}
-.foot{font-size:12px;color:var(--ink3);margin:26px 0 0;max-width:760px;line-height:1.6}
-/* scene animations */
-.a-breathe{animation:sbreathe 3s ease-in-out infinite;transform-origin:center}
-@keyframes sbreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-.a-sweep{animation:ssweep 2.6s ease-in-out infinite alternate}
-@keyframes ssweep{from{transform:translateX(-13px)}to{transform:translateX(13px)}}
-.a-ring{transform-origin:center;animation:sring 1.6s ease-in-out infinite}
-@keyframes sring{0%,100%{transform:rotate(0)}8%{transform:rotate(-4deg)}16%{transform:rotate(4deg)}24%{transform:rotate(-3deg)}32%{transform:rotate(0)}}
-.a-wave{animation:swave 1.6s ease-out infinite}
-@keyframes swave{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
-.a-rise{animation:srise 1.8s ease-in-out infinite}
-@keyframes srise{0%,100%{transform:translateY(4px)}50%{transform:translateY(-6px)}}
-.a-tap{animation:stap 1.5s ease-in-out infinite}
-@keyframes stap{0%,15%,100%{transform:translate(0,0) rotate(0)}35%{transform:translate(-7px,10px) rotate(-9deg)}55%{transform:translate(0,0) rotate(0)}75%{transform:translate(-7px,10px) rotate(-9deg)}}
-.a-press{animation:spress 1.7s ease-in-out infinite}
-@keyframes spress{0%,100%{transform:translateY(0)}45%{transform:translateY(7px)}}
-.a-tick{transform-origin:100px 62px;animation:stick 4s linear infinite}
-@keyframes stick{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-.a-blink{animation:sblink 2.2s ease-in-out infinite}
-@keyframes sblink{0%,100%{opacity:1}50%{opacity:.35}}
-.a-drift{animation:sdrift 2.6s ease-in-out infinite;transform-origin:60px 66px}
-@keyframes sdrift{0%,25%,100%{transform:rotate(0)}55%,75%{transform:rotate(16deg)}}
+.foot{font-size:12px;color:var(--ink3);margin-top:30px;max-width:760px;line-height:1.6;padding-top:20px;border-top:1px solid var(--line)}
+/* motion-scene animations (kept for the illustrations) */
+.a-breathe{animation:sb 3s ease-in-out infinite;transform-origin:center}@keyframes sb{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+.a-sweep{animation:ss 2.6s ease-in-out infinite alternate}@keyframes ss{from{transform:translateX(-13px)}to{transform:translateX(13px)}}
+.a-ring{transform-origin:center;animation:sr 1.6s ease-in-out infinite}@keyframes sr{0%,100%{transform:rotate(0)}8%{transform:rotate(-4deg)}16%{transform:rotate(4deg)}24%{transform:rotate(-3deg)}32%{transform:rotate(0)}}
+.a-wave{animation:sw 1.6s ease-out infinite}@keyframes sw{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.a-rise{animation:sri 1.8s ease-in-out infinite}@keyframes sri{0%,100%{transform:translateY(4px)}50%{transform:translateY(-6px)}}
+.a-tap{animation:st 1.5s ease-in-out infinite}@keyframes st{0%,15%,100%{transform:translate(0,0) rotate(0)}35%{transform:translate(-7px,10px) rotate(-9deg)}55%{transform:translate(0,0) rotate(0)}75%{transform:translate(-7px,10px) rotate(-9deg)}}
+.a-press{animation:sp 1.7s ease-in-out infinite}@keyframes sp{0%,100%{transform:translateY(0)}45%{transform:translateY(7px)}}
+.a-tick{transform-origin:100px 62px;animation:sti 4s linear infinite}@keyframes sti{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.a-blink{animation:sbl 2.2s ease-in-out infinite}@keyframes sbl{0%,100%{opacity:1}50%{opacity:.35}}
+.a-drift{animation:sd 2.6s ease-in-out infinite;transform-origin:60px 66px}@keyframes sd{0%,25%,100%{transform:rotate(0)}55%,75%{transform:rotate(16deg)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
-/* horizon footer */
-.horizon{margin-top:56px}
 </style>
 </head>
 <body>
-
-<div class="band"><span class="pulse"></span><b>In any emergency, call 911 first.</b><span>These cards are for the minutes around that call. They never replace it.</span><a class="call" href="tel:911">Call 911</a></div>
-
 <div class="wrap">
-<div class="crumb"><a href="index.html">← Back to the app</a> · Emergency Guide Book · Quiet Meadow edition</div>
-<h1>When something happens,<br>open this. Breathe.</h1>
-<p class="lede">Six emergencies, four pictures each. Simple enough for a ten-year-old, calm enough for the worst hour. Vetted steps, printed big, working offline. No AI writes these words.</p>
+<div class="top"><div class="crumb"><a href="index.html">&#8592; Back to the app</a> &#183; Emergency Guide Book</div><a class="call911" href="tel:911"><span class="d"></span>Call 911</a></div>
 
-<div class="picker" id="picker">
-  <button class="pick on" data-g="fall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="7" cy="9" r="3"/><path d="M10 12 h8 M20 16 H6"/></svg>A fall</button>
-  <button class="pick" data-g="choke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="7" r="3.4"/><path d="M8 14 q4 -3 8 0 M9.5 17h5"/></svg>Choking</button>
-  <button class="pick" data-g="stroke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 15 q2 1.6 4 .6 M15 15.5 q.8-.4 1-1"/><path d="M8.5 9.5 h2 M14 9.5 h2"/></svg>Stroke</button>
-  <button class="pick" data-g="bleed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 C15 8 18 11 18 15 a6 6 0 0 1-12 0 c0-4 3-7 6-11.5Z"/></svg>Bleeding</button>
-  <button class="pick" data-g="seizure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 6 13h5l-1 8 8-11h-5l1-7Z"/></svg>Seizure</button>
-  <button class="pick" data-g="chest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20 C6.5 16 4 12.6 4 9.6 A4.3 4.3 0 0 1 12 7 a4.3 4.3 0 0 1 8 2.6 c0 3-2.5 6.4-8 10.4Z"/><path d="M6 12 h3l1.4-2.6 2.2 5 1.6-2.4H18"/></svg>Chest pain</button>
+<!-- INDEX -->
+<div class="index">
+  <h1>Open this when<br>something happens.</h1>
+  <p class="sub">Six vetted guides, four pictures each &#8212; simple enough for a ten-year-old, calm enough for the worst hour. Choose a card to see the full steps.</p>
+  <div class="reminder"><span class="d"></span><b>In any emergency, call 911 first.</b>&nbsp; These cards are for the minutes around that call.</div>
+  <div class="grid">
+    <button class="gcard" onclick="openGuide('fall')">
+      <div class="thumb" style="background:#DCEBFC"><svg viewBox="0 0 260 190"><rect x="20" y="146" width="220" height="9" rx="4.5" fill="#A9CBEE"/>
+      <g class="a-breathe"><circle cx="78" cy="128" r="17" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><rect x="96" y="118" width="82" height="24" rx="12" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/></g>
+      <circle cx="206" cy="58" r="15" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><path d="M206 74 q-3 22 -22 32" fill="none" stroke="#2D5F8A" stroke-width="11" stroke-linecap="round"/><path d="M200 92 L168 112" stroke="#2D5F8A" stroke-width="10" stroke-linecap="round"/>
+      <path class="a-wave" d="M52 84 q-8 8 0 16" fill="none" stroke="#5B8FC9" stroke-width="5" stroke-linecap="round"/></svg></div>
+      <div class="gc-body"><div class="gc-title">If someone falls</div><div class="gc-desc">Stay, check, and know when it's safe to help them up.</div><div class="gc-open">Open guide &#8594;</div></div>
+    </button>
+    <button class="gcard" onclick="openGuide('choke')">
+      <div class="thumb" style="background:#DCEBFC"><svg viewBox="0 0 260 190"><circle cx="120" cy="72" r="26" fill="#FFF" stroke="#2D5F8A" stroke-width="7"/><path d="M108 112 q12 8 24 0" fill="none" stroke="#2D5F8A" stroke-width="7" stroke-linecap="round" transform="rotate(180 120 108)"/>
+      <circle cx="98" cy="112" r="10" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><circle cx="142" cy="112" r="10" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
+      <text x="186" y="76" font-family="-apple-system,Helvetica" font-size="52" font-weight="800" fill="#2D5F8A" class="a-blink">?</text></svg></div>
+      <div class="gc-body"><div class="gc-title">If someone is choking</div><div class="gc-desc">Back blows and abdominal thrusts, step by step.</div><div class="gc-open">Open guide &#8594;</div></div>
+    </button>
+    <button class="gcard" onclick="openGuide('stroke')">
+      <div class="thumb" style="background:#DCEBFC"><svg viewBox="0 0 260 190"><circle cx="130" cy="92" r="52" fill="#FFF" stroke="#2D5F8A" stroke-width="7"/>
+      <circle cx="112" cy="80" r="6" fill="#2D5F8A"/><circle cx="150" cy="80" r="6" fill="#2D5F8A"/>
+      <path class="a-drift" style="transform-origin:130px 112px" d="M108 112 q12 10 30 4 q8 -3 10 -10" fill="none" stroke="#2D5F8A" stroke-width="7" stroke-linecap="round"/></svg></div>
+      <div class="gc-body"><div class="gc-title">If you think it's a stroke</div><div class="gc-desc">The F.A.S.T. check — face, arms, speech, time.</div><div class="gc-open">Open guide &#8594;</div></div>
+    </button>
+    <button class="gcard" onclick="openGuide('bleed')">
+      <div class="thumb" style="background:#DFF3E7"><svg viewBox="0 0 260 190"><rect x="46" y="104" width="168" height="26" rx="13" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/>
+      <rect x="104" y="92" width="56" height="26" rx="8" fill="#DFF3E7" stroke="#1F7A4D" stroke-width="5"/>
+      <g class="a-press"><path d="M132 24 v40" stroke="#1F7A4D" stroke-width="11" stroke-linecap="round"/><circle cx="132" cy="74" r="14" fill="#1F7A4D"/></g></svg></div>
+      <div class="gc-body"><div class="gc-title">If there's bad bleeding</div><div class="gc-desc">Press hard, don't peek, elevate, call 911.</div><div class="gc-open">Open guide &#8594;</div></div>
+    </button>
+    <button class="gcard" onclick="openGuide('seizure')">
+      <div class="thumb" style="background:#DCEBFC"><svg viewBox="0 0 260 190"><rect x="24" y="140" width="212" height="9" rx="4.5" fill="#A9CBEE"/>
+      <circle cx="84" cy="120" r="16" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><rect x="102" y="112" width="78" height="22" rx="11" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
+      <path d="M58 132 q-14 -6 -8 -18 q6 -10 20 -4" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
+      <path class="a-sweep" d="M206 76 l24 -12 M206 96 l26 0 M206 116 l24 12" stroke="#2D5F8A" stroke-width="6" stroke-linecap="round"/></svg></div>
+      <div class="gc-body"><div class="gc-title">If someone has a seizure</div><div class="gc-desc">Make space, time it, keep them safe.</div><div class="gc-open">Open guide &#8594;</div></div>
+    </button>
+    <button class="gcard" onclick="openGuide('chest')">
+      <div class="thumb" style="background:#FBE7E3"><svg viewBox="0 0 260 190"><g class="a-ring"><rect x="95" y="22" width="74" height="132" rx="18" fill="#FFF" stroke="#C42B1C" stroke-width="6"/><rect x="107" y="42" width="50" height="66" rx="8" fill="#FFD9D4"/><text x="132" y="86" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="28" font-weight="800" fill="#C42B1C">911</text><circle cx="132" cy="134" r="7" fill="#C42B1C"/></g>
+      <path class="a-wave" d="M184 52 q12 12 0 24" fill="none" stroke="#C42B1C" stroke-width="6" stroke-linecap="round"/><path class="a-wave" style="animation-delay:.3s" d="M196 42 q20 20 0 40" fill="none" stroke="#C42B1C" stroke-width="6" stroke-linecap="round"/></svg></div>
+      <div class="gc-body"><div class="gc-title">If there's chest pain</div><div class="gc-desc">Call 911, sit them down, aspirin only if safe.</div><div class="gc-open">Open guide &#8594;</div></div>
+    </button>
+
+  </div>
 </div>
 
-<!-- ================= FALL ================= -->
-<section class="guide on" id="g-fall">
-  <div class="ghead"><h2>If someone falls</h2><div class="acts"><a class="btn" href="#">Print card</a><a class="btn" href="#">Send to family</a><a class="btn dark" href="#">▶ 2-min video</a></div></div>
-  <div class="persona"><b>For Robert:</b> he takes a blood thinner, so a bumped head always needs a doctor, even if he says he feels fine. His ER sheet is one tap away.</div>
-  <div class="steps">
-    <div class="step"><div class="art" style="background:var(--blue)">
+<!-- DETAILS -->
+  <section class="detail" id="d-fall">
+    <button class="back" onclick="showIndex()">&#8592; All guides</button>
+    <div class="dhead"><h2>If someone falls</h2><div class="acts"><button class="btn">Print card</button><button class="btn">Send to family</button><button class="btn dark">&#9658; 2-min video</button></div></div>
+    <div class="persona"><b>For Robert:</b> he takes a blood thinner, so a bumped head always needs a doctor, even if he says he feels fine. His ER sheet is one tap away.</div>
+    <div class="steps">
+    <div class="step"><div class="art" style="background:#E4EFFB">
       <svg viewBox="0 0 260 190"><rect x="20" y="146" width="220" height="9" rx="4.5" fill="#A9CBEE"/>
       <g class="a-breathe"><circle cx="78" cy="128" r="17" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><rect x="96" y="118" width="82" height="24" rx="12" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/></g>
       <circle cx="206" cy="58" r="15" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><path d="M206 74 q-3 22 -22 32" fill="none" stroke="#2D5F8A" stroke-width="11" stroke-linecap="round"/><path d="M200 92 L168 112" stroke="#2D5F8A" stroke-width="10" stroke-linecap="round"/>
       <path class="a-wave" d="M52 84 q-8 8 0 16" fill="none" stroke="#5B8FC9" stroke-width="5" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">1</span><div><b>Stay with them. Talk softly.</b><span>Do not pull them up. Take one slow breath together.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--green)">
+    <div class="step"><div class="art" style="background:#E4F3EA">
       <svg viewBox="0 0 260 190"><rect x="24" y="140" width="212" height="9" rx="4.5" fill="#B4DFC6"/>
       <circle cx="70" cy="122" r="16" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><rect x="88" y="113" width="76" height="22" rx="11" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/>
       <g class="a-sweep"><circle cx="150" cy="66" r="27" fill="rgba(255,255,255,.7)" stroke="#1F7A4D" stroke-width="8"/><path d="M170 87 L192 110" stroke="#1F7A4D" stroke-width="12" stroke-linecap="round"/></g>
       <circle cx="70" cy="102" r="6.5" fill="#FF9F0A"/><circle cx="126" cy="106" r="6.5" fill="#FF9F0A"/></svg></div>
       <div class="cap"><span class="n">2</span><div><b>Look before you move.</b><span>Head, hips, wrists. Any blood? Ask: "Where does it hurt?"</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--red)">
+    <div class="step"><div class="art" style="background:#FBEAE7">
       <svg viewBox="0 0 260 190"><g class="a-ring"><rect x="95" y="22" width="74" height="132" rx="18" fill="#FFF" stroke="#C42B1C" stroke-width="6"/><rect x="107" y="42" width="50" height="66" rx="8" fill="#FFD9D4"/><text x="132" y="86" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="28" font-weight="800" fill="#C42B1C">911</text><circle cx="132" cy="134" r="7" fill="#C42B1C"/></g>
       <path class="a-wave" d="M184 52 q12 12 0 24" fill="none" stroke="#C42B1C" stroke-width="6" stroke-linecap="round"/><path class="a-wave" style="animation-delay:.3s" d="M196 42 q20 20 0 40" fill="none" stroke="#C42B1C" stroke-width="6" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">3</span><div><b>Hurt, dizzy, or not sure? Call 911.</b><span>Do not help them stand. Keep them warm and still.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--amber)">
+    <div class="step"><div class="art" style="background:#FBF2E1">
       <svg viewBox="0 0 260 190"><rect x="24" y="146" width="212" height="8" rx="4" fill="#EBD2A0"/>
       <path d="M172 76 v66 M212 76 v66 M172 79 h40 M166 110 h52" stroke="#8A6210" stroke-width="8" stroke-linecap="round"/>
       <g class="a-rise"><circle cx="86" cy="52" r="16" fill="#FFF" stroke="#8A6210" stroke-width="6"/><path d="M86 70 q5 24 22 34" fill="none" stroke="#8A6210" stroke-width="11" stroke-linecap="round"/><path d="M94 88 L146 96" stroke="#8A6210" stroke-width="10" stroke-linecap="round"/></g>
       <path class="a-rise" d="M42 104 v-48 M42 56 l-13 15 M42 56 l13 15" stroke="#248A3D" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="cap"><span class="n">4</span><div><b>Feeling fine? Up slowly, with a chair.</b><span>Roll to the side, kneel, hands on the seat. Rest after.</span></div></div></div>
   </div>
-</section>
-
-<!-- ================= CHOKING ================= -->
-<section class="guide" id="g-choke">
-  <div class="ghead"><h2>If someone is choking</h2><div class="acts"><a class="btn" href="#">Print card</a><a class="btn dark" href="#">▶ 2-min video</a></div></div>
-  <div class="steps">
-    <div class="step"><div class="art" style="background:var(--blue)">
+    <p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Clinician-reviewed before every release. Static and vetted &#8212; no AI writes emergency steps. Available offline, printable, and in Spanish.</p>
+  </section>
+  <section class="detail" id="d-choke">
+    <button class="back" onclick="showIndex()">&#8592; All guides</button>
+    <div class="dhead"><h2>If someone is choking</h2><div class="acts"><button class="btn">Print card</button><button class="btn">Send to family</button><button class="btn dark">&#9658; 2-min video</button></div></div>
+    
+    <div class="steps">
+    <div class="step"><div class="art" style="background:#E4EFFB">
       <svg viewBox="0 0 260 190"><circle cx="120" cy="72" r="26" fill="#FFF" stroke="#2D5F8A" stroke-width="7"/><path d="M108 112 q12 8 24 0" fill="none" stroke="#2D5F8A" stroke-width="7" stroke-linecap="round" transform="rotate(180 120 108)"/>
       <circle cx="98" cy="112" r="10" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><circle cx="142" cy="112" r="10" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
       <text x="186" y="76" font-family="-apple-system,Helvetica" font-size="52" font-weight="800" fill="#2D5F8A" class="a-blink">?</text></svg></div>
       <div class="cap"><span class="n">1</span><div><b>Ask: "Can you talk?"</b><span>If they can cough or speak, let them cough. If they cannot, act now.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--green)">
+    <div class="step"><div class="art" style="background:#E4F3EA">
       <svg viewBox="0 0 260 190"><circle cx="96" cy="56" r="16" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><path d="M96 74 q-2 26 -20 40" fill="none" stroke="#1F7A4D" stroke-width="11" stroke-linecap="round"/>
       <g class="a-tap"><path d="M168 52 q-22 8 -38 30" fill="none" stroke="#1F7A4D" stroke-width="11" stroke-linecap="round"/><circle cx="172" cy="50" r="11" fill="#1F7A4D"/></g>
       <text x="196" y="132" font-family="-apple-system,Helvetica" font-size="34" font-weight="800" fill="#1F7A4D">×5</text></svg></div>
       <div class="cap"><span class="n">2</span><div><b>Lean them forward. 5 back blows.</b><span>Hit firmly between the shoulder blades with your palm heel.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--amber)">
+    <div class="step"><div class="art" style="background:#FBF2E1">
       <svg viewBox="0 0 260 190"><circle cx="118" cy="46" r="15" fill="#FFF" stroke="#8A6210" stroke-width="6"/><path d="M118 62 v44" stroke="#8A6210" stroke-width="11" stroke-linecap="round"/><ellipse cx="118" cy="112" rx="26" ry="20" fill="none" stroke="#8A6210" stroke-width="8"/>
       <g class="a-press" style="animation-direction:reverse"><circle cx="118" cy="112" r="11" fill="#8A6210"/><path d="M118 128 v14 M112 108 l6 -8 6 8" stroke="#8A6210" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
       <text x="176" y="128" font-family="-apple-system,Helvetica" font-size="34" font-weight="800" fill="#8A6210">×5</text></svg></div>
       <div class="cap"><span class="n">3</span><div><b>5 tummy pushes.</b><span>Fist just above the belly button. Pull in and up, hard.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--red)">
+    <div class="step"><div class="art" style="background:#FBEAE7">
       <svg viewBox="0 0 260 190"><g class="a-ring"><rect x="72" y="30" width="62" height="112" rx="15" fill="#FFF" stroke="#C42B1C" stroke-width="6"/><rect x="82" y="47" width="42" height="56" rx="7" fill="#FFD9D4"/><text x="103" y="84" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="23" font-weight="800" fill="#C42B1C">911</text><circle cx="103" cy="126" r="6" fill="#C42B1C"/></g>
       <path d="M168 60 a34 34 0 1 1 -6 52" fill="none" stroke="#C42B1C" stroke-width="8" stroke-linecap="round"/><path d="M162 118 l-2 14 14 -4" fill="none" stroke="#C42B1C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="cap"><span class="n">4</span><div><b>Repeat: 5 and 5. Call 911.</b><span>Keep going until it comes out or help arrives. Shout for anyone nearby.</span></div></div></div>
   </div>
-</section>
-
-<!-- ================= STROKE ================= -->
-<section class="guide" id="g-stroke">
-  <div class="ghead"><h2>If you think it's a stroke</h2><div class="acts"><a class="btn" href="#">Print card</a><a class="btn dark" href="#">▶ 2-min video</a></div></div>
-  <div class="persona"><b>Remember one word: F.A.S.T.</b> Face, Arms, Speech, Time. Any one sign means call 911 now, even if it goes away.</div>
-  <div class="steps">
-    <div class="step"><div class="art" style="background:var(--blue)">
+    <p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Clinician-reviewed before every release. Static and vetted &#8212; no AI writes emergency steps. Available offline, printable, and in Spanish.</p>
+  </section>
+  <section class="detail" id="d-stroke">
+    <button class="back" onclick="showIndex()">&#8592; All guides</button>
+    <div class="dhead"><h2>If you think it's a stroke</h2><div class="acts"><button class="btn">Print card</button><button class="btn">Send to family</button><button class="btn dark">&#9658; 2-min video</button></div></div>
+    <div class="persona"><b>Remember one word: F.A.S.T.</b> Face, Arms, Speech, Time. Any one sign means call 911 now, even if it goes away.</div>
+    <div class="steps">
+    <div class="step"><div class="art" style="background:#E4EFFB">
       <svg viewBox="0 0 260 190"><circle cx="130" cy="92" r="52" fill="#FFF" stroke="#2D5F8A" stroke-width="7"/>
       <circle cx="112" cy="80" r="6" fill="#2D5F8A"/><circle cx="150" cy="80" r="6" fill="#2D5F8A"/>
       <path class="a-drift" style="transform-origin:130px 112px" d="M108 112 q12 10 30 4 q8 -3 10 -10" fill="none" stroke="#2D5F8A" stroke-width="7" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">1</span><div><b>Face: ask for a big smile.</b><span>Does one side droop or look uneven?</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--green)">
+    <div class="step"><div class="art" style="background:#E4F3EA">
       <svg viewBox="0 0 260 190"><circle cx="130" cy="52" r="16" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><path d="M130 70 v52" stroke="#1F7A4D" stroke-width="11" stroke-linecap="round"/>
       <path d="M130 84 L82 52" stroke="#1F7A4D" stroke-width="10" stroke-linecap="round"/>
       <path class="a-drift" d="M130 84 L178 52" stroke="#1F7A4D" stroke-width="10" stroke-linecap="round" style="transform-origin:130px 84px"/></svg></div>
       <div class="cap"><span class="n">2</span><div><b>Arms: raise both, eyes closed.</b><span>Does one arm drift down on its own?</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--amber)">
+    <div class="step"><div class="art" style="background:#FBF2E1">
       <svg viewBox="0 0 260 190"><path d="M62 56 h100 a16 16 0 0 1 16 16 v28 a16 16 0 0 1 -16 16 h-58 l-20 20 v-20 h-22 a16 16 0 0 1 -16 -16 v-28 a16 16 0 0 1 16 -16Z" fill="#FFF" stroke="#8A6210" stroke-width="6"/>
       <path class="a-blink" d="M76 88 q8 -10 16 0 q8 10 16 0 q8 -10 16 0 q8 10 16 0" fill="none" stroke="#8A6210" stroke-width="6" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">3</span><div><b>Speech: "The sky is blue today."</b><span>Is it slurred, jumbled, or missing?</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--red)">
+    <div class="step"><div class="art" style="background:#FBEAE7">
       <svg viewBox="0 0 260 190"><g class="a-ring"><rect x="52" y="30" width="62" height="112" rx="15" fill="#FFF" stroke="#C42B1C" stroke-width="6"/><rect x="62" y="47" width="42" height="56" rx="7" fill="#FFD9D4"/><text x="83" y="84" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="23" font-weight="800" fill="#C42B1C">911</text><circle cx="83" cy="126" r="6" fill="#C42B1C"/></g>
       <circle cx="182" cy="86" r="38" fill="#FFF" stroke="#C42B1C" stroke-width="7"/><path d="M182 86 V62 M182 86 l17 10" stroke="#C42B1C" stroke-width="7" stroke-linecap="round" class="a-tick" style="transform-origin:182px 86px"/></svg></div>
       <div class="cap"><span class="n">4</span><div><b>Time: call 911 this minute.</b><span>Say the word "stroke." Write down when it started.</span></div></div></div>
   </div>
-</section>
-
-<!-- ================= BLEEDING ================= -->
-<section class="guide" id="g-bleed">
-  <div class="ghead"><h2>If there's bad bleeding</h2><div class="acts"><a class="btn" href="#">Print card</a><a class="btn dark" href="#">▶ 2-min video</a></div></div>
-  <div class="steps">
-    <div class="step"><div class="art" style="background:var(--green)">
+    <p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Clinician-reviewed before every release. Static and vetted &#8212; no AI writes emergency steps. Available offline, printable, and in Spanish.</p>
+  </section>
+  <section class="detail" id="d-bleed">
+    <button class="back" onclick="showIndex()">&#8592; All guides</button>
+    <div class="dhead"><h2>If there's bad bleeding</h2><div class="acts"><button class="btn">Print card</button><button class="btn">Send to family</button><button class="btn dark">&#9658; 2-min video</button></div></div>
+    
+    <div class="steps">
+    <div class="step"><div class="art" style="background:#E4F3EA">
       <svg viewBox="0 0 260 190"><rect x="46" y="104" width="168" height="26" rx="13" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/>
       <rect x="104" y="92" width="56" height="26" rx="8" fill="#DFF3E7" stroke="#1F7A4D" stroke-width="5"/>
       <g class="a-press"><path d="M132 24 v40" stroke="#1F7A4D" stroke-width="11" stroke-linecap="round"/><circle cx="132" cy="74" r="14" fill="#1F7A4D"/></g></svg></div>
       <div class="cap"><span class="n">1</span><div><b>Press hard with a clean cloth.</b><span>Both hands if you need. Hard pressing is what stops it.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--blue)">
+    <div class="step"><div class="art" style="background:#E4EFFB">
       <svg viewBox="0 0 260 190"><rect x="86" y="84" width="88" height="34" rx="10" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
       <circle cx="130" cy="52" r="24" fill="none" stroke="#2D5F8A" stroke-width="6"/><circle cx="130" cy="52" r="8" fill="#2D5F8A"/>
       <path d="M100 26 L162 78" stroke="#C42B1C" stroke-width="8" stroke-linecap="round"/>
       <circle cx="130" cy="140" r="20" fill="none" stroke="#2D5F8A" stroke-width="6" class="a-blink"/><path d="M130 128 v12 l8 6" fill="none" stroke="#2D5F8A" stroke-width="5.5" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">2</span><div><b>Keep pressing. Do not peek.</b><span>Lifting the cloth restarts the bleeding. Count 10 slow minutes.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--red)">
+    <div class="step"><div class="art" style="background:#FBEAE7">
       <svg viewBox="0 0 260 190"><rect x="60" y="98" width="80" height="22" rx="8" fill="#FFF" stroke="#C42B1C" stroke-width="5"/><rect x="68" y="84" width="80" height="22" rx="8" fill="#FFD9D4" stroke="#C42B1C" stroke-width="5"/><rect x="76" y="70" width="80" height="22" rx="8" fill="#FFF" stroke="#C42B1C" stroke-width="5"/>
       <g class="a-ring"><rect x="176" y="52" width="48" height="86" rx="12" fill="#FFF" stroke="#C42B1C" stroke-width="6"/><text x="200" y="98" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="18" font-weight="800" fill="#C42B1C">911</text><circle cx="200" cy="122" r="5" fill="#C42B1C"/></g></svg></div>
       <div class="cap"><span class="n">3</span><div><b>Soaking through? Add more on top.</b><span>Never remove layers. This is a 911 call.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--amber)">
+    <div class="step"><div class="art" style="background:#FBF2E1">
       <svg viewBox="0 0 260 190"><rect x="30" y="132" width="200" height="10" rx="5" fill="#EBD2A0"/>
       <path d="M64 128 L150 74" stroke="#8A6210" stroke-width="13" stroke-linecap="round"/><rect x="140" y="52" width="52" height="30" rx="10" fill="#FFF" stroke="#8A6210" stroke-width="6"/>
       <path class="a-rise" d="M210 118 v-44 M210 74 l-12 14 M210 74 l12 14" stroke="#248A3D" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="cap"><span class="n">4</span><div><b>Raise it. Keep them warm.</b><span>Injured part up on a pillow. A blanket over them. Stay close.</span></div></div></div>
   </div>
-</section>
-
-<!-- ================= SEIZURE ================= -->
-<section class="guide" id="g-seizure">
-  <div class="ghead"><h2>If someone has a seizure</h2><div class="acts"><a class="btn" href="#">Print card</a><a class="btn dark" href="#">▶ 2-min video</a></div></div>
-  <div class="steps">
-    <div class="step"><div class="art" style="background:var(--blue)">
+    <p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Clinician-reviewed before every release. Static and vetted &#8212; no AI writes emergency steps. Available offline, printable, and in Spanish.</p>
+  </section>
+  <section class="detail" id="d-seizure">
+    <button class="back" onclick="showIndex()">&#8592; All guides</button>
+    <div class="dhead"><h2>If someone has a seizure</h2><div class="acts"><button class="btn">Print card</button><button class="btn">Send to family</button><button class="btn dark">&#9658; 2-min video</button></div></div>
+    
+    <div class="steps">
+    <div class="step"><div class="art" style="background:#E4EFFB">
       <svg viewBox="0 0 260 190"><rect x="24" y="140" width="212" height="9" rx="4.5" fill="#A9CBEE"/>
       <circle cx="84" cy="120" r="16" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><rect x="102" y="112" width="78" height="22" rx="11" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
       <path d="M58 132 q-14 -6 -8 -18 q6 -10 20 -4" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/>
       <path class="a-sweep" d="M206 76 l24 -12 M206 96 l26 0 M206 116 l24 12" stroke="#2D5F8A" stroke-width="6" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">1</span><div><b>Make space. Soft under the head.</b><span>Push chairs and tables away. A folded jacket works.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--red)">
+    <div class="step"><div class="art" style="background:#FBEAE7">
       <svg viewBox="0 0 260 190"><path d="M96 128 q-4 -36 24 -40 q22 -3 28 16" fill="none" stroke="#C42B1C" stroke-width="11" stroke-linecap="round"/><circle cx="152" cy="112" r="12" fill="#C42B1C"/>
       <circle cx="130" cy="92" r="62" fill="none" stroke="#C42B1C" stroke-width="9"/><path d="M86 48 L174 136" stroke="#C42B1C" stroke-width="9" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">2</span><div><b>Do not hold them down.</b><span>Nothing in the mouth. Not fingers, not water, not pills.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--amber)">
+    <div class="step"><div class="art" style="background:#FBF2E1">
       <svg viewBox="0 0 260 190"><circle cx="100" cy="88" r="44" fill="#FFF" stroke="#8A6210" stroke-width="7"/><path d="M100 88 V60 M100 88 l20 12" stroke="#8A6210" stroke-width="7" stroke-linecap="round" class="a-tick" style="transform-origin:100px 88px"/>
       <text x="170" y="80" font-family="-apple-system,Helvetica" font-size="26" font-weight="800" fill="#8A6210">5 min?</text>
       <text x="170" y="112" font-family="-apple-system,Helvetica" font-size="19" font-weight="700" fill="#C42B1C">call 911</text></svg></div>
       <div class="cap"><span class="n">3</span><div><b>Look at a clock. Time it.</b><span>Longer than 5 minutes, or a second one starts: call 911.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--green)">
+    <div class="step"><div class="art" style="background:#E4F3EA">
       <svg viewBox="0 0 260 190"><rect x="24" y="140" width="212" height="9" rx="4.5" fill="#B4DFC6"/>
       <circle cx="80" cy="118" r="16" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><path d="M98 122 q30 -14 58 0" fill="none" stroke="#1F7A4D" stroke-width="11" stroke-linecap="round"/><path d="M156 122 q16 6 24 16" fill="none" stroke="#1F7A4D" stroke-width="9" stroke-linecap="round"/>
       <path class="a-wave" d="M196 62 q10 8 2 18" fill="none" stroke="#1F7A4D" stroke-width="5" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">4</span><div><b>After: roll them on their side.</b><span>Stay until they are fully awake. Speak gently. It's scary to wake up lost.</span></div></div></div>
   </div>
-</section>
-
-<!-- ================= CHEST PAIN ================= -->
-<section class="guide" id="g-chest">
-  <div class="ghead"><h2>If there's chest pain</h2><div class="acts"><a class="btn" href="#">Print card</a><a class="btn dark" href="#">▶ 2-min video</a></div></div>
-  <div class="persona"><b>For Robert:</b> his heart history and medication list are on his ER sheet. Hand it to the paramedics. <a class="btn dark" style="margin-left:6px;padding:6px 13px" href="index.html#er">Open Robert's ER sheet</a></div>
-  <div class="steps">
-    <div class="step"><div class="art" style="background:var(--red)">
+    <p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Clinician-reviewed before every release. Static and vetted &#8212; no AI writes emergency steps. Available offline, printable, and in Spanish.</p>
+  </section>
+  <section class="detail" id="d-chest">
+    <button class="back" onclick="showIndex()">&#8592; All guides</button>
+    <div class="dhead"><h2>If there's chest pain</h2><div class="acts"><button class="btn">Print card</button><button class="btn">Send to family</button><button class="btn dark">&#9658; 2-min video</button></div></div>
+    <div class="persona"><b>For Robert:</b> his heart history and medication list are on his ER sheet. Hand it to the paramedics. <a class="btn dark" style="margin-left:6px;padding:6px 13px" href="index.html#er">Open Robert's ER sheet</a></div>
+    <div class="steps">
+    <div class="step"><div class="art" style="background:#FBEAE7">
       <svg viewBox="0 0 260 190"><g class="a-ring"><rect x="95" y="22" width="74" height="132" rx="18" fill="#FFF" stroke="#C42B1C" stroke-width="6"/><rect x="107" y="42" width="50" height="66" rx="8" fill="#FFD9D4"/><text x="132" y="86" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="28" font-weight="800" fill="#C42B1C">911</text><circle cx="132" cy="134" r="7" fill="#C42B1C"/></g>
       <path class="a-wave" d="M184 52 q12 12 0 24" fill="none" stroke="#C42B1C" stroke-width="6" stroke-linecap="round"/><path class="a-wave" style="animation-delay:.3s" d="M196 42 q20 20 0 40" fill="none" stroke="#C42B1C" stroke-width="6" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">1</span><div><b>Call 911 right away.</b><span>Do not wait to "see if it passes." Do not drive them yourself.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--blue)">
+    <div class="step"><div class="art" style="background:#E4EFFB">
       <svg viewBox="0 0 260 190"><rect x="30" y="142" width="200" height="9" rx="4.5" fill="#A9CBEE"/>
       <g class="a-breathe"><circle cx="118" cy="52" r="16" fill="#FFF" stroke="#2D5F8A" stroke-width="6"/><path d="M118 70 q-2 24 -14 34 l-22 4" fill="none" stroke="#2D5F8A" stroke-width="11" stroke-linecap="round"/><path d="M110 100 q26 -6 38 12 l0 28" fill="none" stroke="#2D5F8A" stroke-width="11" stroke-linecap="round"/></g></svg></div>
       <div class="cap"><span class="n">2</span><div><b>Sit them down. Knees up.</b><span>Loosen the collar. Slow breaths together: in for 4, out for 4.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--amber)">
+    <div class="step"><div class="art" style="background:#FBF2E1">
       <svg viewBox="0 0 260 190"><circle cx="118" cy="88" r="42" fill="#FFF" stroke="#8A6210" stroke-width="7"/><path d="M84 88 h68 M118 54 v68" stroke="#F3E3C0" stroke-width="10"/>
       <text x="118" y="152" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="17" font-weight="800" fill="#8A6210">ASPIRIN · chew 1</text>
       <path class="a-blink" d="M186 66 l16 0 M186 66 l10 -10 M186 66 l10 10" stroke="#8A6210" stroke-width="5.5" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">3</span><div><b>Aspirin? Only if it's safe.</b><span>Not allergic, and their doctor never said no: chew one adult aspirin.</span></div></div></div>
-    <div class="step"><div class="art" style="background:var(--green)">
+    <div class="step"><div class="art" style="background:#E4F3EA">
       <svg viewBox="0 0 260 190"><circle cx="86" cy="58" r="15" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><path d="M86 74 v46" stroke="#1F7A4D" stroke-width="10" stroke-linecap="round"/>
       <circle cx="146" cy="66" r="13" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><path d="M146 80 v40" stroke="#1F7A4D" stroke-width="9" stroke-linecap="round"/>
       <rect x="182" y="52" width="52" height="70" rx="8" fill="#FFF" stroke="#1F7A4D" stroke-width="6"/><path d="M192 70 h32 M192 84 h32 M192 98 h20" stroke="#1F7A4D" stroke-width="4.5" stroke-linecap="round"/></svg></div>
       <div class="cap"><span class="n">4</span><div><b>Stay. Unlock the door. ER sheet out.</b><span>Meds, allergies, contacts: one page, ready to hand over.</span></div></div></div>
   </div>
-</section>
+    <p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Clinician-reviewed before every release. Static and vetted &#8212; no AI writes emergency steps. Available offline, printable, and in Spanish.</p>
+  </section>
 
-<p class="foot">Adapted from American Red Cross and American Heart Association first-aid guidance. Reviewed by a clinician before every release. Static and vetted: no AI writes emergency steps, ever. Available offline, printable, and in Spanish. In the app, these guides live behind the red Emergency button, one tap from every screen.</p>
 
-<div class="horizon">
-<svg viewBox="0 0 1200 60" width="100%" preserveAspectRatio="none"><path d="M0 42 Q150 26 320 38 T680 36 T1040 40 L1200 38 V60 H0 Z" fill="#DCE3D2"/><path d="M0 50 Q220 38 480 47 T980 46 L1200 48 V60 H0 Z" fill="#C9D4BC"/><path d="M900 40 v-14 M900 26 q-8 12 0 0 q10 -10 0 0" stroke="#7A8A6A" stroke-width="3"/><circle cx="900" cy="22" r="7" fill="#7A8A6A"/><path d="M300 24 q4 -4 8 0 M320 20 q4 -4 8 0" stroke="#8A9A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
 </div>
-</div>
-
 <script>
-document.querySelectorAll('.pick').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.querySelectorAll('.pick').forEach(function(x){x.classList.remove('on')});
-    b.classList.add('on');
-    document.querySelectorAll('.guide').forEach(function(g){g.classList.remove('on')});
-    var g=document.getElementById('g-'+b.dataset.g);
-    g.classList.add('on');
-  });
-});
+function openGuide(id){
+  document.querySelectorAll('.detail').forEach(function(d){d.classList.remove('on')});
+  var el=document.getElementById('d-'+id); if(el)el.classList.add('on');
+  document.body.classList.add('reading'); window.scrollTo(0,0);
+  if(history.replaceState)history.replaceState(null,'','#'+id);
+}
+function showIndex(){document.body.classList.remove('reading');window.scrollTo(0,0);if(history.replaceState)history.replaceState(null,'','#');}
+var h=(location.hash||'').replace('#',''); if(h&&document.getElementById('d-'+h))openGuide(h);
 </script>
 </body>
 </html>
