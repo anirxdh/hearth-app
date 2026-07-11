@@ -275,6 +275,35 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 .doc{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid var(--line2);font-size:13.5px}
 .doc:last-child{border:none}
 .doc .ic{width:34px;height:34px;border-radius:9px;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);font-weight:700;font-size:10px}
+
+/* ===== EDITORIAL SYSTEM · Dawn Ridge + Quiet Meadow ===== */
+body{background:#FDFCF8}
+aside{background:#FDFCF8;border-right:1px solid var(--line)}
+.logo .mark{background:none;box-shadow:none;width:26px;height:26px}
+.logo .mark svg path{fill:#1D1D1F}
+.topbar{background:rgba(253,252,248,.9);border-bottom:1px solid var(--line)}
+.search{background:#F1EEE6}
+.nav .av{background:none!important;border:1.4px solid var(--line-strong);color:var(--ink2);font-weight:600;font-size:9px}
+.chip-user .av{background:#1D1D1F!important}
+.pagewrap{padding-top:0}
+.hero{position:relative;margin:0 -34px 10px;height:238px;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-art{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:absolute;left:34px;right:34px;bottom:24px}
+.hero-inner h1{font-size:clamp(40px,5vw,58px);font-weight:700;letter-spacing:-.032em;line-height:1;color:#1D1D1F;margin:0}
+.hero-inner p{font-size:16.5px;color:#5A5148;margin-top:12px}
+.digest{background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important}
+.digest .dhead{border-top:1px solid #1D1D1F;padding-top:16px;margin-bottom:2px}
+.digest .dhead .ic{background:none!important;box-shadow:none!important;width:22px;height:22px}
+.digest .dhead .ic svg{stroke:#B8892E;width:20px;height:20px}
+.digest .items{margin-top:6px}
+.ditem{border-bottom:1px solid var(--line);padding:17px 2px;margin:0}
+.ditem:last-child{border-bottom:none}
+.card{box-shadow:none}
+.pcard{box-shadow:none;border:1px solid var(--line)}
+.pcard:hover,.qa:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.em-btn{background:#fff!important;color:#C42B1C!important;border:1.4px solid #E7B7AE!important;box-shadow:none!important;font-weight:700!important}
+.em-btn span{background:#C42B1C!important}
+.day.today{outline:1.5px solid rgba(29,29,31,.28)}
 </style>
 </head>
 <body>
@@ -302,6 +331,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
   <button class="nav" data-v="guides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg>Emergency Guides</button>
 
   <div class="navlabel">Design</div>
+  <a class="nav" href="https://acl-caretaker.vercel.app" target="_blank" rel="noopener" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H4z"/><path d="M9 21h6M12 17v4"/></svg>ACL challenge brief</a>
   <a class="nav" href="variants.html" style="text-decoration:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18c-2 0-2.5-1.4-1.6-2.6.8-1.1.3-2.4-1.1-2.4H7.5C5.6 16 5 14.6 5 13"/><circle cx="9" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="17" cy="11.5" r="1.2" fill="currentColor" stroke="none"/></svg>Design Lab · pick a theme</a>
 
   <div class="side-foot"><b>Maria Alvarez</b><br>Caring for 3 people<br><span style="color:#34C759">●</span> All data private &amp; audited<br><span style="opacity:.65">Demo · every person, record &amp; number is fictional</span></div>
@@ -312,7 +342,7 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
   <div class="topbar">
     <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search people, meds, records…</div>
     <div class="spacer"></div>
-    <a href="guides.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:7px;background:var(--red);color:#fff;font-weight:800;font-size:12.5px;border-radius:99px;padding:8px 15px;box-shadow:0 4px 14px rgba(255,59,48,.35)"><span style="width:7px;height:7px;border-radius:50%;background:#fff"></span>Emergency</a>
+    <a class="em-btn" href="guides.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;border-radius:99px;padding:8px 15px"><span style="width:7px;height:7px;border-radius:50%"></span>Emergency</a>
     <span class="tag purple">Respite mode: Eleanor · expires Mon 8 AM</span>
     <div class="chip-user"><span class="av g4" style="width:28px;height:28px;font-size:10px">MA</span>Maria</div>
   </div>
@@ -321,8 +351,42 @@ table.meds tr:hover td{background:rgba(0,0,0,.015)}
 
   <!-- ========== DASHBOARD ========== -->
   <section class="view on" id="v-dashboard">
-    <h1 class="page">Good afternoon, Maria</h1>
-    <p class="sub">Saturday, July 11 · Here's the one thing that needs you, and the calm around it.</p>
+    <header class="hero">
+      <svg class="hero-art" viewBox="0 0 1212 250" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="dr-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCFBF9"/><stop offset="0.38" stop-color="#F9F1EA"/><stop offset="0.70" stop-color="#F5E8E1"/><stop offset="1" stop-color="#EFDFDC"/></linearGradient>
+          <linearGradient id="dr-lav" x1="0" y1="0" x2="0" y2="1"><stop offset="0.50" stop-color="#E3DBE4" stop-opacity="0"/><stop offset="1" stop-color="#E3DBE4" stop-opacity="0.38"/></linearGradient>
+          <radialGradient id="dr-halo" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F3D3A8" stop-opacity="0.55"/><stop offset="0.35" stop-color="#F5DCBC" stop-opacity="0.30"/><stop offset="0.70" stop-color="#F7E5D2" stop-opacity="0.13"/><stop offset="1" stop-color="#F7E5D2" stop-opacity="0"/></radialGradient>
+          <radialGradient id="dr-sun" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F8E3BF" stop-opacity="1"/><stop offset="0.55" stop-color="#F5DBB4" stop-opacity="0.9"/><stop offset="0.85" stop-color="#F4D9B6" stop-opacity="0.35"/><stop offset="1" stop-color="#F4D9B6" stop-opacity="0"/></radialGradient>
+          <filter id="dr-mist" x="-20%" y="-300%" width="140%" height="700%"><feGaussianBlur stdDeviation="5"/></filter>
+          <filter id="dr-spill" x="-60%" y="-120%" width="220%" height="340%"><feGaussianBlur stdDeviation="14"/></filter>
+        </defs>
+        <rect x="0" y="0" width="1212" height="250" fill="url(#dr-sky)"/>
+        <rect x="0" y="0" width="1212" height="250" fill="url(#dr-lav)"/>
+        <circle cx="955" cy="146" r="175" fill="url(#dr-halo)"/>
+        <circle cx="955" cy="146" r="40" fill="url(#dr-sun)"/>
+        <g fill="none" stroke="#4A5361" stroke-linecap="round">
+          <path d="M770 52 q3.4 -3 6.6 -0.3 q3.2 -2.7 6.6 0.3" stroke-width="1" stroke-opacity="0.55" vector-effect="non-scaling-stroke"/>
+          <path d="M818 39 q2.9 -2.5 5.6 -0.2 q2.7 -2.3 5.6 0.2" stroke-width="0.9" stroke-opacity="0.46" vector-effect="non-scaling-stroke"/>
+          <path d="M856 63 q2.4 -2.1 4.7 -0.2 q2.3 -1.9 4.7 0.2" stroke-width="0.85" stroke-opacity="0.4" vector-effect="non-scaling-stroke"/>
+          <path d="M1078 46 q2.6 -2.2 5 -0.2 q2.4 -2 5 0.2" stroke-width="0.85" stroke-opacity="0.36" vector-effect="non-scaling-stroke"/>
+        </g>
+        <path fill="#EBE2E6" d="M0 150 C60 146 120 144 190 146 C260 148 330 150 420 149 C500 148 560 146 640 143 C690 141 715 128 745 121 C770 115 795 118 820 127 C850 138 875 146 905 149 C930 151 945 152 965 152 C1000 152 1030 146 1060 139 C1085 133 1108 131 1132 137 C1160 144 1190 149 1212 150 L1212 250 L0 250 Z"/>
+        <path fill="#D9D4DE" d="M0 164 C70 160 130 157 200 159 C270 161 330 163 400 161 C460 159 505 150 555 145 C585 142 610 143 640 149 C685 158 720 163 770 164 C830 165 880 162 930 161 C980 160 1020 156 1060 152 C1095 149 1130 152 1165 158 C1190 162 1205 163 1212 164 L1212 250 L0 250 Z"/>
+        <ellipse cx="955" cy="168" rx="190" ry="26" fill="#F3D9BE" opacity="0.22" filter="url(#dr-spill)"/>
+        <path fill="#C2C1D0" d="M0 175 C60 178 110 170 170 166 C230 162 290 170 350 174 C410 178 460 172 510 168 C560 164 600 166 650 172 C700 178 750 181 810 180 C860 179 905 172 950 168 C990 164 1030 166 1075 172 C1120 178 1170 180 1212 178 L1212 250 L0 250 Z"/>
+        <rect x="-40" y="170" width="1300" height="7" fill="#FFFFFF" opacity="0.5" filter="url(#dr-mist)"/>
+        <path fill="#A8ACBD" d="M0 200 C70 192 120 184 190 182 C250 180 300 188 360 192 C420 196 480 192 540 186 C590 181 630 182 680 188 C740 195 790 200 850 199 C910 198 960 190 1010 186 C1055 182 1100 186 1150 192 C1185 196 1205 197 1212 197 L1212 250 L0 250 Z"/>
+        <rect x="140" y="202" width="1120" height="9" fill="#FFFFFF" opacity="0.4" filter="url(#dr-mist)"/>
+        <path fill="#8B93A3" d="M0 214 C80 218 140 208 210 205 C280 202 340 210 410 214 C470 217 530 212 590 208 C650 204 710 208 770 213 C830 218 890 219 950 216 C1010 213 1060 207 1110 209 C1160 211 1195 214 1212 214 L1212 250 L0 250 Z"/>
+        <rect x="-40" y="224" width="1292" height="8" fill="#FFFFFF" opacity="0.32" filter="url(#dr-mist)"/>
+        <path fill="#6E7B8A" d="M0 236 C90 230 160 224 250 226 C330 228 400 234 480 234 C560 234 630 227 710 228 C790 229 860 236 940 237 C1010 238 1080 232 1140 232 C1180 232 1200 234 1212 235 L1212 250 L0 250 Z"/>
+      </svg>
+      <div class="hero-inner">
+        <h1>Good afternoon, Maria</h1>
+        <p>Saturday, July 11 · Here's the one thing that needs you, and the calm around it.</p>
+      </div>
+    </header>
 
     <div class="card digest pad" style="margin-bottom:16px">
       <div class="dhead">
