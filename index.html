@@ -402,6 +402,32 @@ table.tbl tr:last-child td{border-bottom:none}
 #opBody .lrow{padding:8px 0;font-size:13px}
 #opBody .needs td,#opBody .needs th{padding:8px 12px}
 #opBody .erband{margin:6px 0 10px}
+
+/* keep section meta from overflowing */
+.seclabel{overflow:hidden}
+.seclabel .m{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+main{overflow-x:hidden}
+/* medications, grouped and friendly */
+.medsum{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 4px}
+.ms{border:1px solid var(--line);border-radius:12px;padding:13px 18px;min-width:118px}
+.ms b{font-size:23px;font-weight:600;letter-spacing:-.02em;display:block}
+.ms span{font-size:12px;color:var(--ink2)}
+.ms.red b{color:var(--red)}
+.medgroup{border:1px solid var(--line);border-radius:16px;padding:16px 20px 10px;margin-top:16px}
+.mgh{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line2)}
+.mgh .av{width:30px;height:30px;font-size:11px}
+.mgh b{font-size:16px}
+.mgh .mgflag{margin-left:auto;font-size:12px;font-weight:600;color:var(--ink3)}
+.mgh .mgflag.red{color:var(--red)}.mgh .mgflag.green{color:var(--green)}
+.mrow{display:flex;align-items:center;gap:16px;padding:13px 0;border-bottom:1px solid var(--line2)}
+.mrow:last-child{border-bottom:none}
+.mi2{flex:1;min-width:0}
+.mi2 b{font-size:14.5px}
+.mi2 span{display:block;font-size:12.5px;color:var(--ink2);margin-top:2px}
+.mrun{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.mrun .rway{width:100px}
+.mrun .days{min-width:54px;text-align:right}
+.mrow .btn{flex:0 0 auto;width:78px}
 </style>
 </head>
 <body>
@@ -632,18 +658,16 @@ table.tbl tr:last-child td{border-bottom:none}
   <section class="view" id="v-meds">
     <h1 class="greet" style="font-size:34px">Medications</h1>
     <p class="subline" style="font-size:15px">Every runway across your care circle, computed from the fill date and day-supply on each scanned label. Nothing is logged by hand.</p>
-    <table class="tbl" style="margin-top:26px">
-      <tr><th>Person</th><th>Medication</th><th>Schedule</th><th>Runway</th><th></th><th></th></tr>
-      <tr><td>Robert</td><td class="mname"><b>Metformin 500 mg</b><span>filled Jun 29 · 30-day supply</span></td><td>2× daily</td><td><span class="rway"><i class="red" style="width:13%"></i></span></td><td><span class="days red">4 days</span></td><td style="text-align:right"><button class="btn dark sm">Refill</button></td></tr>
-      <tr><td>Robert</td><td class="mname"><b>Apixaban 5 mg</b> <span style="color:var(--red)">· high-alert</span></td><td>2× daily</td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td style="text-align:right"><button class="btn sm">Remind</button></td></tr>
-      <tr><td>Eleanor</td><td class="mname"><b>Sertraline 50 mg</b><span>filled Jun 23</span></td><td>morning</td><td><span class="rway"><i class="amber" style="width:40%"></i></span></td><td><span class="days amber">12 days</span></td><td style="text-align:right"><button class="btn sm">Remind</button></td></tr>
-      <tr><td>Eleanor</td><td class="mname"><b>Donepezil 10 mg</b><span>filled Jul 2</span></td><td>bedtime</td><td><span class="rway"><i style="width:70%"></i></span></td><td><span class="days">21 days</span></td><td></td></tr>
-      <tr><td>Robert</td><td class="mname"><b>Lisinopril 10 mg</b><span>dose changed Jun 12</span></td><td>daily</td><td><span class="rway"><i style="width:60%"></i></span></td><td><span class="days">18 days</span></td><td></td></tr>
-      <tr><td>Robert</td><td class="mname"><b>Atorvastatin 20 mg</b></td><td>bedtime</td><td><span class="rway"><i style="width:83%"></i></span></td><td><span class="days">25 days</span></td><td></td></tr>
-      <tr><td>Rosa</td><td class="mname"><b>Levothyroxine 75 mcg</b></td><td>fasting</td><td><span class="rway"><i class="green" style="width:100%"></i></span></td><td><span class="days green">32 days</span></td><td></td></tr>
-      <tr><td>Rosa</td><td class="mname"><b>Ibuprofen 200 mg</b><span>as-needed</span></td><td>PRN</td><td><span class="mini">no forecast</span></td><td><span class="mini">PRN</span></td><td></td></tr>
-    </table>
-    <div class="note"><b style="color:var(--ink)">Med-sync opportunity  · </b> Robert's apixaban, lisinopril and atorvastatin can align to one pickup day (the 28th) at CVS #2213. One trip instead of three. Hearth drafted the request. <button class="btn sm" style="margin-left:8px">View draft</button></div>
+    <div class="medsum">
+      <div class="ms"><b>9</b><span>medications</span></div>
+      <div class="ms"><b>3</b><span>people</span></div>
+      <div class="ms red"><b>1</b><span>needs a refill this week</span></div>
+      <div class="ms"><b>3</b><span>can sync to one pickup</span></div>
+    </div>
+    <div class="medgroup"><div class="mgh"><span class="av">RA</span><div><b>Robert</b> <span class="mini">Dad · 81 · 4 medications</span></div><span class="mgflag red">Metformin in 4 days</span></div><div class="mrow"><div class="mi2"><b>Metformin 500 mg</b><span>filled Jun 29 · 30-day supply · 2× daily with meals</span></div><div class="mrun"><span class="rway"><i class="red" style="width:13%"></i></span><span class="days red">4 days</span></div><button class="btn dark sm">Refill</button></div><div class="mrow"><div class="mi2"><b>Apixaban 5 mg</b><span>high-alert blood thinner · 2× daily</span></div><div class="mrun"><span class="rway"><i class="amber" style="width:40%"></i></span><span class="days amber">12 days</span></div><button class="btn sm">Remind</button></div><div class="mrow"><div class="mi2"><b>Lisinopril 10 mg</b><span>dose changed Jun 12 · once daily</span></div><div class="mrun"><span class="rway"><i class="" style="width:60%"></i></span><span class="days ">18 days</span></div><span style="width:78px"></span></div><div class="mrow"><div class="mi2"><b>Atorvastatin 20 mg</b><span> · at bedtime</span></div><div class="mrun"><span class="rway"><i class="" style="width:83%"></i></span><span class="days ">25 days</span></div><span style="width:78px"></span></div></div>
+    <div class="medgroup"><div class="mgh"><span class="av">EA</span><div><b>Eleanor</b> <span class="mini">Mom · 78 · 3 medications</span></div><span class="mgflag">Sertraline in 12 days</span></div><div class="mrow"><div class="mi2"><b>Sertraline 50 mg</b><span>filled Jun 23 · morning</span></div><div class="mrun"><span class="rway"><i class="amber" style="width:40%"></i></span><span class="days amber">12 days</span></div><button class="btn sm">Remind</button></div><div class="mrow"><div class="mi2"><b>Donepezil 10 mg</b><span>filled Jul 2 · bedtime</span></div><div class="mrun"><span class="rway"><i class="" style="width:70%"></i></span><span class="days ">21 days</span></div><span style="width:78px"></span></div><div class="mrow"><div class="mi2"><b>Amlodipine 5 mg</b><span> · once daily</span></div><div class="mrun"><span class="rway"><i class="" style="width:86%"></i></span><span class="days ">26 days</span></div><span style="width:78px"></span></div></div>
+    <div class="medgroup"><div class="mgh"><span class="av">RM</span><div><b>Rosa</b> <span class="mini">Aunt · 74 · 2 medications</span></div><span class="mgflag green">All on track</span></div><div class="mrow"><div class="mi2"><b>Levothyroxine 75 mcg</b><span> · fasting</span></div><div class="mrun"><span class="rway"><i class="green" style="width:100%"></i></span><span class="days green">32 days</span></div><span style="width:78px"></span></div><div class="mrow"><div class="mi2"><b>Ibuprofen 200 mg</b><span>as needed · PRN</span></div><div class="mrun"><span class="mini">no forecast</span><span class="days mini">PRN</span></div><span style="width:78px"></span></div></div>
+    <div class="note"><b style="color:var(--ink)">Med-sync opportunity:</b> Robert's apixaban, lisinopril and atorvastatin can align to one pickup day (the 28th) at CVS #2213. One trip instead of three. Hearth drafted the request. <button class="btn sm" style="margin-left:8px">View draft</button></div>
   </section>
 
   <!-- ========== SCAN ========== -->
@@ -1083,7 +1107,7 @@ function renderTransport(i){
   return '<div class="pchip'+(idx===i?' on':'')+'" data-tpi="'+idx+'"><span class="av">'+(r.patient||'?').charAt(0)+'</span><b>'+(r.patient||'')+'</b><span class="sm">'+(r.toLabel||'')+'</span></div>';
  }).join('');
  var r=TPDATA.routes[i];
- document.getElementById('tMeta').textContent=[r.distance,'from '+(r.fromLabel||'your location')].filter(Boolean).join(' · ');
+ document.getElementById('tMeta').textContent=(r.distance||'')+' · from your current location';
  document.getElementById('tMap').innerHTML=tMapSVG()+'<div class="maptag"><b>'+(r.fromLabel||'You')+'</b> to <b>'+(r.toLabel||r.patient)+'</b></div>';
  document.getElementById('tRoutes').innerHTML=(r.options||[]).map(function(o){
   var tag=o.safety?'<span class="rtag '+tTag(o.safety)+'">'+o.safety+'</span>':'';
