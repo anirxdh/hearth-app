@@ -1,6 +1,6 @@
-# Hearth — Frontend MVP
+# RUA — Frontend MVP
 
-A frontend-only product mockup of **Hearth**, the caregiver command center — built for the ACL Caregiver AI Prize Challenge (Track 1) design proposal.
+A frontend-only product mockup of **RUA**, the caregiver command center — built for the ACL Caregiver AI Prize Challenge (Track 1) design proposal.
 
 **No backend. No build step. Fake data.** Open `index.html` in any browser.
 
@@ -21,4 +21,4 @@ Apple-inspired: system SF typography (`-apple-system`), `#F5F5F7` canvas, iOS sy
 
 Screenshots for the report live in `screenshots/` (2× retina, 1440×940).
 
-*All people, medications, and data are fictional. "Hearth" is a working name.*
+*All people, medications, and data are fictional. "RUA" is a working name.*
